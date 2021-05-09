@@ -14,16 +14,17 @@ class SStringTest {
     String diffpalabra="Hola2";
 
     @BeforeEach
-    void setup(){
+    void setUp(){
         string= new SString(palabra);
         string2= new SString(palabra2);
 
     }
 
     @Test
-    void TestConstructor(){
+    void constructorTest(){
         assertEquals(string,string2);
         assertEquals(string.hashCode(),string2.hashCode());
+        assert(string.toString().equals(string2.toString()));
 
         SString diffstring=new SString(diffpalabra);
         assertNotEquals(diffstring,string);

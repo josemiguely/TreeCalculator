@@ -1,15 +1,20 @@
 package cl.uchile.dcc.scrabble.gui;
 
+import cl.uchile.dcc.scrabble.gui.Tipos.SFloat;
+import cl.uchile.dcc.scrabble.gui.Tipos.SInt;
+import cl.uchile.dcc.scrabble.gui.Tipos.SString;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.RepeatedTest;
+
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SIntTest {
     SInt int1;
     SInt int2;
-    int numero=12345;
-    int numerodiff=123456;
+    int numero= new Random().nextInt();
+    int numerodiff=numero+1;
 
     @BeforeEach
     void setUp() {
@@ -17,7 +22,7 @@ class SIntTest {
         int2=new SInt(numero);
     }
 
-    @Test
+    @RepeatedTest(20)
     void constructorTest(){
         assertEquals(int1.hashCode(),int2.hashCode());
         assertEquals(int1,int2);
@@ -27,21 +32,38 @@ class SIntTest {
         assertNotEquals(int1,diffint);
     }
 
-    @Test
+    @RepeatedTest(20)
     void intoSStringTest(){
-        String string=int1.intoSString();
+        SString actual=int1.intoSString();
+        SString expected=new SString(String.valueOf(int1.getTipoInfo()));
 
-        SString actual=new SString(string);
-        SString expected=new SString(String.valueOf(numero));
         assertEquals(actual,expected);
     }
-    @Test
+
+    @RepeatedTest(20)
+    void intoSIntTest(){
+        SInt actual=int1.intoSInt();
+        assertEquals(int1,actual);
+    }
+
+    @RepeatedTest(20)
     void intoSFloatTest(){
-        double floatnum= int1.intoSFloat();
-        SFloat actual=new SFloat(floatnum);
-        SFloat expected=new SFloat( (double)int1.getNumero());
+
+        SFloat actual=int1.intoSFloat();
+        SFloat expected=new SFloat(int1.getTipoInfo());
 
         assertEquals(expected,actual);
-
     }
+
+    @RepeatedTest(10)
+    void intoSBinaryTest(){
+        assertEquals(null,int1.intoSBinary());
+    }
+
+    @RepeatedTest(10)
+    void intoSBoolTest(){
+        assertEquals(null,int1.intoSBool());
+    }
+
+
 }

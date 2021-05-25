@@ -1,10 +1,10 @@
 package cl.uchile.dcc.scrabble.gui;
 
-import cl.uchile.dcc.scrabble.gui.Tipos.SFloat;
-import cl.uchile.dcc.scrabble.gui.Tipos.SInt;
-import cl.uchile.dcc.scrabble.gui.Tipos.SString;
+import cl.uchile.dcc.scrabble.gui.Tipos.*;
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
@@ -15,6 +15,8 @@ class SIntTest {
     SInt int2;
     int numero= new Random().nextInt();
     int numerodiff=numero+1;
+    int numero2=new Random().nextInt();
+    double numdouble=new Random().nextDouble();
 
     @BeforeEach
     void setUp() {
@@ -55,9 +57,13 @@ class SIntTest {
         assertEquals(expected,actual);
     }
 
-    @RepeatedTest(10)
+    @Test
     void intoSBinaryTest(){
-        assertEquals(null,int1.intoSBinary());
+
+        SInt prueba=new SInt(5);
+        SBinary actual=prueba.intoSBinary();
+        SBinary expected=new SBinary("101");
+        assertEquals(expected,actual);
     }
 
     @RepeatedTest(10)
@@ -65,5 +71,27 @@ class SIntTest {
         assertEquals(null,int1.intoSBool());
     }
 
+    @Test
+    void SumaIntTest(){
+        SInt int3= new SInt(numero2);
+
+        SInt expected=new SInt(numero+numero2);
+
+        SInt actual=int1.SumaSInt(int3);
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void SumaFloatTest(){
+        //SInt int3= new SInt(numero2);
+
+        //SFloat float1=new SFloat(numdouble);
+
+        //SFloat expected=new SFloat(numero2+numdouble);
+
+        //SFloat actual= int3.Suma(float1);
+
+    }
 
 }

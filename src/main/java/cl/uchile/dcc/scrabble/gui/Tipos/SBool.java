@@ -2,19 +2,40 @@ package cl.uchile.dcc.scrabble.gui.Tipos;
 
 import java.util.Objects;
 
-public class SBool implements ITypes {
-
+public class SBool implements ITypes,ILogical {
     private boolean truthvalue;
 
     public SBool(boolean truthvalue) {
-        this.truthvalue = truthvalue;
+        this.truthvalue=truthvalue;
     }
+
+    public boolean getTipoInfo() {
+        return this.truthvalue;
+    }
+
+    /**
+     * Metodo que transforma SBool a SString
+     *
+     * @return SString
+     */
 
     @Override
-    public SBinary intoSBinary() {
-        return null;
+    public SString intoSString() {
+
+        return new SString(String.valueOf(getTipoInfo()));
     }
 
+    /**
+     * Metodo que transforma SBool a un Sbool
+     *
+     * @return SBool
+     */
+
+    @Override
+    public SBool intoSBool() {
+
+        return new SBool(getTipoInfo());
+    }
 
     @Override
     public SFloat intoSFloat() {
@@ -26,33 +47,11 @@ public class SBool implements ITypes {
         return null;
     }
 
-    /**
-     * Metodo que transforma SBool a SString
-     *
-     * @return SString
-     */
-
-    public SString intoSString() {
-
-        return new SString(String.valueOf(this.truthvalue));
+    @Override
+    public SBinary intoSBinary() {
+        return null;
     }
 
-    /**
-     * Metodo que transforma SBool a un Sbool
-     *
-     * @return SBool
-     */
-
-    public SBool intoSBool() {
-
-        return new SBool(getTipoInfo());
-    }
-
-
-
-    public boolean getTipoInfo() {
-        return truthvalue;
-    }
 
 
     /**
@@ -81,5 +80,41 @@ public class SBool implements ITypes {
         return "Bool{" +
                 "truthvalue=" + getTipoInfo() +
                 '}';
+    }
+
+
+    @Override
+    public ILogical and(ILogical logical) {
+        return logical.andSBool(this);
+    }
+
+    @Override
+    public ILogical andSBool(SBool sbool) {
+        return new SBool(this.getTipoInfo() && sbool.getTipoInfo());
+    }
+
+    @Override
+    public ILogical andSBinary(SBinary logical) {
+        return null;
+    }
+
+    @Override
+    public ILogical or(ILogical logical) {
+        return null;
+    }
+
+    @Override
+    public ILogical orSBool(SBool logical) {
+        return null;
+    }
+
+    @Override
+    public ILogical orSBinary(SBinary logical) {
+        return null;
+    }
+
+    @Override
+    public ILogical negacion(ILogical logical) {
+        return new SBool(!this.getTipoInfo());
     }
 }

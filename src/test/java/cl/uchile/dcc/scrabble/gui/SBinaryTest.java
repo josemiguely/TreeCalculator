@@ -1,10 +1,12 @@
 package cl.uchile.dcc.scrabble.gui;
 
 import cl.uchile.dcc.scrabble.gui.Tipos.SBinary;
+import cl.uchile.dcc.scrabble.gui.Tipos.SInt;
 import cl.uchile.dcc.scrabble.gui.Tipos.SString;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
@@ -65,9 +67,13 @@ class SBinaryTest {
         assertEquals(null,binary1.intoSFloat());
     }
 
-    @RepeatedTest(10)
+    @Test
     void intoSIntTest(){
-        assertEquals(null,binary1.intoSInt());
+        SBinary binary5=new SBinary("10000001");
+        SInt numero5=new SInt(-127);
+        SInt binaint=binary5.intoSInt();
+
+        assertEquals(numero5,binaint);
     }
 
 }

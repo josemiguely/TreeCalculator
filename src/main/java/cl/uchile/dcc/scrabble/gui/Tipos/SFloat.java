@@ -2,7 +2,7 @@ package cl.uchile.dcc.scrabble.gui.Tipos;
 
 import java.util.Objects;
 
-public class SFloat implements ITypes {
+public class SFloat implements ITypes,INumber {
 
     private double numero;
 
@@ -11,7 +11,7 @@ public class SFloat implements ITypes {
     }
 
     public double getTipoInfo() {
-        return numero;
+        return this.numero;
     }
 
     /**
@@ -20,15 +20,12 @@ public class SFloat implements ITypes {
      * @return SString
      */
 
+    @Override
     public SString intoSString(){
 
         return new SString(String.valueOf(this.getTipoInfo()));
     }
 
-    @Override
-    public SBinary intoSBinary() {
-        return null;
-    }
 
     @Override
     public SBool intoSBool() {
@@ -41,7 +38,7 @@ public class SFloat implements ITypes {
      * @return Sfloat
      */
 
-
+    @Override
     public SFloat intoSFloat(){
         return new SFloat(getTipoInfo());
     }
@@ -50,6 +47,12 @@ public class SFloat implements ITypes {
     public SInt intoSInt() {
         return null;
     }
+
+    @Override
+    public SBinary intoSBinary() {
+        return null;
+    }
+
 
     /**
      *Revisa si dos objetos representan el mismo SFloat
@@ -77,4 +80,47 @@ public class SFloat implements ITypes {
                 "numero=" + getTipoInfo() +
                 '}';
     }
+
+    @Override
+    public INumber Suma(INumber number) {
+        return number.SumaSFloat(this);
+    }
+
+    @Override
+    public SFloat SumaSInt(SInt number) {
+        return new SFloat(this.numero+number.getTipoInfo());
+    }
+
+    @Override
+    public SFloat SumaSFloat(SFloat number) {
+        return new SFloat(this.getTipoInfo()+number.getTipoInfo());
+    }
+
+    @Override
+    public INumber SumaSBinary(SBinary number) {
+        return null;
+    }
+
+    @Override
+    public INumber Resta(INumber number) {
+        return number.RestaSFloat(this);
+    }
+
+    @Override
+    public INumber RestaSInt(SInt number) {
+        return new SFloat(number.getTipoInfo()-this.getTipoInfo());
+    }
+
+    @Override
+    public SFloat RestaSFloat(SFloat number) {
+        return new SFloat(number.getTipoInfo()-this.getTipoInfo());
+    }
+
+    @Override
+    public INumber RestaSBinary(SBinary number) {
+        SBinary floattobin=this.intoSBinary();
+        return null;
+    }
+
+
 }

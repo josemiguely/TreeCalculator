@@ -18,5 +18,20 @@ public interface INumber {
 
      INumber RestaSBinary(SBinary number);
 
+     INumber Mult(INumber number);
+
+     INumber MultInt(SInt number);
+
+     INumber MultFloat(SFloat number);
+
+     INumber MultBinary(SBinary number);
+
+     INumber Div(INumber number);
+
+     INumber DivInt(SInt number);
+
+     INumber DivFloat(SFloat number);
+
+     INumber DivBinary(SBinary number);
 
 }

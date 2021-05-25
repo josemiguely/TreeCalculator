@@ -201,39 +201,159 @@ public class SBinary implements ITypes,INumber,ILogical {
         return result;
     }
 
+    @Override
+    public INumber Mult(INumber number) {
+        return number.MultBinary(this);
+    }
+
+    @Override
+    public INumber MultInt(SInt number) {
+        SInt Int1=this.intoSInt();
+        return new SInt(number.getTipoInfo()* Int1.getTipoInfo());
+    }
+
+    @Override
+    public INumber MultFloat(SFloat number) {
+        return null;
+    }
+
+    @Override
+    public INumber MultBinary(SBinary number) {
+        SInt Int1= number.intoSInt();
+        SInt Int2=this.intoSInt();
+        SInt Int3= new SInt(Int1.getTipoInfo()* Int2.getTipoInfo());
+        return Int3.intoSBinary();
+    }
+
+    @Override
+    public INumber Div(INumber number) {
+        return number.DivBinary(this);
+    }
+
+    @Override
+    public INumber DivInt(SInt number) {
+        SInt Int1=this.intoSInt();
+        return new SInt(number.getTipoInfo()/ Int1.getTipoInfo());
+    }
+
+    @Override
+    public INumber DivFloat(SFloat number) {
+        SFloat Float1=this.intoSFloat();
+        return new SFloat(number.getTipoInfo()/Float1.getTipoInfo());
+    }
+
+    @Override
+    public INumber DivBinary(SBinary number) {
+        SInt Int1=number.intoSInt();
+        SInt Int2=this.intoSInt();
+        SInt Int3=new SInt(Int1.getTipoInfo()/ Int2.getTipoInfo());
+        return Int3.intoSBinary();
+    }
+
 
     @Override
     public ILogical and(ILogical logical) {
-        return null;
+        return logical.andSBinary(this);
     }
 
     @Override
     public ILogical andSBool(SBool Sbool) {
-        return null;
+        String binario= this.getTipoInfo();
+        int largo=binario.length();
+        boolean truthvalue=Sbool.getTipoInfo();
+        String s="";
+        int i=0;
+        while(i<largo){
+            if (truthvalue && binario.charAt(i)=='1'){
+                s="1"+s;
+            }
+            else{
+                s="0"+s;
+            }
+            i++;
+        }
+        return new SBinary(s);
     }
 
     @Override
-    public ILogical andSBinary(SBinary Sbinary) {
-        return null;
+    public ILogical andSBinary(SBinary binary) {
+        String binario=binary.getTipoInfo();
+        String binario2=this.getTipoInfo();
+        String s="";
+        int i=0;
+        if(binario.length()==binario2.length()){
+            if(binario.charAt(i)=='1' && binario2.charAt(i)=='1'){
+                s="1"+s;
+            }
+            else{
+                s="0"+s;
+            }
+            i++;
+        }
+        return new SBinary(s);
     }
 
     @Override
     public ILogical or(ILogical logical) {
-        return null;
+        return logical.orSBinary(this);
     }
 
     @Override
     public ILogical orSBool(SBool Sbool) {
-        return null;
+        String binario= this.getTipoInfo();
+        int largo=binario.length();
+        boolean truthvalue=Sbool.getTipoInfo();
+        String s="";
+        if (!truthvalue){
+            return new SBinary(binario);
+        }
+        int i=0;
+        while(i<largo){
+
+                s='1'+s;
+            i++;
+            }
+
+
+        return new SBinary(s);
     }
+
 
     @Override
     public ILogical orSBinary(SBinary Sbinary) {
-        return null;
+        String binario = this.getTipoInfo();
+        String binario2=this.getTipoInfo();
+        int largo = binario.length();
+        String s = "";
+        int i = 0;
+        if (binario.length()==binario2.length()) {
+            while (i < largo) {
+                if (binario.charAt(i) == '1' || binario2.charAt(i)=='1') {
+                    s = "1" + s;
+                } else {
+                    s = "0" + s;
+                }
+                i++;
+            }
+        }
+        return new SBinary(s);
     }
 
+
     @Override
-    public ILogical negacion(ILogical logical) {
-        return null;
+    public ILogical negacion() {
+        String binario = this.getTipoInfo();
+        int largo = binario.length();
+        String s = "";
+        int i = 0;
+        while (i < largo) {
+            if (binario.charAt(i) == '1') {
+                s = "0" + s;
+            } else {
+                s = "1" + s;
+            }
+            i++;
+        }
+        return new SBinary(s);
     }
 }

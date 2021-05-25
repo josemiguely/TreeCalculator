@@ -14,5 +14,5 @@ public interface ILogical {
 
     ILogical orSBinary(SBinary Sbinary);
 
-    ILogical negacion(ILogical logical);
+    ILogical negacion();
 }

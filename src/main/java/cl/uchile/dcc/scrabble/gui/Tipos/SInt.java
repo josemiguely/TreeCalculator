@@ -182,6 +182,52 @@ public class SInt implements ITypes,INumber{
     }
 
     @Override
+    public INumber Mult(INumber number) {
+        return number.MultInt(this);
+    }
+
+    @Override
+    public INumber MultInt(SInt number) {
+        return new SInt(this.getTipoInfo()* number.getTipoInfo());
+    }
+
+    @Override
+    public INumber MultFloat(SFloat number) {
+        return new SFloat(number.getTipoInfo()*this.getTipoInfo());
+    }
+
+    @Override
+    public INumber MultBinary(SBinary number) {
+        SInt Int1= number.intoSInt();
+        SInt Res=new SInt(Int1.getTipoInfo()*this.getTipoInfo());
+        SBinary ResToBin=Res.intoSBinary();
+        return ResToBin;
+    }
+
+    @Override
+    public INumber Div(INumber number) {
+        return number.DivInt(this);
+    }
+
+    @Override
+    public INumber DivInt(SInt number) {
+        return new SInt(number.getTipoInfo()/this.getTipoInfo());
+    }
+
+    @Override
+    public INumber DivFloat(SFloat number) {
+        return new SFloat(number.getTipoInfo()/this.getTipoInfo());
+    }
+
+    @Override
+    public INumber DivBinary(SBinary number) {
+        SInt Int1=number.intoSInt();
+        SInt Result=(SInt) Int1.Div(this);
+        SBinary ResultBinary=Result.intoSBinary();
+        return ResultBinary;
+    }
+
+    @Override
     public String toString() {
         return "Int{" +
                 "numero=" + getTipoInfo() +

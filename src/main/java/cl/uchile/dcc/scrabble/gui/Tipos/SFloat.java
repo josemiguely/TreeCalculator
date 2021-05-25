@@ -122,5 +122,45 @@ public class SFloat implements ITypes,INumber {
         return null;
     }
 
+    @Override
+    public INumber Mult(INumber number) {
+        return number.MultFloat(this);
+    }
+
+    @Override
+    public INumber MultInt(SInt number) {
+        return new SFloat(this.getTipoInfo()*number.getTipoInfo());
+    }
+
+    @Override
+    public INumber MultFloat(SFloat number) {
+        return new SFloat(number.getTipoInfo()*this.getTipoInfo());
+    }
+
+    @Override
+    public INumber MultBinary(SBinary number) {
+        return null;
+    }
+
+    @Override
+    public INumber Div(INumber number) {
+        return number.DivFloat(this);
+    }
+
+    @Override
+    public INumber DivInt(SInt number) {
+        return new SFloat(number.getTipoInfo()/this.getTipoInfo());
+    }
+
+    @Override
+    public INumber DivFloat(SFloat number) {
+        return new SFloat(number.getTipoInfo()/this.getTipoInfo());
+    }
+
+    @Override
+    public INumber DivBinary(SBinary number) {
+        return null;
+    }
+
 
 }

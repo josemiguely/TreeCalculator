@@ -95,26 +95,52 @@ public class SBool implements ITypes,ILogical {
 
     @Override
     public ILogical andSBinary(SBinary logical) {
-        return null;
+        String binario= logical.getTipoInfo();
+        int largo=logical.getTipoInfo().length();
+        boolean truthvalue=this.getTipoInfo();
+        String s="";
+        int i=0;
+        if (truthvalue && binario.charAt(i)=='1'){
+            return new SBinary(binario);
+        }
+        while(i<largo){
+                s="0"+s;
+            i++;
+        }
+        return new SBinary(s);
     }
 
     @Override
     public ILogical or(ILogical logical) {
-        return null;
+        return logical.orSBool(this);
     }
 
     @Override
     public ILogical orSBool(SBool logical) {
-        return null;
+        return new SBool(this.getTipoInfo() || logical.getTipoInfo());
     }
 
     @Override
     public ILogical orSBinary(SBinary logical) {
-        return null;
+        String binario= logical.getTipoInfo();
+        int largo=logical.getTipoInfo().length();
+        boolean truthvalue=this.getTipoInfo();
+        String s="";
+        int i=0;
+        while(i<largo){
+            if (truthvalue){
+                s="1"+s;
+            }
+            else{
+                s=binario.charAt(i)+s;
+            }
+            i++;
+        }
+        return new SBinary(s);
     }
 
     @Override
-    public ILogical negacion(ILogical logical) {
+    public ILogical negacion() {
         return new SBool(!this.getTipoInfo());
     }
 }

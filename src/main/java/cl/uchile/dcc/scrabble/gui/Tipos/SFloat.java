@@ -2,7 +2,7 @@ package cl.uchile.dcc.scrabble.gui.Tipos;
 
 import java.util.Objects;
 
-public class SFloat implements ITypes,INumber {
+public class SFloat implements ITypes,IRealNumbers {
 
     private double numero;
 
@@ -81,9 +81,10 @@ public class SFloat implements ITypes,INumber {
                 '}';
     }
 
+
     @Override
-    public INumber Suma(INumber number) {
-        return number.SumaSFloat(this);
+    public IRealNumbers Suma(INumberandStrings number) {
+        return ((IRealNumbers) number).SumaSFloat(this);
     }
 
     @Override
@@ -96,18 +97,14 @@ public class SFloat implements ITypes,INumber {
         return new SFloat(this.getTipoInfo()+number.getTipoInfo());
     }
 
-    @Override
-    public INumber SumaSBinary(SBinary number) {
-        return null;
-    }
 
     @Override
-    public INumber Resta(INumber number) {
+    public IRealNumbers Resta(IRealNumbers number) {
         return number.RestaSFloat(this);
     }
 
     @Override
-    public INumber RestaSInt(SInt number) {
+    public IRealNumbers RestaSInt(SInt number) {
         return new SFloat(number.getTipoInfo()-this.getTipoInfo());
     }
 
@@ -116,51 +113,36 @@ public class SFloat implements ITypes,INumber {
         return new SFloat(number.getTipoInfo()-this.getTipoInfo());
     }
 
-    @Override
-    public INumber RestaSBinary(SBinary number) {
-        SBinary floattobin=this.intoSBinary();
-        return null;
-    }
 
     @Override
-    public INumber Mult(INumber number) {
+    public IRealNumbers Mult(IRealNumbers number) {
         return number.MultFloat(this);
     }
 
     @Override
-    public INumber MultInt(SInt number) {
+    public IRealNumbers MultInt(SInt number) {
         return new SFloat(this.getTipoInfo()*number.getTipoInfo());
     }
 
     @Override
-    public INumber MultFloat(SFloat number) {
+    public IRealNumbers MultFloat(SFloat number) {
         return new SFloat(number.getTipoInfo()*this.getTipoInfo());
     }
 
-    @Override
-    public INumber MultBinary(SBinary number) {
-        return null;
-    }
 
     @Override
-    public INumber Div(INumber number) {
+    public IRealNumbers Div(IRealNumbers number) {
         return number.DivFloat(this);
     }
 
     @Override
-    public INumber DivInt(SInt number) {
+    public IRealNumbers DivInt(SInt number) {
         return new SFloat(number.getTipoInfo()/this.getTipoInfo());
     }
 
     @Override
-    public INumber DivFloat(SFloat number) {
+    public IRealNumbers DivFloat(SFloat number) {
         return new SFloat(number.getTipoInfo()/this.getTipoInfo());
     }
-
-    @Override
-    public INumber DivBinary(SBinary number) {
-        return null;
-    }
-
 
 }

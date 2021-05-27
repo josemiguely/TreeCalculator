@@ -13,23 +13,12 @@ public class SBool implements ITypes,ILogical {
         return this.truthvalue;
     }
 
-    /**
-     * Metodo que transforma SBool a SString
-     *
-     * @return SString
-     */
 
     @Override
     public SString intoSString() {
 
         return new SString(String.valueOf(getTipoInfo()));
     }
-
-    /**
-     * Metodo que transforma SBool a un Sbool
-     *
-     * @return SBool
-     */
 
     @Override
     public SBool intoSBool() {

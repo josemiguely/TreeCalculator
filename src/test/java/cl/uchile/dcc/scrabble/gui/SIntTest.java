@@ -134,10 +134,22 @@ class SIntTest {
     @RepeatedTest(10)
     void MultTest() {
 
+        //Mult entre SInt
         SInt actual = (SInt) int1.Mult(int3);
         SInt expected = new SInt(numero*numero2);
 
         assertEquals(expected, actual);
+
+        //Mult entre SInt y Sfloat
+        SFloat actual2 =(SFloat) int1.Mult(float1);
+        SFloat expected2=new SFloat(numero*numdouble);
+        assertEquals(expected2,actual2);
+
+        //Mult entre SInt y SBinary
+        SBinary binario1=new SBinary("0111");//7
+        SInt actual3=(SInt) int1.Mult(binario1);
+        SInt expected3=new SInt(numero*7);
+        assertEquals(expected3,actual3);
 
     }
 

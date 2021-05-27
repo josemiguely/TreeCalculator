@@ -94,11 +94,7 @@ class SBinaryTest {
         SBinary actual2 = (SBinary) binarysum1.Suma(int1);
         assertEquals(expected, actual2);
 
-        //Suma de SBinary con SFloat
 
-        SFloat float1 = new SFloat(231);
-        SFloat actual3 = (SFloat) binarysum1.Suma(float1);
-        assertEquals(null, actual3);
     }
 
     @Test

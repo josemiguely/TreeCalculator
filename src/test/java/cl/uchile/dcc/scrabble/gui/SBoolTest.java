@@ -84,7 +84,7 @@ class SBoolTest {
         SBinary binary1=new SBinary("101");
         SBinary actualbinary= (SBinary) valorv.and(binary1);
         SBinary expectedbinary= new SBinary("101");
-        assertEquals(actualbinary,actualbinary);
+        assertEquals(expectedbinary,actualbinary);
 
         SBinary actualbinary2=(SBinary) valorf.and(binary1);
         SBinary expectedbinary2=new SBinary("000");

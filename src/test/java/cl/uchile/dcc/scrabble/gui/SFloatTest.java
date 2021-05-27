@@ -104,9 +104,10 @@ class SFloatTest {
 
         //Resta de SFloat con SBinary
 
-        SBinary binary1=new SBinary("0111");
+        SBinary binary1=new SBinary("0111");//7
         SFloat actual3=(SFloat) float1.Resta(binary1);
-        SFloat expected3=new SFloat(float1.getTipoInfo()-5);
+        SFloat expected3=new SFloat(float1.getTipoInfo()-7);
+        assertEquals(expected3,actual3);
     }
 
     @RepeatedTest(5)

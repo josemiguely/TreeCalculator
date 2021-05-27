@@ -14,11 +14,7 @@ public class SInt implements ITypes,INumber{
         return numero;
     }
 
-    /**
-     * Metodo que transforma  SInt a  SString
-     *
-     * @return SString
-     */
+
 
     public SString intoSString(){
 
@@ -30,11 +26,7 @@ public class SInt implements ITypes,INumber{
         return null;
     }
 
-    /**
-     * Metodo que transforma SInt a  SFloat
-     *
-     * @return Sfloat
-     */
+
     @Override
     public SFloat intoSFloat(){
 
@@ -72,20 +64,14 @@ public class SInt implements ITypes,INumber{
         StringBuffer string=new StringBuffer(str);
         int n = string.length();
 
-        // Traverse the string to get first '1' from
-        // the last of string
         int i;
         for (i = n-1 ; i >= 0 ; i--)
             if (string.charAt(i) == '1')
                 break;
 
-        // If there exists no '1' concat 1 at the
-        // starting of string
         if (i == -1)
             return str+"1";
 
-        // Continue traversal after the position of
-        // first '1'
         for (int k = i-1 ; k >= 0; k--)
         {
             //Just flip the values
@@ -95,13 +81,12 @@ public class SInt implements ITypes,INumber{
                 string.replace(k, k+1, "1");
         }
 
-        // return the modified string
         return string.toString();
     }
 
     @Override
-    public INumber Suma(INumber number){
-        return number.SumaSInt(this);
+    public INumberandStrings Suma(INumberandStrings number) {
+        return ((IRealNumbers) number).SumaSInt(this);
     }
 
 
@@ -120,51 +105,15 @@ public class SInt implements ITypes,INumber{
 
     @Override
     public SBinary SumaSBinary(SBinary binarystr){
-        /*SBinary intotobinary = this.intoSBinary();
-        String result=addBinary(intotobinary.getTipoInfo(),binarystr.getTipoInfo());
-
-        return new SBinary(result);*/
         SInt Int1= binarystr.intoSInt();
         SInt Int2=Int1.SumaSInt(this);
         return Int2.intoSBinary();
     }
 
 
-    static String addBinary(String a, String b)
-    {
 
-        // Initialize result
-        String result = "";
-
-        // Initialize digit sum
-        int s = 0;
-
-        // Traverse both strings starting
-        // from last characters
-        int i = a.length() - 1, j = b.length() - 1;
-        while (i >= 0 || j >= 0 || s == 1)
-        {
-
-            // Comput sum of last
-            // digits and carry
-            s += ((i >= 0)? a.charAt(i) - '0': 0);
-            s += ((j >= 0)? b.charAt(j) - '0': 0);
-
-            // If current digit sum is
-            // 1 or 3, add 1 to result
-            result = (char)(s % 2 + '0') + result;
-
-            // Compute carry
-            s /= 2;
-
-            // Move to next digits
-            i--; j--;
-        }
-
-        return result;
-    }
     @Override
-    public INumber Resta(INumber number) {
+    public IRealNumbers Resta(IRealNumbers number) {
         return number.RestaSInt(this);
     }
 
@@ -186,7 +135,7 @@ public class SInt implements ITypes,INumber{
     }
 
     @Override
-    public INumber Mult(INumber number) {
+    public IRealNumbers Mult(IRealNumbers number) {
         return number.MultInt(this);
     }
 
@@ -196,7 +145,7 @@ public class SInt implements ITypes,INumber{
     }
 
     @Override
-    public INumber MultFloat(SFloat number) {
+    public IRealNumbers MultFloat(SFloat number) {
         return new SFloat(number.getTipoInfo()*this.getTipoInfo());
     }
 
@@ -209,17 +158,17 @@ public class SInt implements ITypes,INumber{
     }
 
     @Override
-    public INumber Div(INumber number) {
+    public IRealNumbers Div(IRealNumbers number) {
         return number.DivInt(this);
     }
 
     @Override
-    public INumber DivInt(SInt number) {
+    public IRealNumbers DivInt(SInt number) {
         return new SInt(number.getTipoInfo()/this.getTipoInfo());
     }
 
     @Override
-    public INumber DivFloat(SFloat number) {
+    public IRealNumbers DivFloat(SFloat number) {
         return new SFloat(number.getTipoInfo()/this.getTipoInfo());
     }
 
@@ -258,5 +207,6 @@ public class SInt implements ITypes,INumber{
     public int hashCode() {
         return Objects.hash(getTipoInfo());
     }
+
 
 }

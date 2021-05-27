@@ -111,16 +111,14 @@ public class SBinary implements ITypes,INumber,ILogical {
     }
 
     @Override
-    public INumber Suma(INumber number) {
-        return number.SumaSBinary(this);
+    public IRealNumbers Suma(INumberandStrings number) {
+        return ((INumber) number).SumaSBinary(this);
     }
 
     @Override
     public INumber SumaSInt(SInt number) {
-        //int result = binarytoint(this.getTipoInfo());
         SInt int1=(this.intoSInt());
         int result= int1.getTipoInfo();
-        System.out.println("result= "+result);
         return new SInt(result + number.getTipoInfo());
     }
 
@@ -151,43 +149,11 @@ public class SBinary implements ITypes,INumber,ILogical {
         SBinary Binary=Int3.intoSBinary();
         return Binary;
     }
-        /*String a = this.getTipoInfo();
-        String b = this.getTipoInfo();
-
-        // Initialize result
-        String result = "";
-
-        // Initialize digit sum
-        int s = 0;
-
-        // Traverse both strings starting
-        // from last characters
-        int i = a.length() - 1, j = b.length() - 1;
-        while (i >= 0 || j >= 0 || s == 1) {
-
-            // Comput sum of last
-            // digits and carry
-            s += ((i >= 0) ? a.charAt(i) - '0' : 0);
-            s += ((j >= 0) ? b.charAt(j) - '0' : 0);
-
-            // If current digit sum is
-            // 1 or 3, add 1 to result
-            result = (char) (s % 2 + '0') + result;
-
-            // Compute carry
-            s /= 2;
-
-            // Move to next digits
-            i--;
-            j--;
-        }
-
-        return new SBinary(result);
-    }*/
 
     @Override
-    public INumber Resta(INumber number) {
-        return number.RestaSBinary(this);
+    public IRealNumbers Resta(IRealNumbers number) {
+
+        return ((INumber) number).RestaSBinary(this);
     }
 
     @Override
@@ -198,7 +164,7 @@ public class SBinary implements ITypes,INumber,ILogical {
 
     @Override
     public SFloat RestaSFloat(SFloat number) {
-        SFloat binarytofloat = this.intoSFloat();
+        SInt binarytofloat = this.intoSInt();
         return new SFloat(number.getTipoInfo() - binarytofloat.getTipoInfo());
     }
 
@@ -212,8 +178,8 @@ public class SBinary implements ITypes,INumber,ILogical {
     }
 
     @Override
-    public INumber Mult(INumber number) {
-        return number.MultBinary(this);
+    public IRealNumbers Mult(IRealNumbers number) {
+        return ((INumber) number).MultBinary(this);
     }
 
     @Override
@@ -236,8 +202,8 @@ public class SBinary implements ITypes,INumber,ILogical {
     }
 
     @Override
-    public INumber Div(INumber number) {
-        return number.DivBinary(this);
+    public IRealNumbers Div(IRealNumbers number) {
+        return ((INumber) number).DivBinary(this);
     }
 
     @Override
@@ -247,7 +213,7 @@ public class SBinary implements ITypes,INumber,ILogical {
     }
 
     @Override
-    public INumber DivFloat(SFloat number) {
+    public IRealNumbers DivFloat(SFloat number) {
         SFloat Float1=this.intoSFloat();
         return new SFloat(number.getTipoInfo()/Float1.getTipoInfo());
     }

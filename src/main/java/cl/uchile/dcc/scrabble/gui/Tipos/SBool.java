@@ -100,11 +100,11 @@ public class SBool implements ITypes,ILogical {
         boolean truthvalue=this.getTipoInfo();
         String s="";
         int i=0;
-        if (truthvalue && binario.charAt(i)=='1'){
+        if (truthvalue){
             return new SBinary(binario);
         }
         while(i<largo){
-                s="0"+s;
+                s=s+"0";
             i++;
         }
         return new SBinary(s);
@@ -126,15 +126,15 @@ public class SBool implements ITypes,ILogical {
         int largo=logical.getTipoInfo().length();
         boolean truthvalue=this.getTipoInfo();
         String s="";
+        if (truthvalue==false){
+            return new SBinary(binario);
+        }
         int i=0;
         while(i<largo){
             if (truthvalue){
                 s="1"+s;
+                i++;
             }
-            else{
-                s=binario.charAt(i)+s;
-            }
-            i++;
         }
         return new SBinary(s);
     }

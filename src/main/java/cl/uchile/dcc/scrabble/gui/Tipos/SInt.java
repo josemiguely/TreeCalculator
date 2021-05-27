@@ -61,11 +61,12 @@ public class SInt implements ITypes,INumber{
         String s = "";
         while (numero > 0)
         {
-            s = s+( (numero % 2 ) == 0 ? "0" : "1");
+            s = ( (numero % 2 ) == 0 ? "0" : "1")+s;
             numero = numero / 2;
         }
-        return s;
+        return "0"+s;
     }
+
 
     public String TwosComplement(String str){
         StringBuffer string=new StringBuffer(str);
@@ -119,10 +120,13 @@ public class SInt implements ITypes,INumber{
 
     @Override
     public SBinary SumaSBinary(SBinary binarystr){
-        SBinary intotobinary = this.intoSBinary();
+        /*SBinary intotobinary = this.intoSBinary();
         String result=addBinary(intotobinary.getTipoInfo(),binarystr.getTipoInfo());
 
-        return new SBinary(result);
+        return new SBinary(result);*/
+        SInt Int1= binarystr.intoSInt();
+        SInt Int2=Int1.SumaSInt(this);
+        return Int2.intoSBinary();
     }
 
 
@@ -165,7 +169,7 @@ public class SInt implements ITypes,INumber{
     }
 
     public SInt RestaSInt(SInt numero){
-        int number=this.getTipoInfo()-numero.getTipoInfo();
+        int number=numero.getTipoInfo()-this.getTipoInfo();
         return new SInt(number);
     }
 
@@ -177,8 +181,8 @@ public class SInt implements ITypes,INumber{
     @Override
     public INumber RestaSBinary(SBinary number) {
         SInt Int1=number.intoSInt();
-
-        return null;
+        SInt result= new SInt(Int1.getTipoInfo()-this.getTipoInfo());
+        return result.intoSBinary();
     }
 
     @Override

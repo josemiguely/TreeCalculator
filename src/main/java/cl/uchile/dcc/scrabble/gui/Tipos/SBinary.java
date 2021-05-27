@@ -1,5 +1,6 @@
 package cl.uchile.dcc.scrabble.gui.Tipos;
 
+import java.math.BigInteger;
 import java.util.Objects;
 
 public class SBinary implements ITypes,INumber,ILogical {
@@ -38,9 +39,9 @@ public class SBinary implements ITypes,INumber,ILogical {
 
     @Override
     public SFloat intoSFloat() {
-        SInt binarytoint = this.intoSInt();
-        SFloat binarytofloat = binarytoint.intoSFloat();
-        return binarytofloat;
+        String s=this.getTipoInfo();
+        double doubleVal = Double.longBitsToDouble(new BigInteger(s, 2).longValue());
+        return new SFloat(doubleVal);
     }
 
 
@@ -116,7 +117,10 @@ public class SBinary implements ITypes,INumber,ILogical {
 
     @Override
     public INumber SumaSInt(SInt number) {
-        int result = binarytoint(this.getTipoInfo());
+        //int result = binarytoint(this.getTipoInfo());
+        SInt int1=(this.intoSInt());
+        int result= int1.getTipoInfo();
+        System.out.println("result= "+result);
         return new SInt(result + number.getTipoInfo());
     }
 
@@ -141,7 +145,13 @@ public class SBinary implements ITypes,INumber,ILogical {
 
     @Override
     public INumber SumaSBinary(SBinary number) {
-        String a = this.getTipoInfo();
+        SInt Int1=number.intoSInt();
+        SInt Int2=this.intoSInt();
+        SInt Int3=(SInt) Int1.Suma(Int2);
+        SBinary Binary=Int3.intoSBinary();
+        return Binary;
+    }
+        /*String a = this.getTipoInfo();
         String b = this.getTipoInfo();
 
         // Initialize result
@@ -173,11 +183,11 @@ public class SBinary implements ITypes,INumber,ILogical {
         }
 
         return new SBinary(result);
-    }
+    }*/
 
     @Override
     public INumber Resta(INumber number) {
-        return number.SumaSBinary(this);
+        return number.RestaSBinary(this);
     }
 
     @Override
@@ -281,15 +291,17 @@ public class SBinary implements ITypes,INumber,ILogical {
         String binario2=this.getTipoInfo();
         String s="";
         int i=0;
-        if(binario.length()==binario2.length()){
-            if(binario.charAt(i)=='1' && binario2.charAt(i)=='1'){
-                s="1"+s;
+        if(binario.length()==binario2.length()) {
+            while (i < binario.length()) {
+                if (binario.charAt(i) == '1' && binario2.charAt(i) == '1') {
+                    s = s+"1";
+                } else {
+                    s = s+"0";
+                }
+                i++;
             }
-            else{
-                s="0"+s;
-            }
-            i++;
         }
+        System.out.println("s="+s);
         return new SBinary(s);
     }
 
@@ -320,8 +332,8 @@ public class SBinary implements ITypes,INumber,ILogical {
 
 
     @Override
-    public ILogical orSBinary(SBinary Sbinary) {
-        String binario = this.getTipoInfo();
+    public ILogical orSBinary(SBinary binary) {
+        String binario = binary.getTipoInfo();
         String binario2=this.getTipoInfo();
         int largo = binario.length();
         String s = "";
@@ -329,9 +341,10 @@ public class SBinary implements ITypes,INumber,ILogical {
         if (binario.length()==binario2.length()) {
             while (i < largo) {
                 if (binario.charAt(i) == '1' || binario2.charAt(i)=='1') {
-                    s = "1" + s;
-                } else {
-                    s = "0" + s;
+                    s = s+"1";
+                }
+                else {
+                    s = s+"0";
                 }
                 i++;
             }
@@ -348,9 +361,9 @@ public class SBinary implements ITypes,INumber,ILogical {
         int i = 0;
         while (i < largo) {
             if (binario.charAt(i) == '1') {
-                s = "0" + s;
+                s = s+"0";
             } else {
-                s = "1" + s;
+                s = s+"1";
             }
             i++;
         }

@@ -128,13 +128,11 @@ class SBoolTest {
 
     }
 
-
     @RepeatedTest(10)
     void negacionTest(){
         SBool expected=new SBool(!seed);
         SBool actual=(SBool) truthvalue1.negacion();
         assertEquals(expected,actual);
-
     }
 
 

@@ -2,7 +2,7 @@ package cl.uchile.dcc.scrabble.gui.Tipos;
 
 import java.util.Objects;
 
-public class SString implements ITypes {
+public class SString implements ITypes,INumberandStrings {
 
     private String string;
 
@@ -67,4 +67,11 @@ public class SString implements ITypes {
     }
 
 
+
+
+    @Override
+    public INumberandStrings Suma(INumberandStrings number) {
+        SString string=(SString)number;
+        return new SString(this.getTipoInfo()+string.getTipoInfo());
+    }
 }

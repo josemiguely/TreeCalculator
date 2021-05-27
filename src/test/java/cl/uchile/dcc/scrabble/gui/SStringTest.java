@@ -74,4 +74,13 @@ class SStringTest {
         assertEquals(null,string.intoSBool());
     }
 
+    @RepeatedTest(10)
+    void SumaTest(){
+        SString expected=new SString(palabra+palabra);
+        SString actual=(SString) string.Suma(string2);
+        assertEquals(expected,actual);
+
+
+    }
+
 }

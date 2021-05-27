@@ -2,7 +2,7 @@ package cl.uchile.dcc.scrabble.gui.Tipos;
 
 import java.util.Objects;
 
-public class SFloat implements ITypes {
+public class SFloat implements ITypes,IRealNumbers {
 
     private double numero;
 
@@ -11,7 +11,7 @@ public class SFloat implements ITypes {
     }
 
     public double getTipoInfo() {
-        return numero;
+        return this.numero;
     }
 
     /**
@@ -20,15 +20,12 @@ public class SFloat implements ITypes {
      * @return SString
      */
 
+    @Override
     public SString intoSString(){
 
         return new SString(String.valueOf(this.getTipoInfo()));
     }
 
-    @Override
-    public SBinary intoSBinary() {
-        return null;
-    }
 
     @Override
     public SBool intoSBool() {
@@ -41,7 +38,7 @@ public class SFloat implements ITypes {
      * @return Sfloat
      */
 
-
+    @Override
     public SFloat intoSFloat(){
         return new SFloat(getTipoInfo());
     }
@@ -50,6 +47,12 @@ public class SFloat implements ITypes {
     public SInt intoSInt() {
         return null;
     }
+
+    @Override
+    public SBinary intoSBinary() {
+        return null;
+    }
+
 
     /**
      *Revisa si dos objetos representan el mismo SFloat
@@ -77,4 +80,69 @@ public class SFloat implements ITypes {
                 "numero=" + getTipoInfo() +
                 '}';
     }
+
+
+    @Override
+    public IRealNumbers Suma(INumberandStrings number) {
+        return ((IRealNumbers) number).SumaSFloat(this);
+    }
+
+    @Override
+    public SFloat SumaSInt(SInt number) {
+        return new SFloat(this.numero+number.getTipoInfo());
+    }
+
+    @Override
+    public SFloat SumaSFloat(SFloat number) {
+        return new SFloat(this.getTipoInfo()+number.getTipoInfo());
+    }
+
+
+    @Override
+    public IRealNumbers Resta(IRealNumbers number) {
+        return number.RestaSFloat(this);
+    }
+
+    @Override
+    public IRealNumbers RestaSInt(SInt number) {
+        return new SFloat(number.getTipoInfo()-this.getTipoInfo());
+    }
+
+    @Override
+    public SFloat RestaSFloat(SFloat number) {
+        return new SFloat(number.getTipoInfo()-this.getTipoInfo());
+    }
+
+
+    @Override
+    public IRealNumbers Mult(IRealNumbers number) {
+        return number.MultFloat(this);
+    }
+
+    @Override
+    public IRealNumbers MultInt(SInt number) {
+        return new SFloat(this.getTipoInfo()*number.getTipoInfo());
+    }
+
+    @Override
+    public IRealNumbers MultFloat(SFloat number) {
+        return new SFloat(number.getTipoInfo()*this.getTipoInfo());
+    }
+
+
+    @Override
+    public IRealNumbers Div(IRealNumbers number) {
+        return number.DivFloat(this);
+    }
+
+    @Override
+    public IRealNumbers DivInt(SInt number) {
+        return new SFloat(number.getTipoInfo()/this.getTipoInfo());
+    }
+
+    @Override
+    public IRealNumbers DivFloat(SFloat number) {
+        return new SFloat(number.getTipoInfo()/this.getTipoInfo());
+    }
+
 }

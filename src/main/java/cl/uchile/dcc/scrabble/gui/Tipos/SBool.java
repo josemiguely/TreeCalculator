@@ -2,19 +2,29 @@ package cl.uchile.dcc.scrabble.gui.Tipos;
 
 import java.util.Objects;
 
-public class SBool implements ITypes {
-
+public class SBool implements ITypes,ILogical {
     private boolean truthvalue;
 
     public SBool(boolean truthvalue) {
-        this.truthvalue = truthvalue;
+        this.truthvalue=truthvalue;
+    }
+
+    public boolean getTipoInfo() {
+        return this.truthvalue;
+    }
+
+
+    @Override
+    public SString intoSString() {
+
+        return new SString(String.valueOf(getTipoInfo()));
     }
 
     @Override
-    public SBinary intoSBinary() {
-        return null;
-    }
+    public SBool intoSBool() {
 
+        return new SBool(getTipoInfo());
+    }
 
     @Override
     public SFloat intoSFloat() {
@@ -26,33 +36,11 @@ public class SBool implements ITypes {
         return null;
     }
 
-    /**
-     * Metodo que transforma SBool a SString
-     *
-     * @return SString
-     */
-
-    public SString intoSString() {
-
-        return new SString(String.valueOf(this.truthvalue));
+    @Override
+    public SBinary intoSBinary() {
+        return null;
     }
 
-    /**
-     * Metodo que transforma SBool a un Sbool
-     *
-     * @return SBool
-     */
-
-    public SBool intoSBool() {
-
-        return new SBool(getTipoInfo());
-    }
-
-
-
-    public boolean getTipoInfo() {
-        return truthvalue;
-    }
 
 
     /**
@@ -81,5 +69,67 @@ public class SBool implements ITypes {
         return "Bool{" +
                 "truthvalue=" + getTipoInfo() +
                 '}';
+    }
+
+
+    @Override
+    public ILogical and(ILogical logical) {
+        return logical.andSBool(this);
+    }
+
+    @Override
+    public ILogical andSBool(SBool sbool) {
+        return new SBool(this.getTipoInfo() && sbool.getTipoInfo());
+    }
+
+    @Override
+    public ILogical andSBinary(SBinary logical) {
+        String binario= logical.getTipoInfo();
+        int largo=logical.getTipoInfo().length();
+        boolean truthvalue=this.getTipoInfo();
+        String s="";
+        int i=0;
+        if (truthvalue){
+            return new SBinary(binario);
+        }
+        while(i<largo){
+                s=s+"0";
+            i++;
+        }
+        return new SBinary(s);
+    }
+
+    @Override
+    public ILogical or(ILogical logical) {
+        return logical.orSBool(this);
+    }
+
+    @Override
+    public ILogical orSBool(SBool logical) {
+        return new SBool(this.getTipoInfo() || logical.getTipoInfo());
+    }
+
+    @Override
+    public ILogical orSBinary(SBinary logical) {
+        String binario= logical.getTipoInfo();
+        int largo=logical.getTipoInfo().length();
+        boolean truthvalue=this.getTipoInfo();
+        String s="";
+        if (truthvalue==false){
+            return new SBinary(binario);
+        }
+        int i=0;
+        while(i<largo){
+            if (truthvalue){
+                s="1"+s;
+                i++;
+            }
+        }
+        return new SBinary(s);
+    }
+
+    @Override
+    public ILogical negacion() {
+        return new SBool(!this.getTipoInfo());
     }
 }

@@ -1,11 +1,14 @@
-package cl.uchile.dcc.scrabble.gui.Tipos;
+package cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones;
+
+import cl.uchile.dcc.scrabble.gui.Tipos.SBinary;
+import cl.uchile.dcc.scrabble.gui.Tipos.SBool;
 
 /**
  * Interfaz que tiene las operaciones entre objetos que tienen logica booleana (SString y SBool)
  */
 
 
-public interface ILogical {
+public interface ILogical extends IUnion {
 
     /**
      *Método que utiliza Double-Dispatch
@@ -48,7 +51,7 @@ public interface ILogical {
 
     /**
      * @param logical SBinary que va a hacer la operacion OR con un ILogical
-     * @return ILogical que representa la OR entre logical y ILogical
+     * @return ILogical que representa la operacion OR entre logical y ILogical
      */
 
 

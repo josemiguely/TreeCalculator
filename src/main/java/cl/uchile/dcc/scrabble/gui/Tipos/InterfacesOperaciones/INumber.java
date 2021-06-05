@@ -1,4 +1,6 @@
-package cl.uchile.dcc.scrabble.gui.Tipos;
+package cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones;
+
+import cl.uchile.dcc.scrabble.gui.Tipos.SBinary;
 
 /**
  * Interfaz que tiene  operaciones validas entre INumerosReals y objetos que simulan ser numeros(SBinary)

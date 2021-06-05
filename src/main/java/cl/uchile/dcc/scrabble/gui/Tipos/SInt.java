@@ -1,8 +1,15 @@
 package cl.uchile.dcc.scrabble.gui.Tipos;
 
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.INumber;
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.INumberandStrings;
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IRealNumbers;
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IUnion;
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.TransformacionFloat;
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.TransformacionIntBinary;
+
 import java.util.Objects;
 
-public class SInt implements ITypes,INumber{
+public class SInt implements INumber, TransformacionFloat, TransformacionIntBinary {
 
     private int numero;
 
@@ -14,29 +21,40 @@ public class SInt implements ITypes,INumber{
         return numero;
     }
 
-
+    /**
+     * Metodo que transforma SInt a SString
+     * @return SString
+     */
 
     public SString intoSString(){
 
         return new SString(String.valueOf(this.getTipoInfo()));
     }
 
-    @Override
-    public SBool intoSBool() {
-        return null;
-    }
-
+    /**
+     * Metodo que transforma SInt a SFloat
+     * @return SFloat
+     */
 
     @Override
     public SFloat intoSFloat(){
 
         return new SFloat((double)getTipoInfo());
     }
+    /**
+     * Metodo que transforma SInt a SInt
+     * @return Sint
+     */
 
     @Override
     public SInt intoSInt() {
         return new SInt(getTipoInfo());
     }
+
+    /**
+     * Metodo que transforma SInt a SBinary
+     * @return SBinary
+     */
 
     @Override
     public SBinary intoSBinary() {
@@ -49,7 +67,7 @@ public class SInt implements ITypes,INumber{
     }
 
 
-    public String positiveIntToBinary(int numero){
+    private String positiveIntToBinary(int numero){
         String s = "";
         while (numero > 0)
         {
@@ -60,7 +78,7 @@ public class SInt implements ITypes,INumber{
     }
 
 
-    public String TwosComplement(String str){
+    private String TwosComplement(String str){
         StringBuffer string=new StringBuffer(str);
         int n = string.length();
 
@@ -74,7 +92,7 @@ public class SInt implements ITypes,INumber{
 
         for (int k = i-1 ; k >= 0; k--)
         {
-            //Just flip the values
+
             if (str.charAt(k) == '1')
                 string.replace(k, k+1, "0");
             else
@@ -85,31 +103,52 @@ public class SInt implements ITypes,INumber{
     }
 
     @Override
-    public INumberandStrings Suma(INumberandStrings number) {
+    public INumberandStrings Suma(IUnion number) {
         return ((IRealNumbers) number).SumaSInt(this);
     }
 
+    /**
+     * @param number SInt a ser sumado con un SInt
+     * @return SInt que representa la suma entre number y SInt
+     */
 
     @Override
-    public SInt SumaSInt(SInt numero){
-        int number=this.getTipoInfo()+ numero.getTipoInfo();
-        SInt ResultSuma= new SInt(number);
+    public SInt SumaSInt(SInt number){
+        int sum=this.getTipoInfo()+ number.getTipoInfo();
+        SInt ResultSuma= new SInt(sum);
         return ResultSuma;
     }
 
+    /**
+     * @param number SFloat a ser sumado con un SInt
+     * @return SFloat que representa la suma entre number y SInt
+     */
     @Override
-    public SFloat SumaSFloat(SFloat numero){
-        double number=this.getTipoInfo()+ numero.getTipoInfo();
-        return new SFloat(number);
+    public SFloat SumaSFloat(SFloat number){
+        double sum=this.getTipoInfo()+ number.getTipoInfo();
+        return new SFloat(sum);
     }
 
+    /**
+     * @param number SBinary a ser sumado con un SInt
+     * @return SBinary que representa la suma entre number y SInt
+     */
     @Override
-    public SBinary SumaSBinary(SBinary binarystr){
-        SInt Int1= binarystr.intoSInt();
+    public SBinary SumaSBinary(SBinary number){
+        SInt Int1= number.intoSInt();
         SInt Int2=Int1.SumaSInt(this);
         return Int2.intoSBinary();
     }
 
+    /**
+     * @param number SString a ser sumado con un SInt
+     * @return SString que representa la suma entre number y SInt
+     */
+
+    @Override
+    public SString SumaSString(SString number) {
+        return new SString(number.getTipoInfo()+this.getTipoInfo());
+    }
 
 
     @Override
@@ -117,18 +156,31 @@ public class SInt implements ITypes,INumber{
         return number.RestaSInt(this);
     }
 
-    public SInt RestaSInt(SInt numero){
-        int number=numero.getTipoInfo()-this.getTipoInfo();
-        return new SInt(number);
+    /**
+     * @param number SInt a ser restado con un SInt
+     * @return SInt que representa la resta entre number y SInt
+     */
+    public SInt RestaSInt(SInt number){
+        int res=number.getTipoInfo()-this.getTipoInfo();
+        return new SInt(res);
     }
+    /**
+     * @param number SFLoat a ser restado con un SInt
+     * @return SFloat que representa la resta entre number y SInt
+     */
 
     @Override
     public SFloat RestaSFloat(SFloat number) {
         return new SFloat(number.getTipoInfo()-this.getTipoInfo());
     }
 
+    /**
+     * @param number SBinary a ser restado con un SInt
+     * @return SBinary que representa la resta entre number y SInt
+     */
+
     @Override
-    public INumber RestaSBinary(SBinary number) {
+    public SBinary RestaSBinary(SBinary number) {
         SInt Int1=number.intoSInt();
         SInt result= new SInt(Int1.getTipoInfo()-this.getTipoInfo());
         return result.intoSBinary();
@@ -139,18 +191,33 @@ public class SInt implements ITypes,INumber{
         return number.MultInt(this);
     }
 
+    /**
+     * @param number SInt a ser multiplicado con un SInt
+     * @return SInt que representa la multiplicacion entre number con un SInt
+     */
+
     @Override
-    public INumber MultInt(SInt number) {
+    public SInt MultInt(SInt number) {
         return new SInt(this.getTipoInfo()* number.getTipoInfo());
     }
 
+    /**
+     * @param number SFloat a ser multiplicado con un SInt
+     * @return SFloat que representa la multiplicacion entre number con un SInt
+     */
+
     @Override
-    public IRealNumbers MultFloat(SFloat number) {
+    public SFloat MultFloat(SFloat number) {
         return new SFloat(number.getTipoInfo()*this.getTipoInfo());
     }
 
+    /**
+     * @param number SBinary a ser multiplicado con un SInt
+     * @return SBinary que representa la multiplicacion entre number con un SInt
+     */
+
     @Override
-    public INumber MultBinary(SBinary number) {
+    public SBinary MultBinary(SBinary number) {
         SInt Int1= number.intoSInt();
         SInt Res=new SInt(Int1.getTipoInfo()*this.getTipoInfo());
         SBinary ResToBin=Res.intoSBinary();
@@ -162,18 +229,33 @@ public class SInt implements ITypes,INumber{
         return number.DivInt(this);
     }
 
+    /**
+     * @param number SInt a ser dividido con un SInt
+     * @return SInt que representa la division entre number con un SInt
+     */
+
     @Override
-    public IRealNumbers DivInt(SInt number) {
+    public SInt DivInt(SInt number) {
         return new SInt(number.getTipoInfo()/this.getTipoInfo());
     }
 
+    /**
+     * @param number SFloat a ser dividido con un SInt
+     * @return SFloat que representa la division entre number con un SInt
+     */
+
     @Override
-    public IRealNumbers DivFloat(SFloat number) {
+    public SFloat DivFloat(SFloat number) {
         return new SFloat(number.getTipoInfo()/this.getTipoInfo());
     }
 
+    /**
+     * @param number SBinary a ser dividido con un SInt
+     * @return SBinary que representa la division entre number con un SInt
+     */
+
     @Override
-    public INumber DivBinary(SBinary number) {
+    public SBinary DivBinary(SBinary number) {
         SInt Int1=number.intoSInt();
         SInt Result=(SInt) Int1.Div(this);
         SBinary ResultBinary=Result.intoSBinary();
@@ -187,20 +269,14 @@ public class SInt implements ITypes,INumber{
                 '}';
     }
 
-    /**
-     *Revisa si dos objetos representan el mismo SInt
-     *
-     * @param o Objeto que se quiere comparar
-     * @return Verdadero si representan el mismo SInt, Falso cualquier otro caso
-     */
-
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SInt sInt = (SInt) o;
-        return getTipoInfo() == sInt.getTipoInfo();
+        if(o instanceof SInt) {
+            SInt sInt = (SInt) o;
+            return getTipoInfo()==sInt.getTipoInfo();
+        }
+
+        return false;
     }
 
     @Override

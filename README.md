@@ -26,4 +26,6 @@ Se asumieron las siguientes cosas
 
 -Dos Sbinaries son iguales si su transformacion a entero es la misma.
 
+-No se documento los metodos obvios y los que poseen exactamente la misma documentacion que el padre/interfaz
+
 Para ejecutar los tests basta con correr la carpeta de Test.

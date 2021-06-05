@@ -1,8 +1,14 @@
 package cl.uchile.dcc.scrabble.gui.Tipos;
 
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.INumberandStrings;
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IRealNumbers;
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IUnion;
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.TransformacionFloat;
+
 import java.util.Objects;
 
-public class SFloat implements ITypes,IRealNumbers {
+
+public class SFloat implements IRealNumbers, TransformacionFloat {
 
     private double numero;
 
@@ -27,10 +33,6 @@ public class SFloat implements ITypes,IRealNumbers {
     }
 
 
-    @Override
-    public SBool intoSBool() {
-        return null;
-    }
 
     /**
      * Metodo que transforma SFloat a SFloat
@@ -43,30 +45,14 @@ public class SFloat implements ITypes,IRealNumbers {
         return new SFloat(getTipoInfo());
     }
 
-    @Override
-    public SInt intoSInt() {
-        return null;
-    }
-
-    @Override
-    public SBinary intoSBinary() {
-        return null;
-    }
-
-
-    /**
-     *Revisa si dos objetos representan el mismo SFloat
-     *
-     * @param o Objeto que se quiere comparar
-     * @return Verdadero si representan el mismo Float, Falso cualquier otro caso
-     */
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SFloat sFloat = (SFloat) o;
-        return Double.compare(sFloat.getTipoInfo(), getTipoInfo()) == 0;
+        if(o instanceof SFloat) {
+            SFloat sFloat = (SFloat) o;
+            return getTipoInfo()==sFloat.getTipoInfo();
+        }
+
+        return false;
     }
 
     @Override
@@ -81,32 +67,60 @@ public class SFloat implements ITypes,IRealNumbers {
                 '}';
     }
 
-
     @Override
-    public IRealNumbers Suma(INumberandStrings number) {
+    public IRealNumbers Suma(IUnion number) {
         return ((IRealNumbers) number).SumaSFloat(this);
     }
+
+    /**
+     * @param number SInt a ser sumado con un SFloat
+     * @return SFloat que representa la suma entre number y SFloat
+     */
 
     @Override
     public SFloat SumaSInt(SInt number) {
         return new SFloat(this.numero+number.getTipoInfo());
     }
 
+    /**
+     * @param number SFloat a ser sumado con un SFloat
+     * @return SFloat que representa la suma entre number y SFloat
+     */
+
     @Override
     public SFloat SumaSFloat(SFloat number) {
         return new SFloat(this.getTipoInfo()+number.getTipoInfo());
     }
 
+    /**
+     * @param number SString a ser sumado con un SFloat
+     * @return SString que representa la suma entre number y SFloat
+     */
+
+    @Override
+    public SString SumaSString(SString number) {
+        return new SString(number.getTipoInfo()+this.getTipoInfo());
+    }
 
     @Override
     public IRealNumbers Resta(IRealNumbers number) {
         return number.RestaSFloat(this);
     }
 
+    /**
+     * @param number SInt a ser restado con un SFloat
+     * @return SFloat que representa la resta entre number y SFloat
+     */
+
     @Override
-    public IRealNumbers RestaSInt(SInt number) {
+    public SFloat RestaSInt(SInt number) {
         return new SFloat(number.getTipoInfo()-this.getTipoInfo());
     }
+
+    /**
+     * @param number SFloat a ser restado con un SFloat
+     * @return SFloat que representa la resta entre number y SFloat
+     */
 
     @Override
     public SFloat RestaSFloat(SFloat number) {
@@ -119,13 +133,23 @@ public class SFloat implements ITypes,IRealNumbers {
         return number.MultFloat(this);
     }
 
+    /**
+     * @param number SInt a ser multiplicado con un SFloat
+     * @return SFloat que representa la multiplicacion entre number con un SFloat
+     */
+
     @Override
-    public IRealNumbers MultInt(SInt number) {
+    public SFloat MultInt(SInt number) {
         return new SFloat(this.getTipoInfo()*number.getTipoInfo());
     }
 
+    /**
+     * @param number SFloat a ser multiplicado con un SFloat
+     * @return SFloat que representa la multiplicacion entre number con un SFloat
+     */
+
     @Override
-    public IRealNumbers MultFloat(SFloat number) {
+    public SFloat MultFloat(SFloat number) {
         return new SFloat(number.getTipoInfo()*this.getTipoInfo());
     }
 
@@ -135,13 +159,23 @@ public class SFloat implements ITypes,IRealNumbers {
         return number.DivFloat(this);
     }
 
+    /**
+     * @param number SInt a ser dividido con un SFloat
+     * @return SFloat que representa la division entre number con un SFloat
+     */
+
     @Override
-    public IRealNumbers DivInt(SInt number) {
+    public SFloat DivInt(SInt number) {
         return new SFloat(number.getTipoInfo()/this.getTipoInfo());
     }
 
+    /**
+     * @param number SFloat a ser dividido con un SFloat
+     * @return SFloat que representa la division entre number con un SFloat
+     */
+
     @Override
-    public IRealNumbers DivFloat(SFloat number) {
+    public SFloat DivFloat(SFloat number) {
         return new SFloat(number.getTipoInfo()/this.getTipoInfo());
     }
 

@@ -35,6 +35,10 @@ class SFloatTest {
 
         SFloat diffloat=new SFloat(seed+1);
         assertNotEquals(float1,diffloat);
+
+        SInt int1=new SInt(22);
+
+        assertFalse(float1.equals(int1));
     }
     @RepeatedTest(20)
     void IntoSStringTest(){
@@ -52,31 +56,17 @@ class SFloatTest {
         assertEquals(expected,actual);
     }
 
-    @RepeatedTest(10)
-    void intoSIntTest(){
-        assertEquals(null,float1.intoSInt());
-    }
-
-    @RepeatedTest(10)
-    void intoSBoolTest(){
-        assertEquals(null,float1.intoSBool());
-    }
-
-    @RepeatedTest(10)
-    void intoSBinaryTest(){
-        assertEquals(null,float1.intoSBinary());
-    }
 
     @RepeatedTest(5)
     void Suma(){
 
-        //Suma de floats
+        //Suma de Sloat con SFloat
 
         SFloat expected=new SFloat(float1.getTipoInfo()+ float2.getTipoInfo());
         SFloat actual=(SFloat)float1.Suma(float2);
         assertEquals(expected,actual);
 
-        //Suma de float con int
+        //Suma de Sloat con SInt
 
         SInt int1=new SInt(seed2);
         SFloat actual2=(SFloat) float1.Suma(int1);
@@ -87,7 +77,8 @@ class SFloatTest {
 
         SBinary binary1=new SBinary("0111");
         SFloat actual3=(SFloat) float1.Suma(binary1);
-        SFloat expected3=new SFloat(5+float1.getTipoInfo());
+        SFloat expected3=new SFloat(7+float1.getTipoInfo());
+        assertEquals(expected3,actual3);
     }
     @RepeatedTest(5)
     void Resta(){
@@ -104,13 +95,17 @@ class SFloatTest {
 
         //Resta de SFloat con SBinary
 
-        SBinary binary1=new SBinary("0111");//7
+        SBinary binary1=new SBinary("01111");//15
+        SBinary binary2=new SBinary("10001");//-15
         SFloat actual3=(SFloat) float1.Resta(binary1);
-        SFloat expected3=new SFloat(float1.getTipoInfo()-7);
+        SFloat expected3=new SFloat(float1.getTipoInfo()-15);
         assertEquals(expected3,actual3);
+        SFloat actual4=(SFloat) float1.Resta(binary2);
+        SFloat expected4=new SFloat(float1.getTipoInfo()+15);
+        assertEquals(expected4,actual4);
     }
 
-    @RepeatedTest(5)
+    @RepeatedTest(10)
     void Mult(){
         //Mult de Floats
         SFloat actual=(SFloat) float1.Mult(float2);
@@ -124,11 +119,18 @@ class SFloatTest {
         assertEquals(expected2,actual2);
 
         //Mult de SFloat con SBinary
-        SBinary binary1=new SBinary("0111");
+        SBinary binary1=new SBinary("0101");//5
+        SBinary binary2=new SBinary("1011");//-5
         SFloat actual3=(SFloat) float1.Mult(binary1);
         SFloat expected3=new SFloat(float1.getTipoInfo()*5);
+        assertEquals(expected3,actual3);
+
+        SFloat actual4=(SFloat) float1.Mult(binary2);
+        SFloat expected4=new SFloat(float1.getTipoInfo()*-5);
+        assertEquals(expected4,actual4);
+
     }
-    @RepeatedTest(5)
+    @RepeatedTest(10)
     void Div(){
 
         //Div de Float
@@ -143,9 +145,17 @@ class SFloatTest {
         assertEquals(expected2,actual2);
 
         //Div de SFloat con SBinary
-        SBinary binary1=new SBinary("0111");
+        SBinary binary1=new SBinary("0111");//7
         SFloat actual3=(SFloat) float1.Div(binary1);
-        SFloat expected3=new SFloat(float1.getTipoInfo()/5);
+        SFloat expected3=new SFloat(float1.getTipoInfo()/7);
+        assertEquals(expected3,actual3);
+
+        SBinary binary2=new SBinary("1001");//-7
+        SFloat actual4=(SFloat) float1.Div(binary2);
+        SFloat expected4=new SFloat(float1.getTipoInfo()/-7);
+        assertEquals(expected4,actual4);
+
     }
+
 
 }

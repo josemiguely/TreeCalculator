@@ -3,20 +3,27 @@ package cl.uchile.dcc.scrabble.gui;
 
 import cl.uchile.dcc.scrabble.gui.Tipos.SBinary;
 import cl.uchile.dcc.scrabble.gui.Tipos.SBool;
+import cl.uchile.dcc.scrabble.gui.Tipos.SInt;
 import cl.uchile.dcc.scrabble.gui.Tipos.SString;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class SBoolTest {
     private SBool truthvalue1;
     private SBool truthvalue2;
+    private SBinary binario1;
+    private SString sstring;
+    private String string1;
+    private String string2;
     private boolean seed;
+    private int seed2;
     private Random rng;
 
     SBool valorv=new SBool(true);
@@ -29,16 +36,28 @@ class SBoolTest {
         seed = new Random().nextBoolean();
         truthvalue1=new SBool(seed);
         truthvalue2=new SBool(seed);
+
+        seed2 = new Random().nextInt(20)+1;//para que el bound sea nunca 0
+        rng = new Random(seed2);
+        int strSize = rng.nextInt(seed2)+1;//+1 para que el size del str nunca sea 0
+        string1 = RandomStringUtils.random(strSize, "01");
+        string2=RandomStringUtils.random(strSize,0,0,true,true,null,rng);
+        binario1= new SBinary(string1);
+        sstring=new SString(string2);
     }
 
     @RepeatedTest(20)
     void constructorTest(){
         assertEquals(truthvalue1.hashCode(),truthvalue2.hashCode());
         assertEquals(truthvalue1,truthvalue2);
-        assert(truthvalue1.toString().equals(truthvalue2.toString()));
+        assertEquals(truthvalue1.toString(), truthvalue2.toString());
 
         SBool differenttruthvalue=new SBool(!seed);
         assertNotEquals(truthvalue1,differenttruthvalue);
+
+        SInt int1=new SInt(22);
+
+        assertFalse(truthvalue1.equals(int1));
     }
 
     @RepeatedTest(20)
@@ -53,20 +72,7 @@ class SBoolTest {
         SBool expected= new SBool(truthvalue1.getTipoInfo());
         assertEquals(expected,actual);
     }
-    @RepeatedTest(10)
-    void intoFloatTest(){
-        assertEquals(null,truthvalue1.intoSFloat());
-    }
 
-    @RepeatedTest(10)
-    void intoSIntTest(){
-        assertEquals(null,truthvalue1.intoSInt());
-    }
-
-    @RepeatedTest(10)
-    void intoSBinaryTest(){
-        assertEquals(null,truthvalue1.intoSBinary());
-    }
 
     @RepeatedTest(10)
     void and(){
@@ -81,14 +87,21 @@ class SBoolTest {
 
         //and entre SBool y Sbinary
 
-        SBinary binary1=new SBinary("101");
-        SBinary actualbinary= (SBinary) valorv.and(binary1);
-        SBinary expectedbinary= new SBinary("101");
+
+        SBinary actualbinary= (SBinary) valorv.and(binario1);
+        SBinary expectedbinary= new SBinary(string1);
         assertEquals(expectedbinary,actualbinary);
 
-        SBinary actualbinary2=(SBinary) valorf.and(binary1);
-        SBinary expectedbinary2=new SBinary("000");
-        assertEquals(actualbinary2,expectedbinary2);
+        SBinary actualbinary2=(SBinary) valorf.and(binario1);
+        int largo0=string1.length();
+        String expectedString="";
+
+
+        for (int i=0;i<largo0;i++){
+            expectedString=expectedString+"0";
+        }
+        SBinary expectedbinary2=new SBinary(expectedString);
+        assertEquals(expectedbinary2,actualbinary2);
 
     }
     @RepeatedTest(10)
@@ -113,8 +126,10 @@ class SBoolTest {
         //or entre SBool y SBinary
         SBinary binario=new SBinary("101");
         SBinary expectedbinary=new SBinary("111");
-        SBinary actualbinary=(SBinary) valorv.orSBinary(binario);
-        SBinary actualbinaryf=(SBinary) valorf.orSBinary(binario);
+
+        SBinary actualbinary=(SBinary) valorv.or(binario);
+
+        SBinary actualbinaryf=(SBinary) valorf.or(binario);
         assertEquals(expectedbinary,actualbinary);
 
         SBinary exp=new SBinary("101");
@@ -131,9 +146,35 @@ class SBoolTest {
     @RepeatedTest(10)
     void negacionTest(){
         SBool expected=new SBool(!seed);
-        SBool actual=(SBool) truthvalue1.negacion();
+        SBool actual=truthvalue1.negacion();
         assertEquals(expected,actual);
     }
+    @RepeatedTest(10)
+    void SumaSString(){
+
+        SString actual=truthvalue1.SumaSString(sstring);
+        SString expected= new SString(string2+truthvalue1.getTipoInfo());
+        assertEquals(expected,actual);
+
+
+    }
+    @RepeatedTest(10)
+    void TestRobusto(){
+        SBool truthvaluecopy=truthvalue1.intoSBool();
+        assertEquals(truthvalue1,truthvaluecopy);
+        SBool negtruth=truthvaluecopy.negacion();
+        assertNotEquals(truthvalue1,negtruth);
+        SBool expected=new SBool(!seed);
+        assertEquals(expected,negtruth);
+        SString negtruthstring=negtruth.intoSString();
+        SString expected2=new SString(String.valueOf(!seed));
+        assertEquals(expected2,negtruthstring);
+
+        SString actual=negtruthstring.SumaSString(sstring);
+        SString expected3=new SString(string2+negtruthstring.getTipoInfo());
+        assertEquals(expected3,actual);
+    }
+
 
 
 }

@@ -1,8 +1,13 @@
 package cl.uchile.dcc.scrabble.gui.Tipos;
 
+
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.INumberandStrings;
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IUnion;
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.ITypes;
+
 import java.util.Objects;
 
-public class SString implements ITypes,INumberandStrings {
+public class SString implements ITypes, INumberandStrings {
 
     private String string;
 
@@ -18,30 +23,13 @@ public class SString implements ITypes,INumberandStrings {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SString sString = (SString) o;
-        return Objects.equals(getTipoInfo(), sString.getTipoInfo());
-    }
+        if(o instanceof SString) {
+            SString sString = (SString) o;
+            getTipoInfo().equals(sString.getTipoInfo());
+            return getTipoInfo().equals(sString.getTipoInfo());
+        }
 
-
-    @Override
-    public SBinary intoSBinary() {
-        return null;
-    }
-
-    @Override
-    public SBool intoSBool() {
-        return null;
-    }
-
-    @Override
-    public SFloat intoSFloat() {
-        return null;
-    }
-
-    @Override
-    public SInt intoSInt() {
-        return null;
+        return false;
     }
 
     /**
@@ -66,12 +54,20 @@ public class SString implements ITypes,INumberandStrings {
                 '}';
     }
 
+    /**
+     *
+     * @param number SString que va a ser sumado con un SString
+     * @return SString que representa la suma entre number y SString
+     */
 
+    @Override
+    public SString SumaSString(SString number) {
+        return new SString(number.getTipoInfo()+this.getTipoInfo());
+    }
 
 
     @Override
-    public INumberandStrings Suma(INumberandStrings number) {
-        SString string=(SString)number;
-        return new SString(this.getTipoInfo()+string.getTipoInfo());
+    public INumberandStrings Suma(IUnion number) {
+        return (number).SumaSString(this);
     }
 }

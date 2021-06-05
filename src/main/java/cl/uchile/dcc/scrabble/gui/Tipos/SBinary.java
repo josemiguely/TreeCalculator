@@ -1,9 +1,13 @@
 package cl.uchile.dcc.scrabble.gui.Tipos;
 
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.*;
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.TransformacionFloat;
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.TransformacionIntBinary;
+
 import java.math.BigInteger;
 import java.util.Objects;
 
-public class SBinary implements ITypes,INumber,ILogical {
+public class SBinary implements TransformacionFloat, INumber, ILogical, TransformacionIntBinary {
 
     private String numero;
 
@@ -27,15 +31,11 @@ public class SBinary implements ITypes,INumber,ILogical {
     }
 
     /**
-     * Metodo que transforma  SBinary a  Sbinary
+     * Metodo que transforma  SBinary a  Float
      *
      * @return SBinary
      */
 
-    @Override
-    public SBool intoSBool() {
-        return null;
-    }
 
     @Override
     public SFloat intoSFloat() {
@@ -44,10 +44,14 @@ public class SBinary implements ITypes,INumber,ILogical {
         return new SFloat(doubleVal);
     }
 
+    /**
+     * Metodo que transforma SBinary a SInt
+     *
+     * @return SInt
+     */
 
     @Override
     public SInt intoSInt() {
-
         if (bitToInt(getTipoInfo().charAt(0)) == 0) {
             return positiveBinToInt(getTipoInfo());
         } else {
@@ -59,48 +63,54 @@ public class SBinary implements ITypes,INumber,ILogical {
         return bit == '0' ? 0 : 1;
     }
 
-    private SInt positiveBinToInt(String binary) {
-        int w = 0;
-        for (int i = binary.length() - 1, j = 0; i > 0; i--, j++) {
-            w += (int) Math.pow(2, j) * bitToInt(binary.charAt(i));
-        }
-        return new SInt(w);
-    }
-
-    private SInt negativeBinaryToInt(String binary) {
-        int n = binary.length() - 1;
-        int w = -bitToInt(binary.charAt(0)) * (int) Math.pow(2, n);
-        for (int i = n, j = 0; i > 0; i--, j++) {
-            w += (int) Math.pow(2, j) * (binary.charAt(i) == '1' ? 1 : 0);
-        }
-        return new SInt(w);
-    }
-
+    /**
+     * Metodo que transforma SBinary a SBinary
+     *
+     * @return SInt
+     */
 
     @Override
     public SBinary intoSBinary() {
         return new SBinary(getTipoInfo());
     }
 
+    //Algoritmo para pasar binario positivo a entero
+    private SInt positiveBinToInt(String logical) {
+        int w = 0;
+        for (int i = logical.length() - 1, j = 0; i > 0; i--, j++) {
+            w += (int) Math.pow(2, j) * bitToInt(logical.charAt(i));
+        }
+        return new SInt(w);
+    }
+
+    //Algoritmo para pasar binario negativo a entero
+    private SInt negativeBinaryToInt(String logical) {
+        int n = logical.length() - 1;
+        int w = -bitToInt(logical.charAt(0)) * (int) Math.pow(2, n);
+        for (int i = n, j = 0; i > 0; i--, j++) {
+            w += (int) Math.pow(2, j) * (logical.charAt(i) == '1' ? 1 : 0);
+        }
+        return new SInt(w);
+    }
+
 
     /**
-     * Revisa si dos objetos representan el mismo SBinary
-     *
-     * @param o Objeto que se quiere comparar
-     * @return Verdadero si representan el mismo SBinary, Falso cualquier otro caso
+     * Dos binarios son iguales si su conversion a entero es igual
      */
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SBinary sBinary = (SBinary) o;
-        return Objects.equals(getTipoInfo(), sBinary.getTipoInfo());
+        if(o instanceof SBinary) {
+            SBinary sBinary = (SBinary) o;
+            if((this.intoSInt().getTipoInfo())==sBinary.intoSInt().getTipoInfo()) {
+                return true;
+            }}
+
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTipoInfo());
+        return Objects.hash(SBinary.class);
     }
 
     @Override
@@ -110,39 +120,51 @@ public class SBinary implements ITypes,INumber,ILogical {
                 '}';
     }
 
+
     @Override
-    public IRealNumbers Suma(INumberandStrings number) {
+    public INumberandStrings Suma(IUnion number) {
         return ((INumber) number).SumaSBinary(this);
     }
 
+
+
     @Override
-    public INumber SumaSInt(SInt number) {
+    public SString SumaSString(SString number) {
+        return new SString(number.getTipoInfo()+this.getTipoInfo());
+    }
+
+
+    /**
+     *
+     * @param number SInt a ser sumado con un SBinary
+     * @return SInt que representa la suma entre number y SBinary
+     */
+
+    @Override
+    public SInt SumaSInt(SInt number) {
         SInt int1=(this.intoSInt());
         int result= int1.getTipoInfo();
         return new SInt(result + number.getTipoInfo());
     }
 
-    public int binarytoint(String binary) {
-        int largo = binary.length();
-        int i = largo - 1;
-        int result = 0;
-        while (i >= 0) {
-            if (getTipoInfo().charAt(i) == 1) {
-                result += Math.pow(2, i);
-            }
-            i--;
-        }
-        return result;
-    }
+    /**
+     * @param number SFloat a ser sumado con un SBinary
+     * @return SFloat que representa la suma entre number y Sfloat
+     */
 
     @Override
     public SFloat SumaSFloat(SFloat number) {
-        int result = binarytoint(this.getTipoInfo());
+        int result = (this.intoSInt().getTipoInfo());
         return new SFloat(result + number.getTipoInfo());
     }
 
+    /**
+     * @param number SFloat a ser sumado con un SBinary
+     * @return SFloat que representa la suma entre number y Sfloat
+     */
+
     @Override
-    public INumber SumaSBinary(SBinary number) {
+    public SBinary SumaSBinary(SBinary number) {
         SInt Int1=number.intoSInt();
         SInt Int2=this.intoSInt();
         SInt Int3=(SInt) Int1.Suma(Int2);
@@ -150,26 +172,36 @@ public class SBinary implements ITypes,INumber,ILogical {
         return Binary;
     }
 
+
     @Override
     public IRealNumbers Resta(IRealNumbers number) {
 
         return ((INumber) number).RestaSBinary(this);
     }
 
+    /**
+     * @param number SInt a ser restado con un SBinary
+     * @return SInt que representa la resta entre number y SBinary
+     */
     @Override
-    public INumber RestaSInt(SInt number) {
-        SInt binarytoint = this.intoSInt();
-        return new SInt(number.getTipoInfo() - binarytoint.getTipoInfo());
+    public SInt RestaSInt(SInt number) {
+        SInt logicaltoint = this.intoSInt();
+        return new SInt(number.getTipoInfo() - logicaltoint.getTipoInfo());
     }
 
     @Override
     public SFloat RestaSFloat(SFloat number) {
-        SInt binarytofloat = this.intoSInt();
-        return new SFloat(number.getTipoInfo() - binarytofloat.getTipoInfo());
+        SInt logicaltofloat = this.intoSInt();
+        return new SFloat(number.getTipoInfo() - logicaltofloat.getTipoInfo());
     }
 
+    /**
+     * @param number SBinary a ser restado con un SBinary
+     * @return SBinary que representa la resta entre number con un SBinary
+     */
+
     @Override
-    public INumber RestaSBinary(SBinary number) {
+    public SBinary RestaSBinary(SBinary number) {
         SInt Int1 = number.intoSInt();
         SInt Int2 = this.intoSInt();
         SInt Int3 = new SInt(Int1.getTipoInfo() - Int2.getTipoInfo());
@@ -182,19 +214,35 @@ public class SBinary implements ITypes,INumber,ILogical {
         return ((INumber) number).MultBinary(this);
     }
 
+    /**
+     * @param number SInt a ser multiplicado con un SBinary
+     * @return SInt que representa la multiplicacion entre number con un SBinary
+     */
+
     @Override
-    public INumber MultInt(SInt number) {
+    public SInt MultInt(SInt number) {
         SInt Int1=this.intoSInt();
         return new SInt(number.getTipoInfo()* Int1.getTipoInfo());
     }
 
-    @Override
-    public INumber MultFloat(SFloat number) {
-        return null;
-    }
+    /**
+     * @param number SFloat a ser multiplicado con un SBinary
+     * @return SFloat que representa la multiplicacion entre number con un SBinary
+     */
 
     @Override
-    public INumber MultBinary(SBinary number) {
+    public SFloat MultFloat(SFloat number) {
+        SInt Int1=this.intoSInt();
+        return new SFloat(number.getTipoInfo()*Int1.getTipoInfo());
+    }
+
+    /**
+     * @param number SBinary a ser multiplicado con un SBinary
+     * @return SBinary que representa la multiplicado entre number con un SBinary
+     */
+
+    @Override
+    public SBinary MultBinary(SBinary number) {
         SInt Int1= number.intoSInt();
         SInt Int2=this.intoSInt();
         SInt Int3= new SInt(Int1.getTipoInfo()* Int2.getTipoInfo());
@@ -206,20 +254,35 @@ public class SBinary implements ITypes,INumber,ILogical {
         return ((INumber) number).DivBinary(this);
     }
 
+    /**
+     * @param number SInt a ser dividido con un SBinary
+     * @return SInt que representa la division entre number con un SBinary
+     */
+
     @Override
-    public INumber DivInt(SInt number) {
+    public SInt DivInt(SInt number) {
         SInt Int1=this.intoSInt();
         return new SInt(number.getTipoInfo()/ Int1.getTipoInfo());
     }
 
-    @Override
-    public IRealNumbers DivFloat(SFloat number) {
-        SFloat Float1=this.intoSFloat();
-        return new SFloat(number.getTipoInfo()/Float1.getTipoInfo());
-    }
+    /**
+     * @param number SFloat a ser dividido con un SBinary
+     * @return SFloat que representa la division entre number con un SBinary
+     */
 
     @Override
-    public INumber DivBinary(SBinary number) {
+    public SFloat DivFloat(SFloat number) {
+        SInt Int1=this.intoSInt();
+        return new SFloat(number.getTipoInfo()/Int1.getTipoInfo());
+    }
+
+    /**
+     *
+     * @param number SBinary a ser dividido con un SBinary
+     * @return SBinary que representa la division entre number con SBinary
+     */
+    @Override
+    public SBinary DivBinary(SBinary number) {
         SInt Int1=number.intoSInt();
         SInt Int2=this.intoSInt();
         SInt Int3=new SInt(Int1.getTipoInfo()/ Int2.getTipoInfo());
@@ -232,28 +295,37 @@ public class SBinary implements ITypes,INumber,ILogical {
         return logical.andSBinary(this);
     }
 
+    /**
+     * @param logical que va a hacer la operacion AND con un SBinary
+     * @return SBinary que representa la conjuncion entre logical y SBinary
+     */
     @Override
-    public ILogical andSBool(SBool Sbool) {
+    public SBinary andSBool(SBool logical) {
         String binario= this.getTipoInfo();
         int largo=binario.length();
-        boolean truthvalue=Sbool.getTipoInfo();
+        boolean truthvalue=logical.getTipoInfo();
         String s="";
         int i=0;
+        if (truthvalue){
+            return new SBinary(binario);
+        }
+        else
         while(i<largo){
-            if (truthvalue && binario.charAt(i)=='1'){
-                s="1"+s;
-            }
-            else{
-                s="0"+s;
-            }
+            s="0"+s;
             i++;
         }
         return new SBinary(s);
+
     }
 
+    /**
+     * @param logical que va a hacer la operacion AND con un SBinary (ambos strings deben ser del mismo tamaño)
+     * @return SBinary que representa la conjuncion entre logical y SBinary
+     */
+
     @Override
-    public ILogical andSBinary(SBinary binary) {
-        String binario=binary.getTipoInfo();
+    public SBinary andSBinary(SBinary logical) {
+        String binario=logical.getTipoInfo();
         String binario2=this.getTipoInfo();
         String s="";
         int i=0;
@@ -267,7 +339,7 @@ public class SBinary implements ITypes,INumber,ILogical {
                 i++;
             }
         }
-        System.out.println("s="+s);
+
         return new SBinary(s);
     }
 
@@ -276,11 +348,15 @@ public class SBinary implements ITypes,INumber,ILogical {
         return logical.orSBinary(this);
     }
 
+    /**
+     * @param logical SBool que va a hacer la operacion OR con un SBool
+     * @return SBinary que representa OR entre logical y SBool
+     */
     @Override
-    public ILogical orSBool(SBool Sbool) {
+    public SBinary orSBool(SBool logical) {
         String binario= this.getTipoInfo();
         int largo=binario.length();
-        boolean truthvalue=Sbool.getTipoInfo();
+        boolean truthvalue=logical.getTipoInfo();
         String s="";
         if (!truthvalue){
             return new SBinary(binario);
@@ -296,10 +372,14 @@ public class SBinary implements ITypes,INumber,ILogical {
         return new SBinary(s);
     }
 
+    /**
+     * @param logical SBinary que va a hacer la operacion OR con un SBinary (ambos strings deben ser del mismo tamaño)
+     * @return ILogical que representa la operacion OR entre logical y SBinary
+     */
 
     @Override
-    public ILogical orSBinary(SBinary binary) {
-        String binario = binary.getTipoInfo();
+    public SBinary orSBinary(SBinary logical) {
+        String binario = logical.getTipoInfo();
         String binario2=this.getTipoInfo();
         int largo = binario.length();
         String s = "";
@@ -318,9 +398,12 @@ public class SBinary implements ITypes,INumber,ILogical {
         return new SBinary(s);
     }
 
+    /**
+     * @return SBinary que representa la negacion de un SBinary(this)
+     */
 
     @Override
-    public ILogical negacion() {
+    public SBinary negacion() {
         String binario = this.getTipoInfo();
         int largo = binario.length();
         String s = "";
@@ -335,4 +418,6 @@ public class SBinary implements ITypes,INumber,ILogical {
         }
         return new SBinary(s);
     }
+
+
 }

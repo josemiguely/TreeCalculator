@@ -1,4 +1,7 @@
-package cl.uchile.dcc.scrabble.gui.Tipos;
+package cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones;
+
+import cl.uchile.dcc.scrabble.gui.Tipos.SFloat;
+import cl.uchile.dcc.scrabble.gui.Tipos.SInt;
 
 /**
  * Interfaz que tiene las operaciones entre objetos que contienen informacion de numeros reales/primitivos (ie int,double)
@@ -36,6 +39,11 @@ public interface IRealNumbers extends INumberandStrings {
 
     IRealNumbers RestaSInt(SInt number);
 
+    /**
+     *
+     * @param number SFloat a ser restado con un IRealNumbers
+     * @return SFloat que representa la resta entre number y un IRealNumbers
+     */
     SFloat RestaSFloat(SFloat number);
 
     /**

@@ -18,7 +18,7 @@ _University of Chile_.
 Se termino la Tarea 1.
 
 -La logica del programa es que hay 5 tipos. SBinary (binarios),SBool(booleanos),SFloat(double),SInt(enteros),SString(strings)
-que pueden interactuar entre ellos a partir de operaciones comumenes en sus contrapartes primitivas
+que pueden interactuar entre ellos a partir de operaciones comunes en sus contrapartes primitivas
 
 Se asumieron las siguientes cosas 
 

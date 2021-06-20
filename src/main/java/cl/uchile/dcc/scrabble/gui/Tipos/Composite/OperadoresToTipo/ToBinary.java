@@ -1,13 +1,8 @@
 package cl.uchile.dcc.scrabble.gui.Tipos.Composite;
 
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.AbstractElement;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.ElementBinary;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.ElementNumber;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.ILogical;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.ITypes;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.TransformacionBool;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.TransformacionIntBinary;
-import cl.uchile.dcc.scrabble.gui.Tipos.SBool;
 
 public class ToBinary implements Operador{
 

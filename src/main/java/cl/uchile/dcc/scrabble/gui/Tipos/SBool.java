@@ -1,11 +1,10 @@
 package cl.uchile.dcc.scrabble.gui.Tipos;
 
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.ILogical;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.TransformacionBool;
 
 import java.util.Objects;
 
-public class SBool implements ILogical, TransformacionBool {
+public class SBool implements ILogical {
     private boolean truthvalue;
 
     public SBool(boolean truthvalue) {
@@ -36,7 +35,7 @@ public class SBool implements ILogical, TransformacionBool {
      */
 
 
-    @Override
+
     public SBool intoSBool() {
 
         return new SBool(getTipoInfo());
@@ -163,6 +162,8 @@ public class SBool implements ILogical, TransformacionBool {
     public SString SumaSString(SString number) {
         return new SString(number.getTipoInfo()+getTipoInfo());
     }
+
+
 
 
 }

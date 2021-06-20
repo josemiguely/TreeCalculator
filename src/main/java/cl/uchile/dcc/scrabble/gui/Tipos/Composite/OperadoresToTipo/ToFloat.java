@@ -1,9 +1,9 @@
-package cl.uchile.dcc.scrabble.gui.Tipos.Composite;
+package cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresToTipo;
 
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.ElementBinary;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.ElementNumber;
+import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Operador;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.INumber;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.TransformacionIntBinary;
 
 public class ToFloat implements Operador {
 

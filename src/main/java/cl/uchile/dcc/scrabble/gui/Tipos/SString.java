@@ -3,11 +3,10 @@ package cl.uchile.dcc.scrabble.gui.Tipos;
 
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.INumberandStrings;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IUnion;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.ITypes;
 
 import java.util.Objects;
 
-public class SString implements ITypes, INumberandStrings {
+public class SString implements INumberandStrings {
 
     private String string;
 

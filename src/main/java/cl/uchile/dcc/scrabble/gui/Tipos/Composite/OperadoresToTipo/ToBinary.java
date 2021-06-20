@@ -1,10 +1,11 @@
-package cl.uchile.dcc.scrabble.gui.Tipos.Composite;
+package cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresToTipo;
 
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.ElementBinary;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.ElementNumber;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.TransformacionIntBinary;
+import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Operador;
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.INumber;
 
-public class ToBinary implements Operador{
+public class ToBinary implements Operador {
 
     Operador nodo;
 
@@ -22,7 +23,7 @@ public class ToBinary implements Operador{
 
     @Override
     public ElementBinary eval() {
-        TransformacionIntBinary tipo= (TransformacionIntBinary) nodo.eval().getTipo();
+        INumber tipo= (INumber) nodo.eval().getTipo();
         return new ElementBinary(tipo.intoSBinary());
     }
 }

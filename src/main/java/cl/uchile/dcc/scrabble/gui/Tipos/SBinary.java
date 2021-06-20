@@ -1,13 +1,11 @@
 package cl.uchile.dcc.scrabble.gui.Tipos;
 
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.*;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.TransformacionFloat;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.TransformacionIntBinary;
 
 import java.math.BigInteger;
 import java.util.Objects;
 
-public class SBinary implements TransformacionFloat, INumber, ILogical, TransformacionIntBinary {
+public class SBinary implements INumber, ILogical {
 
     private String numero;
 
@@ -329,6 +327,31 @@ public class SBinary implements TransformacionFloat, INumber, ILogical, Transfor
         String binario2=this.getTipoInfo();
         String s="";
         int i=0;
+
+        if (binario.length()>binario2.length()){
+            int contador=binario2.length();
+            while (binario.length()!=contador){
+                binario2="0"+binario2;
+                contador++;
+            }
+        }
+
+        else if(binario.length()<binario2.length()){
+            int contador=binario.length();
+            if(binario.charAt(0)=='0') {
+                while (binario2.length() != contador) {
+                    binario = "0" + binario;
+                    contador++;
+                }
+            }
+            else{
+                while (binario2.length() != contador) {
+                    binario = "1" + binario;
+                    contador++;
+                }
+            }
+        }
+
         if(binario.length()==binario2.length()) {
             while (i < binario.length()) {
                 if (binario.charAt(i) == '1' && binario2.charAt(i) == '1') {

@@ -92,6 +92,8 @@ public interface IRealNumbers extends INumberandStrings {
 
     IRealNumbers DivFloat(SFloat number);
 
+    SFloat intoSFloat();
+
 
 
 }

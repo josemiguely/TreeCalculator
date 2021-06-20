@@ -16,4 +16,12 @@ public interface IUnion {
      */
 
     SString SumaSString(SString number);
+
+    /**
+     * Metodo que transforma a SString
+     *
+     * @return el objeto  transformado a SString
+     */
+
+    SString intoSString();
 }

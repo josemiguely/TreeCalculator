@@ -2,12 +2,11 @@ package cl.uchile.dcc.scrabble.gui.Tipos;
 
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IRealNumbers;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IUnion;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.TransformacionFloat;
 
 import java.util.Objects;
 
 
-public class SFloat implements IRealNumbers, TransformacionFloat {
+public class SFloat implements IRealNumbers {
 
     private double numero;
 

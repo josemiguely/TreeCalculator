@@ -1,6 +1,8 @@
 package cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones;
 
 import cl.uchile.dcc.scrabble.gui.Tipos.SBinary;
+import cl.uchile.dcc.scrabble.gui.Tipos.SFloat;
+import cl.uchile.dcc.scrabble.gui.Tipos.SInt;
 
 /**
  * Interfaz que tiene  operaciones validas entre INumerosReals y objetos que simulan ser numeros(SBinary)
@@ -36,5 +38,27 @@ public interface INumber extends IRealNumbers {
       */
 
      INumber DivBinary(SBinary number);
+
+     /**
+      * Metodo que transforma a SFloat
+      *
+      * @return el objeto transformado a SFloat
+      */
+
+     /**
+      * Metodo que transforma a SInt
+      *
+      * @return el objeto transformado a SInt
+      */
+
+     SInt intoSInt();
+
+     /**
+      * Metodo que transforma a SBinary
+      *
+      * @return el objeto transformado a SBinary
+      */
+
+     SBinary intoSBinary();
 
 }

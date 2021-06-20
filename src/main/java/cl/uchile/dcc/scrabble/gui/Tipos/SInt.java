@@ -4,13 +4,10 @@ import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.INumber;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.INumberandStrings;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IRealNumbers;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IUnion;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.TransformacionFloat;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesTransformacionesTipos.TransformacionIntBinary;
 
-import javax.lang.model.element.Element;
 import java.util.Objects;
 
-public class SInt implements INumber, TransformacionFloat, TransformacionIntBinary {
+public class SInt implements INumber {
 
     private int numero;
 

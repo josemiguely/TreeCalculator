@@ -3,6 +3,7 @@ package cl.uchile.dcc.scrabble.gui.Tipos.Composite;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.ElementBinary;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.ElementNumber;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.ElementString;
+import cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresToTipo.ToBinary;
 import cl.uchile.dcc.scrabble.gui.Tipos.SBinary;
 import cl.uchile.dcc.scrabble.gui.Tipos.SFloat;
 import cl.uchile.dcc.scrabble.gui.Tipos.SInt;

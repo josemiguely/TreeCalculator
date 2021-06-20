@@ -381,9 +381,34 @@ public class SBinary implements TransformacionFloat, INumber, ILogical, Transfor
     public SBinary orSBinary(SBinary logical) {
         String binario = logical.getTipoInfo();
         String binario2=this.getTipoInfo();
-        int largo = binario.length();
+        int largo = Math.max(binario.length(),binario2.length());
         String s = "";
         int i = 0;
+
+        if (binario.length()>binario2.length()){
+            int contador=binario2.length();
+            while (binario.length()!=contador){
+                binario2="0"+binario2;
+                contador++;
+            }
+        }
+
+        else if(binario.length()<binario2.length()){
+            int contador=binario.length();
+            if(binario.charAt(0)=='0') {
+                while (binario2.length() != contador) {
+                    binario = "0" + binario;
+                    contador++;
+                }
+            }
+            else{
+                    while (binario2.length() != contador) {
+                        binario = "1" + binario;
+                        contador++;
+                    }
+                }
+            }
+
         if (binario.length()==binario2.length()) {
             while (i < largo) {
                 if (binario.charAt(i) == '1' || binario2.charAt(i)=='1') {
@@ -418,6 +443,7 @@ public class SBinary implements TransformacionFloat, INumber, ILogical, Transfor
         }
         return new SBinary(s);
     }
+
 
 
 }

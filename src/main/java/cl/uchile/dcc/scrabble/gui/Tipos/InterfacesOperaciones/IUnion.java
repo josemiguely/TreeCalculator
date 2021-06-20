@@ -1,5 +1,6 @@
 package cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones;
 
+import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Operador;
 import cl.uchile.dcc.scrabble.gui.Tipos.SString;
 
 /**

@@ -1,7 +1,7 @@
 package cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones;
 
-import cl.uchile.dcc.scrabble.gui.Tipos.SFloat;
-import cl.uchile.dcc.scrabble.gui.Tipos.SInt;
+import cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes.SFloat;
+import cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes.SInt;
 
 /**
  * Interfaz que tiene las operaciones entre objetos que contienen informacion de numeros reales/primitivos (ie int,double)

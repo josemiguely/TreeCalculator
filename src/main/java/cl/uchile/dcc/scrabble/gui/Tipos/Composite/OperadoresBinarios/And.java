@@ -1,6 +1,6 @@
-package cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresUnarios;
+package cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresBinarios;
 
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.*;
+import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.Element;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.Operador;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorBinary;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorBool;
@@ -8,18 +8,24 @@ import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorLog
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.ILogical;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IUnion;
 
-public class Negacion implements OperadorBool, OperadorBinary {
+import java.util.Objects;
 
-    Operador nodo;
+public class And implements OperadorBinary, OperadorBool {
 
-    public Negacion(Operador nodo){
-        this.nodo=nodo;
+
+    Operador nodoizq;
+    Operador nodoDer;
+
+    public And(Operador nodoizq,Operador nodoDer){
+        this.nodoizq=nodoizq;
+        this.nodoDer=nodoDer;
     }
+
 
     @Override
     public Element eval() {
-        ILogical tipo= (ILogical) nodo.eval().getTipo();
-        return new Element(tipo.negacion());
+        ILogical Tipo=(ILogical) nodoizq.eval().getTipo();
+        return new Element(Tipo.and((ILogical) nodoDer.eval().getTipo()));
     }
 
     /**
@@ -27,7 +33,8 @@ public class Negacion implements OperadorBool, OperadorBinary {
      */
     @Override
     public String print() {
-        return nodo.print();
+        String str=nodoDer.print()+"-"+"-"+nodoizq.print();
+        return str;
     }
 
     /**
@@ -51,4 +58,17 @@ public class Negacion implements OperadorBool, OperadorBinary {
         return false;
     }
 
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nodoizq, nodoDer);
+    }
+
+    @Override
+    public String toString() {
+        return "And{" +
+                "nodoizq=" + nodoizq +
+                ", nodoDer=" + nodoDer +
+                '}';
+    }
 }

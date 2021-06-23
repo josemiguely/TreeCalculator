@@ -1,31 +1,38 @@
-package cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresToTipo;
+package cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresBinarios;
 
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.Element;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.Operador;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorBinary;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.INumber;
+import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.*;
+import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorInt;
+import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IRealNumbers;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IUnion;
 
-public class ToBinary implements OperadorBinary {
+public class Mult implements OperadorFloat, OperadorInt, OperadorBinary {
 
-    Operador nodo;
+    Operador nodoizq;
+    Operador nodoDer;
 
-    public ToBinary(Operador nodo){
-        this.nodo=nodo;
+
+
+    public Mult(Operador nodoizq,Operador nodoDer){
+        this.nodoizq=nodoizq;
+        this.nodoDer=nodoDer;
     }
+
 
     @Override
     public Element eval() {
-        INumber tipo= (INumber) nodo.eval().getTipo();
-        return new Element(tipo.intoSBinary());
+        IRealNumbers Tipo=(IRealNumbers)nodoizq.eval().getTipo();
+        return new Element(Tipo.Mult((IRealNumbers) nodoDer.eval().getTipo()));
     }
+
 
     /**
      * Printea en estructura Arbol
      */
     @Override
     public String print() {
-        return nodo.print();
+        String str=nodoDer.print()+"-"+"-"+nodoizq.print();
+        return str;
     }
 
     /**
@@ -48,4 +55,7 @@ public class ToBinary implements OperadorBinary {
         }
         return false;
     }
+
+
+
 }

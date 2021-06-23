@@ -1,11 +1,10 @@
 package cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones;
 
-import cl.uchile.dcc.scrabble.gui.Tipos.SBinary;
-import cl.uchile.dcc.scrabble.gui.Tipos.SFloat;
-import cl.uchile.dcc.scrabble.gui.Tipos.SInt;
+import cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes.SBinary;
+import cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes.SInt;
 
 /**
- * Interfaz que tiene  operaciones validas entre INumerosReals y objetos que simulan ser numeros(SBinary)
+ * Interfaz que tiene  operaciones validas entre IRealNumbers y objetos que simulan ser numeros(SBinary)
  */
 
 public interface INumber extends IRealNumbers {

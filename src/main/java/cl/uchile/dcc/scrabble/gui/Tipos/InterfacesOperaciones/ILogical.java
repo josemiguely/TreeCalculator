@@ -1,10 +1,10 @@
 package cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones;
 
-import cl.uchile.dcc.scrabble.gui.Tipos.SBinary;
-import cl.uchile.dcc.scrabble.gui.Tipos.SBool;
+import cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes.SBinary;
+import cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes.SBool;
 
 /**
- * Interfaz que tiene las operaciones entre objetos que tienen logica booleana (SString y SBool)
+ * Interfaz que tiene las operaciones entre objetos que tienen logica booleana (SBinary y SBool)
  */
 
 

@@ -1,7 +1,5 @@
 package cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones;
 
-import cl.uchile.dcc.scrabble.gui.Tipos.SString;
-
 /**
  * Interfaz que define operaciones que un IRealNumbers y un strings comparten (Solo la suma por ahora)
  */

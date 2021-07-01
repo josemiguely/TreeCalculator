@@ -1,20 +1,16 @@
-package cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresBinarios;
+package cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes;
 
-import cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes.*;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.ArbolFactory;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorFloat;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorInt;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorString;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SubTest {
-    public ArbolFactory arbolfact;
+class STypeFactoryTest {
 
     //SSInt
     private int numero = new Random().nextInt();
@@ -49,12 +45,21 @@ class SubTest {
     private SBool sBool2;
     private SBool sBoolcopia;
 
+
+
+
+
     @BeforeEach
     void setUp() {
-        arbolfact=new ArbolFactory();
+        STypeFactory.getSIntcache().clear();
+        STypeFactory.getSBinarycache().clear();
+        STypeFactory.getSFloatcache().clear();
+        STypeFactory.getSBoolcache().clear();
+        STypeFactory.getSStringcache().clear();
+
 
         //SInt setup
-        sInt= STypeFactory.getSInt(numero);
+        sInt=STypeFactory.getSInt(numero);
         sIntcopia=STypeFactory.getSInt(numero);
         sInt2=STypeFactory.getSInt(numerodiff);
 
@@ -91,17 +96,55 @@ class SubTest {
         sBool=STypeFactory.getSBool(seedboolean);
         sBoolcopia=STypeFactory.getSBool(seedboolean);
         sBool2=STypeFactory.getSBool(diifbolean);
+    }
+
+    @RepeatedTest(20)
+    void constructorTest(){
+
+        //SIntcache test
+        assertEquals(sInt,sIntcopia);//Contienen la misma informacion
+        assertTrue(sInt==sIntcopia);//verificamos que son realmente el mismo objeto
+        assertTrue(STypeFactory.getSIntcache().size()==2);
+        assertNotEquals(sInt,sInt2);
+
+
+        //SBinarycache test
+        assertEquals(sBinary,sBinarycopia);//Contienen la misma informacion
+        assertTrue(sBinary==sBinarycopia);//verificamos que son realmente el mismo objeto
+        assertTrue(STypeFactory.getSBinarycache().size()==2);
+        assertNotEquals(sBinary,sBinary2);
+
+        //SStringcache test
+        assertEquals(sString,sStringcopia);//Contienen la misma informacion
+        assertTrue(sString==sStringcopia);//verificamos que son realmente el mismo objeto
+        assertTrue(STypeFactory.getSStringcache().size()==2);
+        assertNotEquals(sString,sString2);
+
+        //SFloatcache test
+        assertEquals(sFloat,sFloatcopia); //Contienen la misma informacion
+        assertTrue(sFloat==sFloatcopia); //verificamos que son realmente el mismo objeto
+        assertTrue(STypeFactory.getSFloatcache().size()==2);
+        assertNotEquals(sFloat,sFloat2);
+
+        //SBoolcache test
+        assertEquals(sBool,sBoolcopia);//Contienen la misma informacion
+        assertTrue(sBool==sBoolcopia);//verificamos que son realmente el mismo objeto
+        assertTrue(STypeFactory.getSBoolcache().size()==2);
+        assertNotEquals(sBool,sBool2);
+
+
+
 
     }
-    @RepeatedTest(10)
-    void constructorTest() {
-        arbolfact = new ArbolFactory();
-        OperadorInt operadorInt = arbolfact.Sub(sInt, sInt2);
-        OperadorInt operadorInt2 = arbolfact.Sub(sIntcopia, sInt2);
-        SInt expectedInt = new SInt(numero - numerodiff);
 
-        assertEquals(operadorInt, operadorInt2);
-        assertEquals(expectedInt, operadorInt.resultado());
 
-    }
+     /*System.out.println(STypeFactory.getSFloatcache().size());
+        System.out.println(STypeFactory.getSIntcache().size());
+        System.out.println(STypeFactory.getSBinarycache().size());
+        System.out.println(STypeFactory.getSBoolcache().size());
+        System.out.println(STypeFactory.getSStringcache().size());*/
+
+
+
+
 }

@@ -18,10 +18,6 @@ public interface Operador {
 
     Element eval();
 
-    /**
-     * Printea en estructura Arbol
-     */
-    String print();
 
     /**
      * Evalua y obtiene el SType correspondiente

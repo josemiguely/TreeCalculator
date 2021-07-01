@@ -22,13 +22,7 @@ public class Negacion implements OperadorBool, OperadorBinary {
         return new Element(tipo.negacion());
     }
 
-    /**
-     * Printea en estructura Arbol
-     */
-    @Override
-    public String print() {
-        return nodo.print();
-    }
+
 
     /**
      * Evalua y obtiene el SType correspondiente

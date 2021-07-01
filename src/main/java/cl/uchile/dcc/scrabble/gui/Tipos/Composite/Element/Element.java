@@ -22,11 +22,7 @@ public class Element implements Operador {
         return Objects.hash(tipo);
     }
 
-    @Override
-    public String print() {
-        String str=getTipo().toString();
-        return str;
-    }
+
 
     /**
      * Evalua y obtiene el SType correspondiente

@@ -21,14 +21,6 @@ public class ToBinary implements OperadorBinary {
     }
 
     /**
-     * Printea en estructura Arbol
-     */
-    @Override
-    public String print() {
-        return nodo.print();
-    }
-
-    /**
      * Evalua y obtiene el SType correspondiente
      *
      * @return

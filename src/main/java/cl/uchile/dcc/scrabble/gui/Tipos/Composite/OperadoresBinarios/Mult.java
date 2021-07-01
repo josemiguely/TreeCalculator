@@ -27,15 +27,6 @@ public class Mult implements OperadorFloat, OperadorInt, OperadorBinary {
 
 
     /**
-     * Printea en estructura Arbol
-     */
-    @Override
-    public String print() {
-        String str=nodoDer.print()+"-"+"-"+nodoizq.print();
-        return str;
-    }
-
-    /**
      * Evalua y obtiene el SType correspondiente
      *
      * @return

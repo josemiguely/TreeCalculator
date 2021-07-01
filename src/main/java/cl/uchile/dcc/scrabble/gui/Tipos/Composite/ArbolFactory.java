@@ -15,7 +15,19 @@ import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.INumber;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IRealNumbers;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IUnion;
 
+
 public class ArbolFactory {
+
+
+
+
+
+
+
+
+
+
+
 
     //SECCION ADD
 
@@ -52,6 +64,16 @@ public class ArbolFactory {
      */
     public OperadorString Add(OperadorString operador1,Operador operador2){
         return new Add(operador1,operador2);
+    }
+
+    /**
+     * Suma OperadorString(Operador que resulta en String) con cualquier SType
+     * @param operador1 operando de la izquierda (en forma de operacion)
+     * @param SType operando de la derecha
+     * @return OperadorString (Operacion que resulta en un String)
+     */
+    public OperadorString Add(OperadorString operador1,IUnion SType){
+        return new Add(operador1,new Element(SType));
     }
 
 
@@ -127,7 +149,7 @@ public class ArbolFactory {
     }
 
     /**
-     * Suma SInt y un OperadorIntBinario(operacion que al ser evaluada result en Int o Binario)
+     * Suma SInt y un OperadorIntBinario(operacion que al ser evaluada result en Int,Binario)
      * @param Int1 operando de la izquierda
      * @param operador operando de la derecha (en forma de operacion)
      * @return OperadorInt (Operacion que resulta ser un Int)
@@ -136,6 +158,30 @@ public class ArbolFactory {
     public OperadorInt Add(SInt Int1, OperadorIntBinario operador){
         return new Add(new Element(Int1),operador);
     }
+
+    /**
+     * Suma OperadorInt y un OperadorIntBinario(operacion que al ser evaluada result en Int,Binario)
+     * @param operador1 operando de la izquierda
+     * @param operador2 operando de la derecha (en forma de operacion)
+     * @return OperadorInt (Operacion que resulta ser un Int)
+     */
+
+    public OperadorInt Add(OperadorInt operador1, OperadorIntBinario operador2){
+        return new Add(operador1,operador2);
+    }
+
+    /**
+     * Suma SInt y un OperadorFloatIntBinario(operacion que al ser evaluada result en Int,Binario,Float)
+     * @param operador operando de la izquierda (en forma de operacion)
+     * @param Float1 operando de la derecha
+     * @return OperadorFloat (Operacion que resulta ser un Float)
+     */
+
+    public OperadorFloat Add(OperadoresFloatIntBinario operador, SFloat Float1){
+        return new Add(operador,new Element(Float1));
+    }
+
+
 
 
 
@@ -170,7 +216,7 @@ public class ArbolFactory {
      * @return OperadorBinary (Operacion que resulta ser un Binary)
      */
 
-    public OperadorInt Add(OperadorBinary operador1, OperadorIntBinario operador2){
+    public OperadorBinary Add(OperadorBinary operador1, OperadorIntBinario operador2){
         return new Add(operador1,operador2);
     }
 

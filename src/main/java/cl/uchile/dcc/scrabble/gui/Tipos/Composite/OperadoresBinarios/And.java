@@ -28,14 +28,6 @@ public class And implements OperadorBinary, OperadorBool {
         return new Element(Tipo.and((ILogical) nodoDer.eval().getTipo()));
     }
 
-    /**
-     * Printea en estructura Arbol
-     */
-    @Override
-    public String print() {
-        String str=nodoDer.print()+"-"+"-"+nodoizq.print();
-        return str;
-    }
 
     /**
      * Evalua y obtiene el SType correspondiente

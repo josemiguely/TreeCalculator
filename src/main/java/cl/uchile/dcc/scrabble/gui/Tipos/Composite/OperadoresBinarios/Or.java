@@ -15,12 +15,6 @@ public class Or implements OperadorBinary, OperadorBool {
     }
 
 
-    @Override
-    public String print() {
-        String str=nodoDer.print()+"-"+"-"+nodoizq.print();
-        return str;
-    }
-
     /**
      * Evalua y obtiene el SType correspondiente
      *

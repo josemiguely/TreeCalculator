@@ -23,13 +23,7 @@ public class ToBool implements OperadorBool {
         return new Element(tipo.intoSBool());
     }
 
-    /**
-     * Printea en estructura Arbol
-     */
-    @Override
-    public String print() {
-        return nodo.print();
-    }
+
 
     /**
      * Evalua y obtiene el SType correspondiente

@@ -18,12 +18,6 @@ public class Sub implements  OperadorFloat, OperadorInt, OperadorBinary {
         this.nodoDer=nodoDer;
     }
 
-    @Override
-    public String print() {
-        String str=nodoDer.print()+"-"+"-"+nodoizq.print();
-        return str;
-    }
-
     /**
      * Evalua y obtiene el SType correspondiente
      *

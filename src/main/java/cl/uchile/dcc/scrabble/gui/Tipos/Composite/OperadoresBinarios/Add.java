@@ -15,12 +15,6 @@ public class Add implements OperadorString, OperadorFloat, OperadorInt, Operador
         this.nodoDer = nodoDer;
     }
 
-    @Override
-    public String print() {
-        String str=nodoDer.print()+"-"+"-"+nodoizq.print();
-        return str;
-    }
-
 
     @Override
     public Element eval() {
@@ -34,6 +28,7 @@ public class Add implements OperadorString, OperadorFloat, OperadorInt, Operador
 
     @Override
     public boolean equals(Object o) {
+        System.out.println("PUTAAAA");
         if (this == o) return true;
         if (o == null ) return false;
         if(o instanceof Operador) {

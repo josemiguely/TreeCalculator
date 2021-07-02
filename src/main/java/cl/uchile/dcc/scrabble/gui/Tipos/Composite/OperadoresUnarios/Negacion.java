@@ -2,13 +2,10 @@ package cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresUnarios;
 
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.*;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.Operador;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorBinary;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorBool;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorLogical;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.ILogical;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IUnion;
 
-public class Negacion implements OperadorBool, OperadorBinary {
+public class Negacion implements Operador {
 
     Operador nodo;
 

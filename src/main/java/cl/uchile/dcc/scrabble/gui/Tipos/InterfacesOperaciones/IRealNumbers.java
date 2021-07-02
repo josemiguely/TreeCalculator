@@ -40,7 +40,6 @@ public interface IRealNumbers extends INumberandStrings {
     IRealNumbers RestaSInt(SInt number);
 
     /**
-     *
      * @param number SFloat a ser restado con un IRealNumbers
      * @return SFloat que representa la resta entre number y un IRealNumbers
      */
@@ -93,7 +92,6 @@ public interface IRealNumbers extends INumberandStrings {
     IRealNumbers DivFloat(SFloat number);
 
     SFloat intoSFloat();
-
 
 
 }

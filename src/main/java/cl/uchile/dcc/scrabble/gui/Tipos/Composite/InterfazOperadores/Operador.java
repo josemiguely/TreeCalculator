@@ -4,7 +4,7 @@ import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.Element;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IUnion;
 
 /**
- * Interfaz de composite: Un operador puede ser una operador (+,-,x,/,and,or,not,toType) o un Elemento(ElementNumber,ElementLogical,ElementString)
+ * Interfaz de diseño composite: Un operador puede ser una operador (+,-,x,/,and,or,not,toType) o un Element
  * Un operador puede tener como hijos tanto operadores como elementos
  */
 
@@ -13,7 +13,7 @@ public interface Operador {
     /**
      * Evalua la parte del arbol correspondiente
      *
-     * @return Un elemento que es el resultado de las operaciones
+     * @return Un Element (nodo hoja) que es el resultado de las operaciones
      */
 
     Element eval();
@@ -22,7 +22,7 @@ public interface Operador {
     /**
      * Evalua y obtiene el SType correspondiente
      *
-     * @return
+     * @return un SType de IUnion(SBool,SString,SBinary,SInt,SFloat)
      */
     IUnion resultado();
 

@@ -11,8 +11,8 @@ public class SInt implements INumber {
 
     private int numero;
 
-    public SInt(int numero){
-        this.numero=numero;
+    public SInt(int numero) {
+        this.numero = numero;
     }
 
     public int getTipoInfo() {
@@ -21,26 +21,30 @@ public class SInt implements INumber {
 
     /**
      * Metodo que transforma SInt a SString
+     *
      * @return SString
      */
 
-    public SString intoSString(){
+    public SString intoSString() {
 
         return new SString(String.valueOf(this.getTipoInfo()));
     }
 
     /**
      * Metodo que transforma SInt a SFloat
+     *
      * @return SFloat
      */
 
     @Override
-    public SFloat intoSFloat(){
+    public SFloat intoSFloat() {
 
-        return new SFloat((double)getTipoInfo());
+        return new SFloat((double) getTipoInfo());
     }
+
     /**
      * Metodo que transforma SInt a SInt
+     *
      * @return Sint
      */
 
@@ -51,50 +55,49 @@ public class SInt implements INumber {
 
     /**
      * Metodo que transforma SInt a SBinary
+     *
      * @return SBinary
      */
 
     @Override
     public SBinary intoSBinary() {
         int absolute = Math.abs(this.numero);
-        String b=positiveIntToBinary(absolute);
-        if (this.numero<0){
-            b=TwosComplement(b);
+        String b = positiveIntToBinary(absolute);
+        if (this.numero < 0) {
+            b = TwosComplement(b);
         }
         return new SBinary(b);
     }
 
 
-    private String positiveIntToBinary(int numero){
+    private String positiveIntToBinary(int numero) {
         String s = "";
-        while (numero > 0)
-        {
-            s = ( (numero % 2 ) == 0 ? "0" : "1")+s;
+        while (numero > 0) {
+            s = ((numero % 2) == 0 ? "0" : "1") + s;
             numero = numero / 2;
         }
-        return "0"+s;
+        return "0" + s;
     }
 
 
-    private String TwosComplement(String str){
-        StringBuffer string=new StringBuffer(str);
+    private String TwosComplement(String str) {
+        StringBuffer string = new StringBuffer(str);
         int n = string.length();
 
         int i;
-        for (i = n-1 ; i >= 0 ; i--)
+        for (i = n - 1; i >= 0; i--)
             if (string.charAt(i) == '1')
                 break;
 
         if (i == -1)
-            return str+"1";
+            return str + "1";
 
-        for (int k = i-1 ; k >= 0; k--)
-        {
+        for (int k = i - 1; k >= 0; k--) {
 
             if (str.charAt(k) == '1')
-                string.replace(k, k+1, "0");
+                string.replace(k, k + 1, "0");
             else
-                string.replace(k, k+1, "1");
+                string.replace(k, k + 1, "1");
         }
 
         return string.toString();
@@ -111,9 +114,9 @@ public class SInt implements INumber {
      */
 
     @Override
-    public SInt SumaSInt(SInt number){
-        int sum=this.getTipoInfo()+ number.getTipoInfo();
-        SInt ResultSuma= new SInt(sum);
+    public SInt SumaSInt(SInt number) {
+        int sum = this.getTipoInfo() + number.getTipoInfo();
+        SInt ResultSuma = new SInt(sum);
         return ResultSuma;
     }
 
@@ -122,8 +125,8 @@ public class SInt implements INumber {
      * @return SFloat que representa la suma entre number y SInt
      */
     @Override
-    public SFloat SumaSFloat(SFloat number){
-        double sum=this.getTipoInfo()+ number.getTipoInfo();
+    public SFloat SumaSFloat(SFloat number) {
+        double sum = this.getTipoInfo() + number.getTipoInfo();
         return new SFloat(sum);
     }
 
@@ -132,9 +135,9 @@ public class SInt implements INumber {
      * @return SBinary que representa la suma entre number y SInt
      */
     @Override
-    public SBinary SumaSBinary(SBinary number){
-        SInt Int1= number.intoSInt();
-        SInt Int2=Int1.SumaSInt(this);
+    public SBinary SumaSBinary(SBinary number) {
+        SInt Int1 = number.intoSInt();
+        SInt Int2 = Int1.SumaSInt(this);
         return Int2.intoSBinary();
     }
 
@@ -145,7 +148,7 @@ public class SInt implements INumber {
 
     @Override
     public SString SumaSString(SString number) {
-        return new SString(number.getTipoInfo()+this.getTipoInfo());
+        return new SString(number.getTipoInfo() + this.getTipoInfo());
     }
 
 
@@ -158,10 +161,11 @@ public class SInt implements INumber {
      * @param number SInt a ser restado con un SInt
      * @return SInt que representa la resta entre number y SInt
      */
-    public SInt RestaSInt(SInt number){
-        int res=number.getTipoInfo()-this.getTipoInfo();
+    public SInt RestaSInt(SInt number) {
+        int res = number.getTipoInfo() - this.getTipoInfo();
         return new SInt(res);
     }
+
     /**
      * @param number SFLoat a ser restado con un SInt
      * @return SFloat que representa la resta entre number y SInt
@@ -169,7 +173,7 @@ public class SInt implements INumber {
 
     @Override
     public SFloat RestaSFloat(SFloat number) {
-        return new SFloat(number.getTipoInfo()-this.getTipoInfo());
+        return new SFloat(number.getTipoInfo() - this.getTipoInfo());
     }
 
     /**
@@ -179,8 +183,8 @@ public class SInt implements INumber {
 
     @Override
     public SBinary RestaSBinary(SBinary number) {
-        SInt Int1=number.intoSInt();
-        SInt result= new SInt(Int1.getTipoInfo()-this.getTipoInfo());
+        SInt Int1 = number.intoSInt();
+        SInt result = new SInt(Int1.getTipoInfo() - this.getTipoInfo());
         return result.intoSBinary();
     }
 
@@ -196,7 +200,7 @@ public class SInt implements INumber {
 
     @Override
     public SInt MultInt(SInt number) {
-        return new SInt(this.getTipoInfo()* number.getTipoInfo());
+        return new SInt(this.getTipoInfo() * number.getTipoInfo());
     }
 
     /**
@@ -206,7 +210,7 @@ public class SInt implements INumber {
 
     @Override
     public SFloat MultFloat(SFloat number) {
-        return new SFloat(number.getTipoInfo()*this.getTipoInfo());
+        return new SFloat(number.getTipoInfo() * this.getTipoInfo());
     }
 
     /**
@@ -216,9 +220,9 @@ public class SInt implements INumber {
 
     @Override
     public SBinary MultBinary(SBinary number) {
-        SInt Int1= number.intoSInt();
-        SInt Res=new SInt(Int1.getTipoInfo()*this.getTipoInfo());
-        SBinary ResToBin=Res.intoSBinary();
+        SInt Int1 = number.intoSInt();
+        SInt Res = new SInt(Int1.getTipoInfo() * this.getTipoInfo());
+        SBinary ResToBin = Res.intoSBinary();
         return ResToBin;
     }
 
@@ -234,7 +238,7 @@ public class SInt implements INumber {
 
     @Override
     public SInt DivInt(SInt number) {
-        return new SInt(number.getTipoInfo()/this.getTipoInfo());
+        return new SInt(number.getTipoInfo() / this.getTipoInfo());
     }
 
     /**
@@ -244,7 +248,7 @@ public class SInt implements INumber {
 
     @Override
     public SFloat DivFloat(SFloat number) {
-        return new SFloat(number.getTipoInfo()/this.getTipoInfo());
+        return new SFloat(number.getTipoInfo() / this.getTipoInfo());
     }
 
     /**
@@ -254,9 +258,9 @@ public class SInt implements INumber {
 
     @Override
     public SBinary DivBinary(SBinary number) {
-        SInt Int1=number.intoSInt();
-        SInt Result=(SInt) Int1.Div(this);
-        SBinary ResultBinary=Result.intoSBinary();
+        SInt Int1 = number.intoSInt();
+        SInt Result = (SInt) Int1.Div(this);
+        SBinary ResultBinary = Result.intoSBinary();
         return ResultBinary;
     }
 
@@ -269,9 +273,9 @@ public class SInt implements INumber {
 
     public boolean equals(Object o) {
         if (this == o) return true;
-        if(o instanceof SInt) {
+        if (o instanceof SInt) {
             SInt sInt = (SInt) o;
-            return getTipoInfo()==sInt.getTipoInfo();
+            return getTipoInfo() == sInt.getTipoInfo();
         }
 
         return false;

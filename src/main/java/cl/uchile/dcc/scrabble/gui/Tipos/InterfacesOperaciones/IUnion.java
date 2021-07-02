@@ -9,7 +9,6 @@ import cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes.SString;
 public interface IUnion {
 
     /**
-     *
      * @param number SString que va a ser sumado con un IUnion
      * @return SString que representa la suma entre number y IUnion
      */

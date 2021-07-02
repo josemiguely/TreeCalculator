@@ -3,43 +3,51 @@ package cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresToTipo;
 import cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes.SBool;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.Element;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.Operador;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorBinary;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorBool;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.ILogical;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.INumber;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IUnion;
 
-public class ToBool implements OperadorBool {
+public class ToBool implements Operador {
 
     Operador nodo;
 
-    public ToBool(Operador nodo){
-        this.nodo=nodo;
+    public ToBool(Operador nodo) {
+        this.nodo = nodo;
     }
+
+    /**
+     * Evalua la parte del arbol correspondiente
+     *
+     * @return Un Element (nodo hoja) que es el resultado de las operaciones
+     */
 
     @Override
     public Element eval() {
-        SBool tipo= (SBool) nodo.eval().getTipo();
+        SBool tipo = (SBool) nodo.eval().getTipo();
         return new Element(tipo.intoSBool());
     }
-
 
 
     /**
      * Evalua y obtiene el SType correspondiente
      *
-     * @return
+     * @return un SType de IUnion(SBool,SString,SBinary,SInt,SFloat)
      */
     @Override
     public IUnion resultado() {
         return this.eval().getTipo();
     }
 
+    /**
+     * Dos operadores son iguales si al ser evaluados contienen el mismo SType con la misma informacion
+     *
+     * @param o Objeto a comparar con this
+     * @return True si dos objetos son iguales, Falso en Caso contrario
+     */
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null ) return false;
-        if(o instanceof Operador) {
+        if (o == null) return false;
+        if (o instanceof Operador) {
             Operador operador2 = (Operador) o;
             return this.resultado().equals(operador2.resultado());
         }

@@ -1,890 +1,459 @@
 package cl.uchile.dcc.scrabble.gui.Tipos.Composite;
 
-import cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes.*;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element.*;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.*;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresBinarios.*;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresToTipo.ToBinary;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresToTipo.ToBool;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresToTipo.ToFloat;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresToTipo.ToInt;
+import cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresToTipo.*;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresUnarios.Negacion;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorInt;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.ILogical;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.INumber;
-import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IRealNumbers;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IUnion;
 
+/**
+ * Fabrica de ArbolAST. Usa el patron Composite de Operador para definir los nodos internos y hojas.
+ * Se asumio que el usuario debe crear correctamente el arbol.
+ */
 
 public class ArbolFactory {
 
 
-
-
-
-
-
-
-
-
-
-
     //SECCION ADD
 
-
-
-
-
     /**
-     * Suma SString con cualquier SType
-     * @param String1 operando de la izquierda
-     * @param SType operando de la derecha
-     * @return OperadorString (Operacion que resulta en un String)
-     */
-
-    public OperadorString Add(SString String1, IUnion SType){
-        return new Add(new Element(String1),new Element(SType));
-    }
-
-    /**
-     * Suma SString con cualquier Operador
-     * @param String1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorString (Operacion que resulta en un String)
-     */
-    public OperadorString Add(SString String1, Operador operador){
-        return new Add(new Element(String1),operador);
-    }
-
-    /**
-     * Suma OperadorString(Operador que resulta en String) con cualquier Operador
-     * @param operador1 operando de la izquierda (en forma de operacion)
+     * Suma Operador con cualquier Operador
+     *
+     * @param operador  operando de la izquierda (en forma de operacion)
      * @param operador2 operando de la derecha (en forma de operacion)
-     * @return OperadorString (Operacion que resulta en un String)
+     * @return Operador
      */
-    public OperadorString Add(OperadorString operador1,Operador operador2){
-        return new Add(operador1,operador2);
+
+    public Operador Add(Operador operador, Operador operador2) {
+        return new Add(operador, operador2);
     }
 
     /**
-     * Suma OperadorString(Operador que resulta en String) con cualquier SType
-     * @param operador1 operando de la izquierda (en forma de operacion)
-     * @param SType operando de la derecha
-     * @return OperadorString (Operacion que resulta en un String)
+     * Suma de un SType(SInt,SFloat,SBool,SString,SBinary,) con cualquier Operador
+     *
+     * @param SType
+     * @param operador (en forma de operacion)
+     * @return Operador
      */
-    public OperadorString Add(OperadorString operador1,IUnion SType){
-        return new Add(operador1,new Element(SType));
-    }
-
-
-    /**
-     * Suma entre un SFloat y cualquier SType del tipo IRealNumbers(SInt,SFloat,SBinary)
-     * @param Float1     operando a la izquierda
-     * @param RealNumber operando a la derecha (SInt,SFloat,SBinary)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-    public OperadorFloat Add(SFloat Float1, IRealNumbers RealNumber) {
-        return new Add(new Element(Float1),new Element(RealNumber));
-    }
-
-
-
-    /**
-     * Suma entre un SFloat y un OperadorFloatIntBinario(operacion que al ser evaluada resulte Float,Int,Binario)
-     * @param Float1   operando a la izquierda
-     * @param operador operando a la derecha (en forma de operacion)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Add(SFloat Float1, OperadoresFloatIntBinario operador) {
-        return new Add(new Element(Float1),operador);
-    }
-
-    
-
-    /**
-     * Suma entre un OperadorFloat y un OperadorFloatIntBinario(operacion que al ser evaluada resulte Float,Int,Binario)
-     * @param operador1  operando a la izquierda (en forma de operacion)
-     * @param operador2 operando a la derecha (en forma de operacion)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Add(OperadorFloat operador1, OperadoresFloatIntBinario operador2) {
-        return new Add(operador1,operador2);
-
-
-    }
-    /**
-     * Suma SInt con SFloat
-     * @param Int1 operando de la izquierda
-     * @param Float1 operando de la derecha
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Add(SInt Int1, SFloat Float1){
-        return new Add(new Element(Int1),new Element(Float1));
-    }
-
-
-    /**
-     * Suma SInt y cualquier SType del tipo INumbers(SInt,SBinary)
-     * @param Int1 operando de la izquierda
-     * @param Number operando de la derecha
-     * @return OperadorInt (Operacion que resulta ser un Int)
-     */
-
-    public OperadorInt Add(SInt Int1, INumber Number){
-        return new Add(new Element(Int1),new Element(Number));
+    public Operador Add(IUnion SType, Operador operador) {
+        return new Add(new Element(SType), operador);
     }
 
     /**
-     * Suma SInt y un OperadorFloat
-     * @param Int1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Add(SInt Int1, OperadorFloat operador){
-        return new Add(new Element(Int1),operador);
-    }
-
-    /**
-     * Suma SInt y un OperadorIntBinario(operacion que al ser evaluada result en Int,Binario)
-     * @param Int1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorInt (Operacion que resulta ser un Int)
-     */
-
-    public OperadorInt Add(SInt Int1, OperadorIntBinario operador){
-        return new Add(new Element(Int1),operador);
-    }
-
-    /**
-     * Suma OperadorInt y un OperadorIntBinario(operacion que al ser evaluada result en Int,Binario)
-     * @param operador1 operando de la izquierda
-     * @param operador2 operando de la derecha (en forma de operacion)
-     * @return OperadorInt (Operacion que resulta ser un Int)
-     */
-
-    public OperadorInt Add(OperadorInt operador1, OperadorIntBinario operador2){
-        return new Add(operador1,operador2);
-    }
-
-    /**
-     * Suma SInt y un OperadorFloatIntBinario(operacion que al ser evaluada result en Int,Binario,Float)
+     * Suma de un Operador con un SType(SInt,SFloat,SBool,SString,SBinary)
+     *
      * @param operador operando de la izquierda (en forma de operacion)
-     * @param Float1 operando de la derecha
-     * @return OperadorFloat (Operacion que resulta ser un Float)
+     * @param SType    operando de la derecha
+     * @return Operador
      */
-
-    public OperadorFloat Add(OperadoresFloatIntBinario operador, SFloat Float1){
-        return new Add(operador,new Element(Float1));
+    public Operador Add(Operador operador, IUnion SType) {
+        return new Add(operador, new Element(SType));
     }
-
-
-
-
 
     /**
-     * Suma SBinary y cualquier SType del tipo INumbers(SInt,SBinary)
-     * @param Binary1 operando de la izquierda
-     * @param Number operando de la derecha
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
+     * Suma entre un SType(SInt,SFloat,SBool,SString,SBinary) con otro SType
+     *
+     * @param operador  operando de la izquierda
+     * @param operador2 operando de la derecha
+     * @return Operador
      */
 
-    public OperadorBinary Add(SBinary Binary1, INumber Number){
-        return new Add(new Element(Binary1),new Element(Number));
+    public Operador Add(IUnion operador, IUnion operador2) {
+        return new Add(new Element(operador), new Element(operador2));
     }
-
-
-    /**
-     * Suma SBinary y un OperadorIntBinario(operacion que al ser evaluada result en Int o Binario)
-     * @param Binary1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
-     */
-
-    public OperadorBinary Add(SBinary Binary1, OperadorIntBinario operador){
-        return new Add(new Element(Binary1),operador);
-    }
-
-
-    /**
-     * Suma entre OperadorBinary y un OperadorIntBinario(operacion que al ser evaluada result en Int o Binario)
-     * @param operador1 operando de la izquierda
-     * @param operador2 operando de la derecha (en forma de operacion)
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
-     */
-
-    public OperadorBinary Add(OperadorBinary operador1, OperadorIntBinario operador2){
-        return new Add(operador1,operador2);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     //SECCION SUB
 
-
-
     /**
-     * Resta entre un SFloat y cualquier SType del tipo IRealNumbers(SInt,SFloat,SBinary)
-     * @param Float1     operando a la izquierda
-     * @param RealNumber operando a la derecha (SInt,SFloat,SBinary)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-    public OperadorFloat Sub(SFloat Float1, IRealNumbers RealNumber) {
-        return new Sub(new Element(Float1),new Element(RealNumber));
-    }
-
-    /**
-     * Resta entre un SFloat y un OperadorFloatIntBinario(operacion que al ser evaluada resulte Float,Int,Binario)
-     * @param Float1   operando a la izquierda
-     * @param operador operando a la derecha (en forma de operacion)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Sub(SFloat Float1, OperadoresFloatIntBinario operador) {
-        return new Sub(new Element(Float1),operador);
-    }
-
-    /**
-     * Resta entre un OperadorFloat y un OperadorFloatIntBinario(operacion que al ser evaluada resulte Float,Int,Binario)
-     * @param operador1  operando a la izquierda (en forma de operacion)
-     * @param operador2 operando a la derecha (en forma de operacion)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Sub(OperadorFloat operador1, OperadoresFloatIntBinario operador2) {
-        return new Sub(operador1,operador2);
-
-
-    }
-    /**
-     * Resta SInt con SFloat
-     * @param Int1 operando de la izquierda
-     * @param Float1 operando de la derecha
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Sub(SInt Int1, SFloat Float1){
-        return new Sub(new Element(Int1),new Element(Float1));
-    }
-
-
-    /**
-     * Resta SInt y cualquier SType del tipo INumbers(SInt,SBinary)
-     * @param Int1 operando de la izquierda
-     * @param Number operando de la derecha
-     * @return OperadorInt (Operacion que resulta ser un Int)
-     */
-
-    public OperadorInt Sub(SInt Int1, INumber Number){
-        return new Sub(new Element(Int1),new Element(Number));
-    }
-
-    /**
-     * Resta SInt y un OperadorFloat
-     * @param Int1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Sub(SInt Int1, OperadorFloat operador){
-        return new Sub(new Element(Int1),operador);
-    }
-
-    /**
-     * Resta SInt y un OperadorIntBinario(operacion que al ser evaluada result en Int o Binario)
-     * @param Int1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorInt que contiene la Suma en Int
-     */
-
-    public OperadorInt Sub(SInt Int1, OperadorIntBinario operador){
-        return new Sub(new Element(Int1),operador);
-    }
-
-    /**
-     * Resta SBinary y cualquier SType del tipo INumbers(SInt,SBinary)
-     * @param Binary1 operando de la izquierda
-     * @param Number operando de la derecha
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
-     */
-
-    public OperadorBinary Sub(SBinary Binary1, INumber Number){
-        return new Sub(new Element(Binary1),new Element(Number));
-    }
-
-
-    /**
-     * Resta SBinary y un OperadorIntBinario(operacion que al ser evaluada result en Int o Binario)
-     * @param Binary1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
-     */
-
-    public OperadorBinary Sub(SBinary Binary1, OperadorIntBinario operador){
-        return new Sub(new Element(Binary1),operador);
-    }
-
-
-    /**
-     * Resta entre OperadorBinary y un OperadorIntBinario(operacion que al ser evaluada result en Int o Binario)
-     * @param operador1 operando de la izquierda
+     * Resta Operador con cualquier Operador
+     *
+     * @param operador  operando de la izquierda (en forma de operacion)
      * @param operador2 operando de la derecha (en forma de operacion)
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
+     * @return Operador
      */
 
-    public OperadorInt Sub(OperadorBinary operador1, OperadorIntBinario operador2){
-        return new Sub(operador1,operador2);
+    public Operador Sub(Operador operador, Operador operador2) {
+        return new Sub(operador, operador2);
     }
 
+    /**
+     * Resta de un SType(SInt,SFloat,SBool,SString,SBinary,) con cualquier Operador
+     *
+     * @param SType
+     * @param operador (en forma de operacion)
+     * @return Operador
+     */
+    public Operador Sub(IUnion SType, Operador operador) {
+        return new Sub(new Element(SType), operador);
+    }
 
+    /**
+     * Resta de un Operador con un SType(SInt,SFloat,SBool,SString,SBinary)
+     *
+     * @param operador operando de la izquierda (en forma de operacion)
+     * @param SType    operando de la derecha
+     * @return Operador
+     */
+    public Operador Sub(Operador operador, IUnion SType) {
+        return new Sub(operador, new Element(SType));
+    }
 
+    /**
+     * Resta entre un SType(SInt,SFloat,SBool,SString,SBinary) con otro SType
+     *
+     * @param operador  operando de la izquierda
+     * @param operador2 operando de la derecha
+     * @return Operador
+     */
 
+    public Operador Sub(IUnion operador, IUnion operador2) {
+        return new Sub(new Element(operador), new Element(operador2));
+    }
 
 
     //SECCION MULT
 
-
-
-
     /**
-     * Multiplicacion entre un SFloat y cualquier SType del tipo IRealNumbers(SInt,SFloat,SBinary)
-     * @param Float1     operando a la izquierda
-     * @param RealNumber operando a la derecha (SInt,SFloat,SBinary)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-    public OperadorFloat Mult(SFloat Float1, IRealNumbers RealNumber) {
-        return new Mult(new Element(Float1),new Element(RealNumber));
-    }
-
-    /**
-     * Multiplicacion entre un SFloat y un OperadorFloatIntBinario(operacion que al ser evaluada resulte Float,Int,Binario)
-     * @param Float1   operando a la izquierda
-     * @param operador operando a la derecha (en forma de operacion)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Mult(SFloat Float1, OperadoresFloatIntBinario operador) {
-        return new Mult(new Element(Float1),operador);
-    }
-
-    /**
-     * Multiplicacion entre un OperadorFloat y un OperadorFloatIntBinario(operacion que al ser evaluada resulte Float,Int,Binario)
-     * @param operador1  operando a la izquierda (en forma de operacion)
-     * @param operador2 operando a la derecha (en forma de operacion)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Mult(OperadorFloat operador1, OperadoresFloatIntBinario operador2) {
-        return new Mult(operador1,operador2);
-
-
-    }
-    /**
-     * Multiplicacion SInt con SFloat
-     * @param Int1 operando de la izquierda
-     * @param Float1 operando de la derecha
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Mult(SInt Int1, SFloat Float1){
-        return new Mult(new Element(Int1),new Element(Float1));
-    }
-
-
-    /**
-     * Multiplicacion SInt y cualquier SType del tipo INumbers(SInt,SBinary)
-     * @param Int1 operando de la izquierda
-     * @param Number operando de la derecha
-     * @return OperadorInt (Operacion que resulta ser un Int)
-     */
-
-    public OperadorInt Mult(SInt Int1, INumber Number){
-        return new Mult(new Element(Int1),new Element(Number));
-    }
-
-    /**
-     * Multiplicacion SInt y un OperadorFloat
-     * @param Int1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Mult(SInt Int1, OperadorFloat operador){
-        return new Mult(new Element(Int1),operador);
-    }
-
-    /**
-     * Multiplicacion SInt y un OperadorIntBinario(operacion que al ser evaluada result en Int o Binario)
-     * @param Int1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorInt que contiene la Suma en Int
-     */
-
-    public OperadorInt Mult(SInt Int1, OperadorIntBinario operador){
-        return new Mult(new Element(Int1),operador);
-    }
-
-    /**
-     * Multiplicacion SBinary y cualquier SType del tipo INumbers(SInt,SBinary)
-     * @param Binary1 operando de la izquierda
-     * @param Number operando de la derecha
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
-     */
-
-    public OperadorBinary Mult(SBinary Binary1, INumber Number){
-        return new Mult(new Element(Binary1),new Element(Number));
-    }
-
-
-    /**
-     * Multiplicacion SBinary y un OperadorIntBinario(operacion que al ser evaluada result en Int o Binario)
-     * @param Binary1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
-     */
-
-    public OperadorBinary Mult(SBinary Binary1, OperadorIntBinario operador){
-        return new Mult(new Element(Binary1),operador);
-    }
-
-
-    /**
-     * Multiplicacion entre OperadorBinary y un OperadorIntBinario(operacion que al ser evaluada result en Int o Binario)
-     * @param operador1 operando de la izquierda
+     * Multiplicacion Operador con cualquier Operador
+     *
+     * @param operador  operando de la izquierda (en forma de operacion)
      * @param operador2 operando de la derecha (en forma de operacion)
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
+     * @return Operador
      */
 
-    public OperadorInt Mult(OperadorBinary operador1, OperadorIntBinario operador2){
-        return new Mult(operador1,operador2);
+    public Operador Mult(Operador operador, Operador operador2) {
+        return new Mult(operador, operador2);
     }
 
+    /**
+     * Multiplicacion de un SType(SInt,SFloat,SBool,SString,SBinary,) con cualquier Operador
+     *
+     * @param SType
+     * @param operador (en forma de operacion)
+     * @return Operador
+     */
+    public Operador Mult(IUnion SType, Operador operador) {
+        return new Mult(new Element(SType), operador);
+    }
 
+    /**
+     * Multiplicacion de un Operador con un SType(SInt,SFloat,SBool,SString,SBinary)
+     *
+     * @param operador operando de la izquierda (en forma de operacion)
+     * @param SType    operando de la derecha
+     * @return Operador
+     */
+    public Operador Mult(Operador operador, IUnion SType) {
+        return new Mult(operador, new Element(SType));
+    }
 
+    /**
+     * Multiplicacion entre un SType(SInt,SFloat,SBool,SString,SBinary) con otro SType
+     *
+     * @param operador  operando de la izquierda
+     * @param operador2 operando de la derecha
+     * @return Operador
+     */
 
-
-
-
-
-
-
-
-
-
-
-
-
+    public Operador Mult(IUnion operador, IUnion operador2) {
+        return new Mult(new Element(operador), new Element(operador2));
+    }
 
 
     //SECCION DIV
 
-
-
-
     /**
-     * Division entre un SFloat y cualquier SType del tipo IRealNumbers(SInt,SFloat,SBinary)
-     * @param Float1     operando a la izquierda
-     * @param RealNumber operando a la derecha (SInt,SFloat,SBinary)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-    public OperadorFloat Div(SFloat Float1, IRealNumbers RealNumber) {
-        return new Div(new Element(Float1),new Element(RealNumber));
-    }
-
-    /**
-     * Division entre un SFloat y un OperadorFloatIntBinario(operacion que al ser evaluada resulte Float,Int,Binario)
-     * @param Float1   operando a la izquierda
-     * @param operador operando a la derecha (en forma de operacion)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Div(SFloat Float1, OperadoresFloatIntBinario operador) {
-        return new Div(new Element(Float1),operador);
-    }
-
-    /**
-     * Division entre un OperadorFloat y un OperadorFloatIntBinario(operacion que al ser evaluada resulte Float,Int,Binario)
-     * @param operador1  operando a la izquierda (en forma de operacion)
-     * @param operador2 operando a la derecha (en forma de operacion)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Div(OperadorFloat operador1, OperadoresFloatIntBinario operador2) {
-        return new Div(operador1,operador2);
-
-
-    }
-    /**
-     * Division SInt con SFloat
-     * @param Int1 operando de la izquierda
-     * @param Float1 operando de la derecha
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Div(SInt Int1, SFloat Float1){
-        return new Div(new Element(Int1),new Element(Float1));
-    }
-
-
-    /**
-     * Division SInt y cualquier SType del tipo INumbers(SInt,SBinary)
-     * @param Int1 operando de la izquierda
-     * @param Number operando de la derecha
-     * @return OperadorInt (Operacion que resulta ser un Int)
-     */
-
-    public OperadorInt Div(SInt Int1, INumber Number){
-        return new Div(new Element(Int1),new Element(Number));
-    }
-
-    /**
-     * Division SInt y un OperadorFloat
-     * @param Int1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorFloat (Operacion que resulta ser un Float)
-     */
-
-    public OperadorFloat Div(SInt Int1, OperadorFloat operador){
-        return new Div(new Element(Int1),operador);
-    }
-
-    /**
-     * Division SInt y un OperadorIntBinario(operacion que al ser evaluada result en Int o Binario)
-     * @param Int1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorInt que contiene la Suma en Int
-     */
-
-    public OperadorInt Div(SInt Int1, OperadorIntBinario operador){
-        return new Div(new Element(Int1),operador);
-    }
-
-    /**
-     * Division SBinary y cualquier SType del tipo INumbers(SInt,SBinary)
-     * @param Binary1 operando de la izquierda
-     * @param Number operando de la derecha
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
-     */
-
-    public OperadorBinary Div(SBinary Binary1, INumber Number){
-        return new Div(new Element(Binary1),new Element(Number));
-    }
-
-
-    /**
-     * Division SBinary y un OperadorIntBinario(operacion que al ser evaluada result en Int o Binario)
-     * @param Binary1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
-     */
-
-    public OperadorBinary Div(SBinary Binary1, OperadorIntBinario operador){
-        return new Div(new Element(Binary1),operador);
-    }
-
-
-    /**
-     * Division entre OperadorBinary y un OperadorIntBinario(operacion que al ser evaluada result en Int o Binario)
-     * @param operador1 operando de la izquierda
+     * Division Operador con cualquier Operador
+     *
+     * @param operador  operando de la izquierda (en forma de operacion)
      * @param operador2 operando de la derecha (en forma de operacion)
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
+     * @return Operador
      */
 
-    public OperadorInt Div(OperadorBinary operador1, OperadorIntBinario operador2){
-        return new Div(operador1,operador2);
+    public Operador Div(Operador operador, Operador operador2) {
+        return new Div(operador, operador2);
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    /**
+     * Division de un SType(SInt,SFloat,SBool,SString,SBinary,) con cualquier Operador
+     *
+     * @param SType
+     * @param operador (en forma de operacion)
+     * @return Operador
+     */
+    public Operador Div(IUnion SType, Operador operador) {
+        return new Div(new Element(SType), operador);
+    }
+
+    /**
+     * Division de un Operador con un SType(SInt,SFloat,SBool,SString,SBinary)
+     *
+     * @param operador operando de la izquierda (en forma de operacion)
+     * @param SType    operando de la derecha
+     * @return Operador
+     */
+    public Operador Div(Operador operador, IUnion SType) {
+        return new Div(operador, new Element(SType));
+    }
+
+    /**
+     * Division entre un SType(SInt,SFloat,SBool,SString,SBinary) con otro SType
+     *
+     * @param SType     operando de la izquierda
+     * @param operador2 operando de la derecha
+     * @return Operador
+     */
+
+    public Operador Div(IUnion SType, IUnion operador2) {
+        return new Div(new Element(SType), new Element(operador2));
+    }
+
+
     //SECCION TO BINARY
 
-    public OperadorBinary ToBinary(Operador operador){
+    /**
+     * Transforma un Operador a un Operador Binary
+     *
+     * @param operador (en forma de operacion)
+     * @return operador transformado a uno que contiene un SBinary
+     */
+
+    public Operador ToBinary(Operador operador) {
         return new ToBinary(operador);
+    }
+
+    /**
+     * Transforma un SType a un Operador Binary
+     *
+     * @param SType
+     * @return SType transformado a un operador que contiene un SBinary
+     */
+
+    public Operador ToBinary(IUnion SType) {
+        return new ToBinary(new Element(SType));
     }
 
     //SECCION TO Float
 
-    public OperadorFloat ToFloat(Operador operador){
+    /**
+     * Transforma un Operador a un Operador Float
+     *
+     * @param operador (en forma de operacion)
+     * @return operador transformado a uno que contiene un SFloat
+     */
+
+    public Operador ToFloat(Operador operador) {
         return new ToFloat(operador);
+    }
+
+    /**
+     * Transforma un SType a un Operador Float
+     *
+     * @param SType
+     * @return SType transformado a un operador que contiene un SFloat
+     */
+
+    public Operador ToFloat(IUnion SType) {
+        return new ToFloat(new Element(SType));
     }
 
     //SECCION TO Int
 
-    public OperadorInt ToInt(Operador operador){
+    /**
+     * Transforma un Operador a un Operador Int
+     *
+     * @param operador (en forma de operacion)
+     * @return operador transformado a uno que contiene un SInt
+     */
+
+    public Operador ToInt(Operador operador) {
         return new ToInt(operador);
+    }
+
+    /**
+     * Transforma un SType a un Operador Int
+     *
+     * @param SType
+     * @return SType transformado a un operador que contiene un SInt
+     */
+
+    public Operador ToInt(IUnion SType) {
+        return new ToInt(new Element(SType));
     }
 
     //SECCION TO Bool
 
-    public OperadorBool ToBool(Operador operador){
+    /**
+     * Transforma un Operador a un Operador Booleano
+     *
+     * @param operador (en forma de operacion)
+     * @return operador transformado a uno que contiene un SBool
+     */
+
+    public Operador ToBool(Operador operador) {
         return new ToBool(operador);
     }
 
+    /**
+     * Transforma un SType a un Operador Booleano
+     *
+     * @param SType
+     * @return SType transformado a un operador que contiene un SBool
+     */
+
+    public Operador ToBool(IUnion SType) {
+        return new ToBool(new Element(SType));
+    }
 
 
+    //SECCION TO String
+
+    /**
+     * Transforma un Operador a un Operador String
+     *
+     * @param operador (en forma de operacion)
+     * @return operador transformado a uno que contiene un SString
+     */
+
+    public Operador ToString(Operador operador) {
+        return new ToString(operador);
+    }
+
+    /**
+     * Transforma un SType a un Operador String
+     *
+     * @param SType
+     * @return SType transformado a un operador que contiene un SString
+     */
+
+    public Operador ToString(IUnion SType) {
+        return new ToString(new Element(SType));
+    }
 
 
     //SECCION Negacion
 
-    public OperadorBool Negacion(OperadorBool operador){
+    /**
+     * Niega un Operador
+     *
+     * @param operador (en forma de operacion)
+     * @return operador transformado a uno que contiene la misma informacion pero negada
+     */
+
+    public Operador Negacion(Operador operador) {
         return new Negacion(operador);
     }
 
-    public OperadorBinary Negacion(OperadorBinary operador){
-        return new Negacion(operador);
+    /**
+     * Niega un SType y lo convierte a un Operador
+     *
+     * @param SType
+     * @return SType transformado a un operador que contiene el SType negado
+     */
+
+    public Operador Negacion(IUnion SType) {
+        return new Negacion(new Element(SType));
     }
-
-    public OperadorBinary Negacion(SBinary binario){
-        return new Negacion(new Element(binario));
-    }
-
-    public OperadorBinary Negacion(SBool bool){
-        return new Negacion(new Element(bool));
-    }
-
-
-
 
 
     //SECCION AND
 
-
-
-
     /**
-     * Y logico entre SBinary y cualquier SType del tipo ILogical(Binary,Bool)
-     * @param Binary1 operando de la izquierda
-     * @param Bool operando de la derecha
-     * @return OperadorBinary (Operacion que resulta ser un Int)
-     */
-
-    public OperadorBinary And(SBinary Binary1, ILogical Bool){
-        return new And(new Element(Binary1),new Element(Bool));
-    }
-
-    /**
-     * Y logico entre SBinary y un OperadorLogical(operacion que al ser evaluada result en Binary,Bool)
-     * @param Binary1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
-     */
-
-    public OperadorBinary And(SBinary Binary1, OperadorLogical operador){
-        return new And(new Element(Binary1),operador);
-    }
-
-    /**
-     * Y logico entre OperadorBinary y un OperadorLogical(operacion que al ser evaluada result en Bool o Binario)
-     * @param operador1 operando de la izquierda
+     * Y logico Operador con cualquier Operador
+     *
+     * @param operador  operando de la izquierda (en forma de operacion)
      * @param operador2 operando de la derecha (en forma de operacion)
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
+     * @return Operador
      */
 
-
-    public OperadorBinary And(OperadorBinary operador1,OperadorLogical operador2){
-        return new And(operador1,operador2);
+    public Operador And(Operador operador, Operador operador2) {
+        return new And(operador, operador2);
     }
 
     /**
-     * Y logico entre OperadorBinary y cualquier SType del tipo ILogical (Bool,Binario)
-     * @param operador1 operando de la izquierda (en forma de operacion)
-     * @param Logical operando de la derecha
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
+     * Y logico de un SType(SInt,SFloat,SBool,SString,SBinary,) con cualquier Operador
+     *
+     * @param SType
+     * @param operador (en forma de operacion)
+     * @return Operador
      */
-
-
-    public OperadorBinary And(OperadorBinary operador1,ILogical Logical){
-        return new And(operador1,new Element(Logical));
-    }
-
-    
-    /**
-     * Y logico entre SBool y cualquier SType del tipo ILogical(Binary,Bool)
-     * @param Binary1 operando de la izquierda
-     * @param Bool operando de la derecha
-     * @return OperadorBool (Operacion que resulta ser un Int)
-     */
-
-    public OperadorBool And(SBool Binary1, ILogical Bool){
-        return new And(new Element(Binary1),new Element(Bool));
+    public Operador And(IUnion SType, Operador operador) {
+        return new And(new Element(SType), operador);
     }
 
     /**
-     * Y logico entre SBool y un OperadorLogical(operacion que al ser evaluada result en Binary,Bool)
-     * @param Binary1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorBool (Operacion que resulta ser un Binary)
+     * Y logico de un Operador con un SType(SInt,SFloat,SBool,SString,SBinary)
+     *
+     * @param operador operando de la izquierda (en forma de operacion)
+     * @param SType    operando de la derecha
+     * @return Operador
      */
-
-    public OperadorBool And(SBool Binary1, OperadorLogical operador){
-        return new And(new Element(Binary1),operador);
+    public Operador And(Operador operador, IUnion SType) {
+        return new And(operador, new Element(SType));
     }
 
     /**
-     * Y logico entre OperadorBool y un OperadorLogical(operacion que al ser evaluada result en Bool o Binario)
-     * @param operador1 operando de la izquierda
-     * @param operador2 operando de la derecha (en forma de operacion)
-     * @return OperadorBool (Operacion que resulta ser un Binary)
+     * Y logico entre un SType(SInt,SFloat,SBool,SString,SBinary) con otro SType
+     *
+     * @param SType     operando de la izquierda
+     * @param operador2 operando de la derecha
+     * @return Operador
      */
 
-
-    public OperadorBool And(OperadorBool operador1,OperadorLogical operador2){
-        return new And(operador1,operador2);
+    public Operador And(IUnion SType, IUnion operador2) {
+        return new And(new Element(SType), new Element(operador2));
     }
-
-    /**
-     * Y logico entre OperadorBool y cualquier SType del tipo ILogical (Bool,Binario)
-     * @param operador1 operando de la izquierda (en forma de operacion)
-     * @param Logical operando de la derecha
-     * @return OperadorBool (Operacion que resulta ser un Binary)
-     */
-
-
-    public OperadorBool And(OperadorBool operador1,ILogical Logical){
-        return new And(operador1,new Element(Logical));
-    }
-    
-    
-
-
-
-
-
-
-
 
 
     //SECCION OR
 
-
     /**
-     * Y logico entre SBinary y cualquier SType del tipo ILogical(Binary,Bool)
-     * @param Binary1 operando de la izquierda
-     * @param Bool operando de la derecha
-     * @return OperadorBinary (Operacion que resulta ser un Int)
-     */
-
-    public OperadorBinary Or(SBinary Binary1, ILogical Bool){
-        return new Or(new Element(Binary1),new Element(Bool));
-    }
-
-    /**
-     * Y logico entre SBinary y un OperadorLogical(operacion que al ser evaluada result en Binary,Bool)
-     * @param Binary1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
-     */
-
-    public OperadorBinary Or(SBinary Binary1, OperadorLogical operador){
-        return new Or(new Element(Binary1),operador);
-    }
-
-    /**
-     * Y logico entre OperadorBinary y un OperadorLogical(operacion que al ser evaluada result en Bool o Binario)
-     * @param operador1 operando de la izquierda
+     * O logico Operador con cualquier Operador
+     *
+     * @param operador  operando de la izquierda (en forma de operacion)
      * @param operador2 operando de la derecha (en forma de operacion)
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
+     * @return Operador
      */
 
-
-    public OperadorBinary Or(OperadorBinary operador1,OperadorLogical operador2){
-        return new Or(operador1,operador2);
+    public Operador Or(Operador operador, Operador operador2) {
+        return new Or(operador, operador2);
     }
 
     /**
-     * Y logico entre OperadorBinary y cualquier SType del tipo ILogical (Bool,Binario)
-     * @param operador1 operando de la izquierda (en forma de operacion)
-     * @param Logical operando de la derecha
-     * @return OperadorBinary (Operacion que resulta ser un Binary)
+     * O logico de un SType(SInt,SFloat,SBool,SString,SBinary,) con cualquier Operador
+     *
+     * @param SType
+     * @param operador (en forma de operacion)
+     * @return Operador
      */
-
-
-    public OperadorBinary Or(OperadorBinary operador1,ILogical Logical){
-        return new Or(operador1,new Element(Logical));
-    }
-
-
-    /**
-     * Y logico entre SBool y cualquier SType del tipo ILogical(Binary,Bool)
-     * @param Binary1 operando de la izquierda
-     * @param Bool operando de la derecha
-     * @return OperadorBool (Operacion que resulta ser un Int)
-     */
-
-    public OperadorBool Or(SBool Binary1, ILogical Bool){
-        return new Or(new Element(Binary1),new Element(Bool));
+    public Operador Or(IUnion SType, Operador operador) {
+        return new Or(new Element(SType), operador);
     }
 
     /**
-     * Y logico entre SBool y un OperadorLogical(operacion que al ser evaluada result en Binary,Bool)
-     * @param Binary1 operando de la izquierda
-     * @param operador operando de la derecha (en forma de operacion)
-     * @return OperadorBool (Operacion que resulta ser un Binary)
+     * O logico de un Operador con un SType(SInt,SFloat,SBool,SString,SBinary)
+     *
+     * @param operador operando de la izquierda (en forma de operacion)
+     * @param SType    operando de la derecha
+     * @return Operador
      */
-
-    public OperadorBool Or(SBool Binary1, OperadorLogical operador){
-        return new Or(new Element(Binary1),operador);
+    public Operador Or(Operador operador, IUnion SType) {
+        return new Or(operador, new Element(SType));
     }
 
     /**
-     * Y logico entre OperadorBool y un OperadorLogical(operacion que al ser evaluada result en Bool o Binario)
-     * @param operador1 operando de la izquierda
-     * @param operador2 operando de la derecha (en forma de operacion)
-     * @return OperadorBool (Operacion que resulta ser un Binary)
+     * O logico entre un SType(SInt,SFloat,SBool,SString,SBinary) con otro SType
+     *
+     * @param SType     operando de la izquierda
+     * @param operador2 operando de la derecha
+     * @return Operador
      */
 
-
-    public OperadorBool Or(OperadorBool operador1,OperadorLogical operador2){
-        return new Or(operador1,operador2);
+    public Operador Or(IUnion SType, IUnion operador2) {
+        return new Or(new Element(SType), new Element(operador2));
     }
-
-    /**
-     * Y logico entre OperadorBool y cualquier SType del tipo ILogical (Bool,Binario)
-     * @param operador1 operando de la izquierda (en forma de operacion)
-     * @param Logical operando de la derecha
-     * @return OperadorBool (Operacion que resulta ser un Binary)
-     */
-
-
-    public OperadorBool Or(OperadorBool operador1,ILogical Logical){
-        return new Or(operador1,new Element(Logical));
-    }
-
-
-
-   
-
-
-
 
 
 }

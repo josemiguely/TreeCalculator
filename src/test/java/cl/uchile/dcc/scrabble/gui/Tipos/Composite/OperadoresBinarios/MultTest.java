@@ -1,10 +1,8 @@
 package cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresBinarios;
 
-import cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes.SFloat;
-import cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes.SInt;
+import cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes.*;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.ArbolFactory;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorFloat;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorInt;
+import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.Operador;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 
@@ -14,76 +12,75 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MultTest {
 
+    public ArbolFactory arbolfact;
 
-    private OperadorInt mult1;
-    private OperadorInt mult1copia;
-    private OperadorInt mult1diff;
-    private OperadorInt mult2;
+    //SSInt
+    private int numero = new Random().nextInt();
+    private int numerodiff = numero + 1;
+    private SInt sInt;
+    private SInt sIntnegativo;
+    private SInt sInt2;
+    private SInt sInt2negativo;
 
-    private OperadorFloat mult1double;
-    private OperadorFloat mult1doublecopia;
-    private OperadorFloat multdoublediff;
 
-    private int seed;
-    private Random rng;
-    ArbolFactory arbolFactory;
-    int numero;
-    int numero2;
-    int numerodiff;
-    double numdouble;
-    double numdouble2;
+    //Float
+    private double seeddouble;
+    private SFloat sFloat;
 
 
     @BeforeEach
     void setUp() {
+        arbolfact = new ArbolFactory();
+
+        //SInt setup
+        sInt = STypeFactory.getSInt(numero);
+        sIntnegativo = STypeFactory.getSInt(-numero);
+        sInt2 = STypeFactory.getSInt(numerodiff);
+        sInt2negativo = STypeFactory.getSInt(-numerodiff);
 
 
-        numero = new Random().nextInt(10000);
-        if (numero==0){
-            numero++;
-        }
-
-        numero2 = new Random().nextInt(10000);
-
-        if (numero2==0){
-            numero2++;
-        }
-
-
-        numdouble = new Random().nextDouble();
-        numdouble2 = new Random().nextDouble();
-
-        arbolFactory=new ArbolFactory();
-        mult1=arbolFactory.Mult(new SInt(numero),new SInt(numero2));
-        mult1copia=arbolFactory.Mult(new SInt(numero),new SInt(numero2));
-        mult1diff=arbolFactory.Mult(new SInt(numero+1),new SInt(numero2));
-
-        mult1double=arbolFactory.Mult(new SFloat(numdouble),new SFloat(numdouble2));
-        mult1doublecopia=arbolFactory.Mult(new SFloat(numdouble2),new SFloat(numdouble));
-        multdoublediff=arbolFactory.Mult(new SFloat(numdouble+1),new SFloat(numdouble2));
-
-
+        //SFloat setup
+        seeddouble = new Random().nextDouble();
+        sFloat = STypeFactory.getSFloat(seeddouble);
 
     }
 
     @RepeatedTest(20)
-    void constructorTest(){
+    void constructorTest() {
+        arbolfact = new ArbolFactory();
 
-        //Constructor Int con Int
-        assertEquals(mult1,mult1copia);
-        assertEquals(mult1,mult1);
+        //4to constructor
 
-        assertNotEquals(mult1diff,mult1);
+        Operador constructor4 = arbolfact.Mult(sInt, sInt2);
+        Operador constructor4copia = arbolfact.Mult(sInt2negativo, sIntnegativo);
+        SInt expectedsInt4 = STypeFactory.getSInt(numero * numerodiff);
+        assertEquals(constructor4, constructor4copia);
+        assertEquals(expectedsInt4, constructor4.resultado());
 
-        //Constructor Double con Double
-        assertEquals(mult1double,mult1doublecopia);
-        assertEquals(mult1double,mult1double);
+        //1er constructor
 
-        assertNotEquals(mult1double,multdoublediff);
 
-        //Constructor Double con Int
+        Operador constructor1 = arbolfact.Mult(constructor4, constructor4copia);
+        SInt expectedsInt1 = STypeFactory.getSInt(numero * numerodiff * (numero * numerodiff));
+        assertEquals(expectedsInt1, constructor1.resultado());
 
-        //
+
+        //2do constructor
+
+        int n = numero * numerodiff * (numero * numerodiff);
+
+
+        Operador constructor2 = arbolfact.Mult(sFloat, constructor1);
+        SFloat expectedsFloat2 = STypeFactory.getSFloat(seeddouble * n);
+        assertEquals(expectedsFloat2, constructor2.resultado());
+
+        //3er constructor
+        double x = seeddouble * n;
+
+        Operador constructor3 = arbolfact.Mult(constructor2, sInt);
+        SFloat expectedsInt3 = STypeFactory.getSFloat(numero * x);
+        assertEquals(expectedsInt3, constructor3.resultado());
+
 
     }
 }

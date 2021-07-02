@@ -10,9 +10,9 @@ public class SString implements INumberandStrings {
 
     private String string;
 
-    public SString(String input){
+    public SString(String input) {
 
-        this.string=input;
+        this.string = input;
     }
 
     public String getTipoInfo() {
@@ -22,7 +22,7 @@ public class SString implements INumberandStrings {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if(o instanceof SString) {
+        if (o instanceof SString) {
             SString sString = (SString) o;
             getTipoInfo().equals(sString.getTipoInfo());
             return getTipoInfo().equals(sString.getTipoInfo());
@@ -37,7 +37,7 @@ public class SString implements INumberandStrings {
      * @return SString
      */
 
-    public SString intoSString(){
+    public SString intoSString() {
         return new SString(getTipoInfo());
     }
 
@@ -54,14 +54,13 @@ public class SString implements INumberandStrings {
     }
 
     /**
-     *
      * @param number SString que va a ser sumado con un SString
      * @return SString que representa la suma entre number y SString
      */
 
     @Override
     public SString SumaSString(SString number) {
-        return new SString(number.getTipoInfo()+this.getTipoInfo());
+        return new SString(number.getTipoInfo() + this.getTipoInfo());
     }
 
 

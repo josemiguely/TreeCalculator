@@ -8,7 +8,7 @@ public class SBool implements ILogical {
     private boolean truthvalue;
 
     public SBool(boolean truthvalue) {
-        this.truthvalue=truthvalue;
+        this.truthvalue = truthvalue;
     }
 
     public boolean getTipoInfo() {
@@ -35,7 +35,6 @@ public class SBool implements ILogical {
      */
 
 
-
     public SBool intoSBool() {
 
         return new SBool(getTipoInfo());
@@ -44,9 +43,9 @@ public class SBool implements ILogical {
 
     public boolean equals(Object o) {
         if (this == o) return true;
-        if(o instanceof SBool) {
+        if (o instanceof SBool) {
             SBool sBool = (SBool) o;
-            return this.getTipoInfo()==sBool.getTipoInfo();
+            return this.getTipoInfo() == sBool.getTipoInfo();
         }
 
         return false;
@@ -65,7 +64,6 @@ public class SBool implements ILogical {
     }
 
 
-
     @Override
     public ILogical and(ILogical logical) {
         return logical.andSBool(this);
@@ -82,22 +80,21 @@ public class SBool implements ILogical {
     }
 
     /**
-     *
      * @param logical que va a hacer la operacion AND con un SBool
      * @return Sbinary que representa la conjuncion entre logical y SBool
      */
     @Override
     public ILogical andSBinary(SBinary logical) {
-        String binario= logical.getTipoInfo();
-        int largo=logical.getTipoInfo().length();
-        boolean truthvalue=this.getTipoInfo();
-        String s="";
-        int i=0;
-        if (truthvalue){
+        String binario = logical.getTipoInfo();
+        int largo = logical.getTipoInfo().length();
+        boolean truthvalue = this.getTipoInfo();
+        String s = "";
+        int i = 0;
+        if (truthvalue) {
             return new SBinary(binario);
         }
-        while(i<largo){
-                s=s+"0";
+        while (i < largo) {
+            s = s + "0";
             i++;
         }
         return new SBinary(s);
@@ -110,7 +107,6 @@ public class SBool implements ILogical {
     }
 
     /**
-     *
      * @param logical SBool que va a hacer la operacion OR con un SBool
      * @return SBool que representa OR entre logical y SBool
      */
@@ -121,23 +117,22 @@ public class SBool implements ILogical {
     }
 
     /**
-     *
      * @param logical SBinary que va a hacer la operacion OR con un SBool
      * @return SBinary que representa la operacion OR entre logical y SBool
      */
     @Override
     public ILogical orSBinary(SBinary logical) {
-        String binario= logical.getTipoInfo();
-        int largo=logical.getTipoInfo().length();
-        boolean truthvalue=this.getTipoInfo();
-        String s="";
-        if (truthvalue==false){
+        String binario = logical.getTipoInfo();
+        int largo = logical.getTipoInfo().length();
+        boolean truthvalue = this.getTipoInfo();
+        String s = "";
+        if (truthvalue == false) {
             return new SBinary(binario);
         }
-        int i=0;
-        while(i<largo){
-            if (truthvalue){
-                s="1"+s;
+        int i = 0;
+        while (i < largo) {
+            if (truthvalue) {
+                s = "1" + s;
                 i++;
             }
         }
@@ -160,10 +155,8 @@ public class SBool implements ILogical {
 
     @Override
     public SString SumaSString(SString number) {
-        return new SString(number.getTipoInfo()+getTipoInfo());
+        return new SString(number.getTipoInfo() + getTipoInfo());
     }
-
-
 
 
 }

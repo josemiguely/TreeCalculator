@@ -11,7 +11,7 @@ import cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes.SBool;
 public interface ILogical extends IUnion {
 
     /**
-     *Método que utiliza Double-Dispatch
+     * Método que utiliza Double-Dispatch
      *
      * @param logical que va a hacer la operacion AND con this
      * @return ILogical que representa la conjuncion entre ILogicals

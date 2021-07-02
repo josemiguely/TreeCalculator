@@ -7,7 +7,6 @@ package cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones;
 public interface INumberandStrings extends IUnion {
 
     /**
-     *
      * Método que utiliza Double-Disptach
      *
      * @param number INumberandStrings que va a sumarse a this
@@ -15,7 +14,6 @@ public interface INumberandStrings extends IUnion {
      */
 
     INumberandStrings Suma(IUnion number);
-
 
 
 }

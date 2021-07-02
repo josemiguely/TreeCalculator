@@ -37,7 +37,7 @@ public class SBinary implements INumber, ILogical {
 
     @Override
     public SFloat intoSFloat() {
-        String s=this.getTipoInfo();
+        String s = this.getTipoInfo();
         double doubleVal = Double.longBitsToDouble(new BigInteger(s, 2).longValue());
         return new SFloat(doubleVal);
     }
@@ -97,11 +97,12 @@ public class SBinary implements INumber, ILogical {
      */
     public boolean equals(Object o) {
         if (this == o) return true;
-        if(o instanceof SBinary) {
+        if (o instanceof SBinary) {
             SBinary sBinary = (SBinary) o;
-            if((this.intoSInt().getTipoInfo())==sBinary.intoSInt().getTipoInfo()) {
+            if ((this.intoSInt().getTipoInfo()) == sBinary.intoSInt().getTipoInfo()) {
                 return true;
-            }}
+            }
+        }
 
         return false;
     }
@@ -125,23 +126,21 @@ public class SBinary implements INumber, ILogical {
     }
 
 
-
     @Override
     public SString SumaSString(SString number) {
-        return new SString(number.getTipoInfo()+this.getTipoInfo());
+        return new SString(number.getTipoInfo() + this.getTipoInfo());
     }
 
 
     /**
-     *
      * @param number SInt a ser sumado con un SBinary
      * @return SInt que representa la suma entre number y SBinary
      */
 
     @Override
     public SInt SumaSInt(SInt number) {
-        SInt int1=(this.intoSInt());
-        int result= int1.getTipoInfo();
+        SInt int1 = (this.intoSInt());
+        int result = int1.getTipoInfo();
         return new SInt(result + number.getTipoInfo());
     }
 
@@ -163,10 +162,10 @@ public class SBinary implements INumber, ILogical {
 
     @Override
     public SBinary SumaSBinary(SBinary number) {
-        SInt Int1=number.intoSInt();
-        SInt Int2=this.intoSInt();
-        SInt Int3=(SInt) Int1.Suma(Int2);
-        SBinary Binary=Int3.intoSBinary();
+        SInt Int1 = number.intoSInt();
+        SInt Int2 = this.intoSInt();
+        SInt Int3 = (SInt) Int1.Suma(Int2);
+        SBinary Binary = Int3.intoSBinary();
         return Binary;
     }
 
@@ -219,8 +218,8 @@ public class SBinary implements INumber, ILogical {
 
     @Override
     public SInt MultInt(SInt number) {
-        SInt Int1=this.intoSInt();
-        return new SInt(number.getTipoInfo()* Int1.getTipoInfo());
+        SInt Int1 = this.intoSInt();
+        return new SInt(number.getTipoInfo() * Int1.getTipoInfo());
     }
 
     /**
@@ -230,8 +229,8 @@ public class SBinary implements INumber, ILogical {
 
     @Override
     public SFloat MultFloat(SFloat number) {
-        SInt Int1=this.intoSInt();
-        return new SFloat(number.getTipoInfo()*Int1.getTipoInfo());
+        SInt Int1 = this.intoSInt();
+        return new SFloat(number.getTipoInfo() * Int1.getTipoInfo());
     }
 
     /**
@@ -241,9 +240,9 @@ public class SBinary implements INumber, ILogical {
 
     @Override
     public SBinary MultBinary(SBinary number) {
-        SInt Int1= number.intoSInt();
-        SInt Int2=this.intoSInt();
-        SInt Int3= new SInt(Int1.getTipoInfo()* Int2.getTipoInfo());
+        SInt Int1 = number.intoSInt();
+        SInt Int2 = this.intoSInt();
+        SInt Int3 = new SInt(Int1.getTipoInfo() * Int2.getTipoInfo());
         return Int3.intoSBinary();
     }
 
@@ -259,8 +258,8 @@ public class SBinary implements INumber, ILogical {
 
     @Override
     public SInt DivInt(SInt number) {
-        SInt Int1=this.intoSInt();
-        return new SInt(number.getTipoInfo()/ Int1.getTipoInfo());
+        SInt Int1 = this.intoSInt();
+        return new SInt(number.getTipoInfo() / Int1.getTipoInfo());
     }
 
     /**
@@ -270,20 +269,19 @@ public class SBinary implements INumber, ILogical {
 
     @Override
     public SFloat DivFloat(SFloat number) {
-        SInt Int1=this.intoSInt();
-        return new SFloat(number.getTipoInfo()/Int1.getTipoInfo());
+        SInt Int1 = this.intoSInt();
+        return new SFloat(number.getTipoInfo() / Int1.getTipoInfo());
     }
 
     /**
-     *
      * @param number SBinary a ser dividido con un SBinary
      * @return SBinary que representa la division entre number con SBinary
      */
     @Override
     public SBinary DivBinary(SBinary number) {
-        SInt Int1=number.intoSInt();
-        SInt Int2=this.intoSInt();
-        SInt Int3=new SInt(Int1.getTipoInfo()/ Int2.getTipoInfo());
+        SInt Int1 = number.intoSInt();
+        SInt Int2 = this.intoSInt();
+        SInt Int3 = new SInt(Int1.getTipoInfo() / Int2.getTipoInfo());
         return Int3.intoSBinary();
     }
 
@@ -299,19 +297,18 @@ public class SBinary implements INumber, ILogical {
      */
     @Override
     public SBinary andSBool(SBool logical) {
-        String binario= this.getTipoInfo();
-        int largo=binario.length();
-        boolean truthvalue=logical.getTipoInfo();
-        String s="";
-        int i=0;
-        if (truthvalue){
+        String binario = this.getTipoInfo();
+        int largo = binario.length();
+        boolean truthvalue = logical.getTipoInfo();
+        String s = "";
+        int i = 0;
+        if (truthvalue) {
             return new SBinary(binario);
-        }
-        else
-        while(i<largo){
-            s="0"+s;
-            i++;
-        }
+        } else
+            while (i < largo) {
+                s = "0" + s;
+                i++;
+            }
         return new SBinary(s);
 
     }
@@ -323,55 +320,46 @@ public class SBinary implements INumber, ILogical {
 
     @Override
     public SBinary andSBinary(SBinary logical) {
-        String binario=logical.getTipoInfo();
-        String binario2=this.getTipoInfo();
-
-        //System.out.println("binario 1 "+binario);
-        //System.out.println("binario 2 "+binario2);
+        String binario = logical.getTipoInfo();
+        String binario2 = this.getTipoInfo();
 
 
-        String s="";
-        int i=0;
+        String s = "";
+        int i = 0;
 
-        if (binario.length()>binario2.length()){
-            int contador=binario2.length();
-            if(binario2.charAt(0)=='0') {
+        if (binario.length() > binario2.length()) {
+            int contador = binario2.length();
+            if (binario2.charAt(0) == '0') {
                 while (binario.length() != contador) {
                     binario2 = "0" + binario2;
                     contador++;
                 }
-            }
-            else{
+            } else {
                 while (binario.length() != contador) {
                     binario2 = "1" + binario2;
                     contador++;
                 }
             }
-        }
-
-        else if(binario.length()<binario2.length()){
-            int contador=binario.length();
-            if(binario.charAt(0)=='0') {
+        } else if (binario.length() < binario2.length()) {
+            int contador = binario.length();
+            if (binario.charAt(0) == '0') {
                 while (binario2.length() != contador) {
                     binario = "0" + binario;
                     contador++;
                 }
-            }
-            else{
+            } else {
                 while (binario2.length() != contador) {
                     binario = "1" + binario;
                     contador++;
                 }
             }
         }
-        //System.out.println("cambio binario 1 "+binario);
-        //System.out.println("cambio binario 2 "+binario2);
-        if(binario.length()==binario2.length()) {
+        if (binario.length() == binario2.length()) {
             while (i < binario.length()) {
                 if (binario.charAt(i) == '1' && binario2.charAt(i) == '1') {
-                    s = s+"1";
+                    s = s + "1";
                 } else {
-                    s = s+"0";
+                    s = s + "0";
                 }
                 i++;
             }
@@ -391,19 +379,19 @@ public class SBinary implements INumber, ILogical {
      */
     @Override
     public SBinary orSBool(SBool logical) {
-        String binario= this.getTipoInfo();
-        int largo=binario.length();
-        boolean truthvalue=logical.getTipoInfo();
-        String s="";
-        if (!truthvalue){
+        String binario = this.getTipoInfo();
+        int largo = binario.length();
+        boolean truthvalue = logical.getTipoInfo();
+        String s = "";
+        if (!truthvalue) {
             return new SBinary(binario);
         }
-        int i=0;
-        while(i<largo){
+        int i = 0;
+        while (i < largo) {
 
-                s='1'+s;
+            s = '1' + s;
             i++;
-            }
+        }
 
 
         return new SBinary(s);
@@ -417,50 +405,45 @@ public class SBinary implements INumber, ILogical {
     @Override
     public SBinary orSBinary(SBinary logical) {
         String binario = logical.getTipoInfo();
-        String binario2=this.getTipoInfo();
-        int largo = Math.max(binario.length(),binario2.length());
+        String binario2 = this.getTipoInfo();
+        int largo = Math.max(binario.length(), binario2.length());
         String s = "";
         int i = 0;
 
-        if (binario.length()>binario2.length()){
-            int contador=binario2.length();
-            if(binario2.charAt(0)=='0') {
+        if (binario.length() > binario2.length()) {
+            int contador = binario2.length();
+            if (binario2.charAt(0) == '0') {
                 while (binario.length() != contador) {
                     binario2 = "0" + binario2;
                     contador++;
                 }
-            }
-            else{
+            } else {
                 while (binario.length() != contador) {
                     binario2 = "1" + binario2;
                     contador++;
                 }
             }
-        }
-
-        else if(binario.length()<binario2.length()){
-            int contador=binario.length();
-            if(binario.charAt(0)=='0') {
+        } else if (binario.length() < binario2.length()) {
+            int contador = binario.length();
+            if (binario.charAt(0) == '0') {
                 while (binario2.length() != contador) {
                     binario = "0" + binario;
                     contador++;
                 }
-            }
-            else{
-                    while (binario2.length() != contador) {
-                        binario = "1" + binario;
-                        contador++;
-                    }
+            } else {
+                while (binario2.length() != contador) {
+                    binario = "1" + binario;
+                    contador++;
                 }
             }
+        }
 
-        if (binario.length()==binario2.length()) {
+        if (binario.length() == binario2.length()) {
             while (i < largo) {
-                if (binario.charAt(i) == '1' || binario2.charAt(i)=='1') {
-                    s = s+"1";
-                }
-                else {
-                    s = s+"0";
+                if (binario.charAt(i) == '1' || binario2.charAt(i) == '1') {
+                    s = s + "1";
+                } else {
+                    s = s + "0";
                 }
                 i++;
             }
@@ -480,15 +463,14 @@ public class SBinary implements INumber, ILogical {
         int i = 0;
         while (i < largo) {
             if (binario.charAt(i) == '1') {
-                s = s+"0";
+                s = s + "0";
             } else {
-                s = s+"1";
+                s = s + "1";
             }
             i++;
         }
         return new SBinary(s);
     }
-
 
 
 }

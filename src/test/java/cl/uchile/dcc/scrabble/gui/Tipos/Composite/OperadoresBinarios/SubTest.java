@@ -2,9 +2,7 @@ package cl.uchile.dcc.scrabble.gui.Tipos.Composite.OperadoresBinarios;
 
 import cl.uchile.dcc.scrabble.gui.Tipos.ClasesSTypes.*;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.ArbolFactory;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorFloat;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorInt;
-import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.OperadorString;
+import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.Operador;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
@@ -18,90 +16,72 @@ class SubTest {
 
     //SSInt
     private int numero = new Random().nextInt();
-    private int numerodiff = numero+1;
-    private int seed;
-    private Random rng;
+    private int numerodiff = numero + 1;
     private SInt sInt;
-    private SInt sIntcopia;
+    private SInt sIntnegativo;
     private SInt sInt2;
+    private SInt sInt2negativo;
 
-    //SBinary
-    private SBinary sBinary;
-    private SBinary sBinarycopia;
-    private SBinary sBinary2;
-    private String string1;
-
-    //SString
-    private String palabra;
-    private SString sString;
-    private SString sStringcopia;
-    private SString sString2;
 
     //Float
     private double seeddouble;
     private SFloat sFloat;
-    private SFloat sFloatcopia;
-    private SFloat sFloat2;
 
-    //Bool
-
-    private SBool sBool;
-    private SBool sBool2;
-    private SBool sBoolcopia;
 
     @BeforeEach
     void setUp() {
-        arbolfact=new ArbolFactory();
+        arbolfact = new ArbolFactory();
 
         //SInt setup
-        sInt= STypeFactory.getSInt(numero);
-        sIntcopia=STypeFactory.getSInt(numero);
-        sInt2=STypeFactory.getSInt(numerodiff);
-
-
-        //SBinary setup
-        seed = new Random().nextInt(20) + 1;
-        rng = new Random(seed);
-        int strSize = rng.nextInt(seed) +1; //+1 para que nunca sea 0 el strSize
-        string1 = RandomStringUtils.random(strSize, "01");
-        String diffstring = string1 + "101";
-        sBinary = STypeFactory.getSBinary(string1);
-        sBinarycopia = STypeFactory.getSBinary(string1);
-        sBinary2= STypeFactory.getSBinary(diffstring);
-
-        //SString setup
-        palabra= RandomStringUtils.random(strSize,0,0,true,true,null,rng);
-        String diffpalabra = palabra + "101";
-        sString=STypeFactory.getSString(palabra);
-        sStringcopia=STypeFactory.getSString(palabra);
-        sString2=STypeFactory.getSString(diffpalabra);
+        sInt = STypeFactory.getSInt(numero);
+        sIntnegativo = STypeFactory.getSInt(-numero);
+        sInt2 = STypeFactory.getSInt(numerodiff);
+        sInt2negativo = STypeFactory.getSInt(-numerodiff);
 
 
         //SFloat setup
-        seeddouble=new Random().nextDouble();
-        double diffdouble=seeddouble+1;
-        sFloat=STypeFactory.getSFloat(seeddouble);
-        sFloatcopia=STypeFactory.getSFloat(seeddouble);
-        sFloat2=STypeFactory.getSFloat(diffdouble);
+        seeddouble = new Random().nextDouble();
+        sFloat = STypeFactory.getSFloat(seeddouble);
 
-        //SBool setup
-
-        boolean seedboolean = new Random().nextBoolean();
-        boolean diifbolean = !seedboolean;
-        sBool=STypeFactory.getSBool(seedboolean);
-        sBoolcopia=STypeFactory.getSBool(seedboolean);
-        sBool2=STypeFactory.getSBool(diifbolean);
 
     }
-    @RepeatedTest(10)
+
+    @RepeatedTest(20)
     void constructorTest() {
         arbolfact = new ArbolFactory();
-        OperadorInt operadorInt = arbolfact.Sub(sInt, sInt2);
-        OperadorInt operadorInt2 = arbolfact.Sub(sIntcopia, sInt2);
-        SInt expectedInt = new SInt(numero - numerodiff);
 
-        assertEquals(operadorInt, operadorInt2);
-        assertEquals(expectedInt, operadorInt.resultado());
+        //4to constructor
+
+        Operador constructor4 = arbolfact.Sub(sInt, sInt2);
+        Operador constructor4copia = arbolfact.Sub(sInt2negativo, sIntnegativo);
+        SInt expectedsInt4 = STypeFactory.getSInt(numero - numerodiff);
+        assertEquals(constructor4, constructor4copia);
+        assertEquals(expectedsInt4, constructor4.resultado());
+
+        //1er constructor
+
+
+        Operador constructor1 = arbolfact.Sub(constructor4, constructor4copia);
+        SInt expectedsInt1 = STypeFactory.getSInt(numero - numerodiff - (numero - numerodiff));
+        assertEquals(expectedsInt1, constructor1.resultado());
+
+
+        //2do constructor
+
+        int n = numero - numerodiff - (numero - numerodiff);
+
+
+        Operador constructor2 = arbolfact.Sub(sFloat, constructor1);
+        SFloat expectedsFloat2 = STypeFactory.getSFloat(seeddouble - n);
+        assertEquals(expectedsFloat2, constructor2.resultado());
+
+        //3er constructor
+        double x = seeddouble - n;
+
+        Operador constructor3 = arbolfact.Sub(constructor2, sInt);
+        SFloat expectedsInt3 = STypeFactory.getSFloat(x - numero);
+        assertEquals(expectedsInt3, constructor3.resultado());
+
 
     }
 }

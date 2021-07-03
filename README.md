@@ -26,4 +26,6 @@ Se asumieron las siguientes cosas
 
 -El arbolAst(Clase ArbolFactory), asume que el usuario va a crear correctamente el arbol.
 
-Para ejecutar los tests basta con correr la carpeta de Test.
+-Para ejecutar los tests basta con correr la carpeta de Test.
+
+-No se documento los metodos obvios y los que poseen exactamente la misma documentacion que el padre/interfaz

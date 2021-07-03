@@ -15,15 +15,15 @@ _University of Chile_.
 
 **The rest of the documentation is left for the users of this template to complete**
 
-Se termino la Tarea 1.
+Introduccion:
 
 -La logica del programa es que hay 5 tipos. SBinary (binarios),SBool(booleanos),SFloat(double),SInt(enteros),SString(strings)
-que pueden interactuar entre ellos a partir de operaciones comumenes en sus contrapartes primitivas
+que pueden interactuar entre ellos a partir de operaciones comunes en sus contrapartes primitivas
 
 Se asumieron las siguientes cosas 
 
--Para trabajar dos Sbinaries con and o or se debe hacer input de un binario del mismo largo(el usario rellena con 0´s pertinentes).
-
 -Dos Sbinaries son iguales si su transformacion a entero es la misma.
+
+-El arbolAst(Clase ArbolFactory), asume que el usuario va a crear correctamente el arbol.
 
 Para ejecutar los tests basta con correr la carpeta de Test.

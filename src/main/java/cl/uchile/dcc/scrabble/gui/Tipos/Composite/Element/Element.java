@@ -3,6 +3,9 @@ package cl.uchile.dcc.scrabble.gui.Tipos.Composite.Element;
 import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.Operador;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IUnion;
 
+/**
+ * Nodo hoja del composite
+ */
 
 public class Element implements Operador {
     private IUnion tipo;

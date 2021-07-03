@@ -27,7 +27,7 @@ public class SFloat implements IRealNumbers {
     @Override
     public SString intoSString() {
 
-        return new SString(String.valueOf(this.getTipoInfo()));
+        return STypeFactory.getSString(String.valueOf(this.getTipoInfo()));
     }
 
 
@@ -39,7 +39,7 @@ public class SFloat implements IRealNumbers {
 
     @Override
     public SFloat intoSFloat() {
-        return new SFloat(getTipoInfo());
+        return STypeFactory.getSFloat(getTipoInfo());
     }
 
     public boolean equals(Object o) {
@@ -76,7 +76,7 @@ public class SFloat implements IRealNumbers {
 
     @Override
     public SFloat SumaSInt(SInt number) {
-        return new SFloat(this.numero + number.getTipoInfo());
+        return STypeFactory.getSFloat(this.numero + number.getTipoInfo());
     }
 
     /**
@@ -86,7 +86,7 @@ public class SFloat implements IRealNumbers {
 
     @Override
     public SFloat SumaSFloat(SFloat number) {
-        return new SFloat(this.getTipoInfo() + number.getTipoInfo());
+        return STypeFactory.getSFloat(this.getTipoInfo() + number.getTipoInfo());
     }
 
     /**
@@ -96,7 +96,7 @@ public class SFloat implements IRealNumbers {
 
     @Override
     public SString SumaSString(SString number) {
-        return new SString(number.getTipoInfo() + this.getTipoInfo());
+        return STypeFactory.getSString(number.getTipoInfo() + this.getTipoInfo());
     }
 
     @Override
@@ -111,7 +111,7 @@ public class SFloat implements IRealNumbers {
 
     @Override
     public SFloat RestaSInt(SInt number) {
-        return new SFloat(number.getTipoInfo() - this.getTipoInfo());
+        return STypeFactory.getSFloat(number.getTipoInfo() - this.getTipoInfo());
     }
 
     /**
@@ -121,7 +121,7 @@ public class SFloat implements IRealNumbers {
 
     @Override
     public SFloat RestaSFloat(SFloat number) {
-        return new SFloat(number.getTipoInfo() - this.getTipoInfo());
+        return STypeFactory.getSFloat(number.getTipoInfo() - this.getTipoInfo());
     }
 
 
@@ -137,7 +137,7 @@ public class SFloat implements IRealNumbers {
 
     @Override
     public SFloat MultInt(SInt number) {
-        return new SFloat(this.getTipoInfo() * number.getTipoInfo());
+        return STypeFactory.getSFloat(this.getTipoInfo() * number.getTipoInfo());
     }
 
     /**
@@ -147,7 +147,7 @@ public class SFloat implements IRealNumbers {
 
     @Override
     public SFloat MultFloat(SFloat number) {
-        return new SFloat(number.getTipoInfo() * this.getTipoInfo());
+        return STypeFactory.getSFloat(number.getTipoInfo() * this.getTipoInfo());
     }
 
 
@@ -163,7 +163,7 @@ public class SFloat implements IRealNumbers {
 
     @Override
     public SFloat DivInt(SInt number) {
-        return new SFloat(number.getTipoInfo() / this.getTipoInfo());
+        return STypeFactory.getSFloat(number.getTipoInfo() / this.getTipoInfo());
     }
 
     /**
@@ -173,7 +173,7 @@ public class SFloat implements IRealNumbers {
 
     @Override
     public SFloat DivFloat(SFloat number) {
-        return new SFloat(number.getTipoInfo() / this.getTipoInfo());
+        return STypeFactory.getSFloat(number.getTipoInfo() / this.getTipoInfo());
     }
 
 }

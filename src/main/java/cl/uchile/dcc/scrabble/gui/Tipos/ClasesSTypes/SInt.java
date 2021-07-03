@@ -27,7 +27,7 @@ public class SInt implements INumber {
 
     public SString intoSString() {
 
-        return new SString(String.valueOf(this.getTipoInfo()));
+        return STypeFactory.getSString(String.valueOf(this.getTipoInfo()));
     }
 
     /**
@@ -39,7 +39,7 @@ public class SInt implements INumber {
     @Override
     public SFloat intoSFloat() {
 
-        return new SFloat((double) getTipoInfo());
+        return STypeFactory.getSFloat((double) getTipoInfo());
     }
 
     /**
@@ -50,7 +50,7 @@ public class SInt implements INumber {
 
     @Override
     public SInt intoSInt() {
-        return new SInt(getTipoInfo());
+        return STypeFactory.getSInt(getTipoInfo());
     }
 
     /**
@@ -66,7 +66,7 @@ public class SInt implements INumber {
         if (this.numero < 0) {
             b = TwosComplement(b);
         }
-        return new SBinary(b);
+        return STypeFactory.getSBinary(b);
     }
 
 
@@ -116,7 +116,7 @@ public class SInt implements INumber {
     @Override
     public SInt SumaSInt(SInt number) {
         int sum = this.getTipoInfo() + number.getTipoInfo();
-        SInt ResultSuma = new SInt(sum);
+        SInt ResultSuma = STypeFactory.getSInt(sum);
         return ResultSuma;
     }
 
@@ -127,7 +127,7 @@ public class SInt implements INumber {
     @Override
     public SFloat SumaSFloat(SFloat number) {
         double sum = this.getTipoInfo() + number.getTipoInfo();
-        return new SFloat(sum);
+        return STypeFactory.getSFloat(sum);
     }
 
     /**
@@ -148,7 +148,7 @@ public class SInt implements INumber {
 
     @Override
     public SString SumaSString(SString number) {
-        return new SString(number.getTipoInfo() + this.getTipoInfo());
+        return STypeFactory.getSString(number.getTipoInfo() + this.getTipoInfo());
     }
 
 
@@ -163,7 +163,7 @@ public class SInt implements INumber {
      */
     public SInt RestaSInt(SInt number) {
         int res = number.getTipoInfo() - this.getTipoInfo();
-        return new SInt(res);
+        return STypeFactory.getSInt(res);
     }
 
     /**
@@ -173,7 +173,7 @@ public class SInt implements INumber {
 
     @Override
     public SFloat RestaSFloat(SFloat number) {
-        return new SFloat(number.getTipoInfo() - this.getTipoInfo());
+        return STypeFactory.getSFloat(number.getTipoInfo() - this.getTipoInfo());
     }
 
     /**
@@ -184,7 +184,7 @@ public class SInt implements INumber {
     @Override
     public SBinary RestaSBinary(SBinary number) {
         SInt Int1 = number.intoSInt();
-        SInt result = new SInt(Int1.getTipoInfo() - this.getTipoInfo());
+        SInt result = STypeFactory.getSInt(Int1.getTipoInfo() - this.getTipoInfo());
         return result.intoSBinary();
     }
 
@@ -200,7 +200,7 @@ public class SInt implements INumber {
 
     @Override
     public SInt MultInt(SInt number) {
-        return new SInt(this.getTipoInfo() * number.getTipoInfo());
+        return STypeFactory.getSInt(this.getTipoInfo() * number.getTipoInfo());
     }
 
     /**
@@ -210,7 +210,7 @@ public class SInt implements INumber {
 
     @Override
     public SFloat MultFloat(SFloat number) {
-        return new SFloat(number.getTipoInfo() * this.getTipoInfo());
+        return STypeFactory.getSFloat(number.getTipoInfo() * this.getTipoInfo());
     }
 
     /**
@@ -221,7 +221,7 @@ public class SInt implements INumber {
     @Override
     public SBinary MultBinary(SBinary number) {
         SInt Int1 = number.intoSInt();
-        SInt Res = new SInt(Int1.getTipoInfo() * this.getTipoInfo());
+        SInt Res = STypeFactory.getSInt(Int1.getTipoInfo() * this.getTipoInfo());
         SBinary ResToBin = Res.intoSBinary();
         return ResToBin;
     }
@@ -238,7 +238,7 @@ public class SInt implements INumber {
 
     @Override
     public SInt DivInt(SInt number) {
-        return new SInt(number.getTipoInfo() / this.getTipoInfo());
+        return STypeFactory.getSInt(number.getTipoInfo() / this.getTipoInfo());
     }
 
     /**
@@ -248,7 +248,7 @@ public class SInt implements INumber {
 
     @Override
     public SFloat DivFloat(SFloat number) {
-        return new SFloat(number.getTipoInfo() / this.getTipoInfo());
+        return STypeFactory.getSFloat(number.getTipoInfo() / this.getTipoInfo());
     }
 
     /**

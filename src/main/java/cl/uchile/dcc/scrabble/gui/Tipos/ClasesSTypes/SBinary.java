@@ -25,7 +25,7 @@ public class SBinary implements INumber, ILogical {
 
     @Override
     public SString intoSString() {
-        return new SString(getTipoInfo());
+        return STypeFactory.getSString(getTipoInfo());
     }
 
     /**
@@ -39,7 +39,7 @@ public class SBinary implements INumber, ILogical {
     public SFloat intoSFloat() {
         String s = this.getTipoInfo();
         double doubleVal = Double.longBitsToDouble(new BigInteger(s, 2).longValue());
-        return new SFloat(doubleVal);
+        return STypeFactory.getSFloat(doubleVal);
     }
 
     /**
@@ -69,7 +69,7 @@ public class SBinary implements INumber, ILogical {
 
     @Override
     public SBinary intoSBinary() {
-        return new SBinary(getTipoInfo());
+        return STypeFactory.getSBinary(getTipoInfo());
     }
 
     //Algoritmo para pasar binario positivo a entero
@@ -78,7 +78,7 @@ public class SBinary implements INumber, ILogical {
         for (int i = logical.length() - 1, j = 0; i > 0; i--, j++) {
             w += (int) Math.pow(2, j) * bitToInt(logical.charAt(i));
         }
-        return new SInt(w);
+        return STypeFactory.getSInt(w);
     }
 
     //Algoritmo para pasar binario negativo a entero
@@ -88,7 +88,7 @@ public class SBinary implements INumber, ILogical {
         for (int i = n, j = 0; i > 0; i--, j++) {
             w += (int) Math.pow(2, j) * (logical.charAt(i) == '1' ? 1 : 0);
         }
-        return new SInt(w);
+        return STypeFactory.getSInt(w);
     }
 
 
@@ -128,7 +128,7 @@ public class SBinary implements INumber, ILogical {
 
     @Override
     public SString SumaSString(SString number) {
-        return new SString(number.getTipoInfo() + this.getTipoInfo());
+        return STypeFactory.getSString(number.getTipoInfo() + this.getTipoInfo());
     }
 
 
@@ -141,7 +141,7 @@ public class SBinary implements INumber, ILogical {
     public SInt SumaSInt(SInt number) {
         SInt int1 = (this.intoSInt());
         int result = int1.getTipoInfo();
-        return new SInt(result + number.getTipoInfo());
+        return STypeFactory.getSInt(result + number.getTipoInfo());
     }
 
     /**
@@ -152,7 +152,7 @@ public class SBinary implements INumber, ILogical {
     @Override
     public SFloat SumaSFloat(SFloat number) {
         int result = (this.intoSInt().getTipoInfo());
-        return new SFloat(result + number.getTipoInfo());
+        return STypeFactory.getSFloat(result + number.getTipoInfo());
     }
 
     /**
@@ -183,13 +183,13 @@ public class SBinary implements INumber, ILogical {
     @Override
     public SInt RestaSInt(SInt number) {
         SInt logicaltoint = this.intoSInt();
-        return new SInt(number.getTipoInfo() - logicaltoint.getTipoInfo());
+        return STypeFactory.getSInt(number.getTipoInfo() - logicaltoint.getTipoInfo());
     }
 
     @Override
     public SFloat RestaSFloat(SFloat number) {
         SInt logicaltofloat = this.intoSInt();
-        return new SFloat(number.getTipoInfo() - logicaltofloat.getTipoInfo());
+        return STypeFactory.getSFloat(number.getTipoInfo() - logicaltofloat.getTipoInfo());
     }
 
     /**
@@ -201,7 +201,7 @@ public class SBinary implements INumber, ILogical {
     public SBinary RestaSBinary(SBinary number) {
         SInt Int1 = number.intoSInt();
         SInt Int2 = this.intoSInt();
-        SInt Int3 = new SInt(Int1.getTipoInfo() - Int2.getTipoInfo());
+        SInt Int3 = STypeFactory.getSInt(Int1.getTipoInfo() - Int2.getTipoInfo());
         SBinary result = Int3.intoSBinary();
         return result;
     }
@@ -219,7 +219,7 @@ public class SBinary implements INumber, ILogical {
     @Override
     public SInt MultInt(SInt number) {
         SInt Int1 = this.intoSInt();
-        return new SInt(number.getTipoInfo() * Int1.getTipoInfo());
+        return STypeFactory.getSInt(number.getTipoInfo() * Int1.getTipoInfo());
     }
 
     /**
@@ -230,7 +230,7 @@ public class SBinary implements INumber, ILogical {
     @Override
     public SFloat MultFloat(SFloat number) {
         SInt Int1 = this.intoSInt();
-        return new SFloat(number.getTipoInfo() * Int1.getTipoInfo());
+        return STypeFactory.getSFloat(number.getTipoInfo() * Int1.getTipoInfo());
     }
 
     /**
@@ -242,7 +242,7 @@ public class SBinary implements INumber, ILogical {
     public SBinary MultBinary(SBinary number) {
         SInt Int1 = number.intoSInt();
         SInt Int2 = this.intoSInt();
-        SInt Int3 = new SInt(Int1.getTipoInfo() * Int2.getTipoInfo());
+        SInt Int3 = STypeFactory.getSInt(Int1.getTipoInfo() * Int2.getTipoInfo());
         return Int3.intoSBinary();
     }
 
@@ -259,7 +259,7 @@ public class SBinary implements INumber, ILogical {
     @Override
     public SInt DivInt(SInt number) {
         SInt Int1 = this.intoSInt();
-        return new SInt(number.getTipoInfo() / Int1.getTipoInfo());
+        return STypeFactory.getSInt(number.getTipoInfo() / Int1.getTipoInfo());
     }
 
     /**
@@ -270,7 +270,7 @@ public class SBinary implements INumber, ILogical {
     @Override
     public SFloat DivFloat(SFloat number) {
         SInt Int1 = this.intoSInt();
-        return new SFloat(number.getTipoInfo() / Int1.getTipoInfo());
+        return STypeFactory.getSFloat(number.getTipoInfo() / Int1.getTipoInfo());
     }
 
     /**
@@ -281,7 +281,7 @@ public class SBinary implements INumber, ILogical {
     public SBinary DivBinary(SBinary number) {
         SInt Int1 = number.intoSInt();
         SInt Int2 = this.intoSInt();
-        SInt Int3 = new SInt(Int1.getTipoInfo() / Int2.getTipoInfo());
+        SInt Int3 = STypeFactory.getSInt(Int1.getTipoInfo() / Int2.getTipoInfo());
         return Int3.intoSBinary();
     }
 
@@ -303,13 +303,13 @@ public class SBinary implements INumber, ILogical {
         String s = "";
         int i = 0;
         if (truthvalue) {
-            return new SBinary(binario);
+            return STypeFactory.getSBinary(binario);
         } else
             while (i < largo) {
                 s = "0" + s;
                 i++;
             }
-        return new SBinary(s);
+        return STypeFactory.getSBinary(s);
 
     }
 
@@ -365,7 +365,7 @@ public class SBinary implements INumber, ILogical {
             }
         }
 
-        return new SBinary(s);
+        return STypeFactory.getSBinary(s);
     }
 
     @Override
@@ -384,7 +384,7 @@ public class SBinary implements INumber, ILogical {
         boolean truthvalue = logical.getTipoInfo();
         String s = "";
         if (!truthvalue) {
-            return new SBinary(binario);
+            return STypeFactory.getSBinary(binario);
         }
         int i = 0;
         while (i < largo) {
@@ -394,7 +394,7 @@ public class SBinary implements INumber, ILogical {
         }
 
 
-        return new SBinary(s);
+        return STypeFactory.getSBinary(s);
     }
 
     /**
@@ -448,7 +448,7 @@ public class SBinary implements INumber, ILogical {
                 i++;
             }
         }
-        return new SBinary(s);
+        return STypeFactory.getSBinary(s);
     }
 
     /**
@@ -469,7 +469,7 @@ public class SBinary implements INumber, ILogical {
             }
             i++;
         }
-        return new SBinary(s);
+        return STypeFactory.getSBinary(s);
     }
 
 

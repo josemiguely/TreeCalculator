@@ -25,7 +25,7 @@ public class SBool implements ILogical {
     @Override
     public SString intoSString() {
 
-        return new SString(String.valueOf(getTipoInfo()));
+        return STypeFactory.getSString(String.valueOf(getTipoInfo()));
     }
 
     /**
@@ -37,7 +37,7 @@ public class SBool implements ILogical {
 
     public SBool intoSBool() {
 
-        return new SBool(getTipoInfo());
+        return STypeFactory.getSBool(getTipoInfo());
     }
 
 
@@ -76,7 +76,7 @@ public class SBool implements ILogical {
 
     @Override
     public SBool andSBool(SBool logical) {
-        return new SBool(this.getTipoInfo() && logical.getTipoInfo());
+        return STypeFactory.getSBool(this.getTipoInfo() && logical.getTipoInfo());
     }
 
     /**
@@ -91,13 +91,13 @@ public class SBool implements ILogical {
         String s = "";
         int i = 0;
         if (truthvalue) {
-            return new SBinary(binario);
+            return STypeFactory.getSBinary(binario);
         }
         while (i < largo) {
             s = s + "0";
             i++;
         }
-        return new SBinary(s);
+        return STypeFactory.getSBinary(s);
     }
 
 
@@ -113,7 +113,7 @@ public class SBool implements ILogical {
 
     @Override
     public SBool orSBool(SBool logical) {
-        return new SBool(this.getTipoInfo() || logical.getTipoInfo());
+        return STypeFactory.getSBool(this.getTipoInfo() || logical.getTipoInfo());
     }
 
     /**
@@ -127,7 +127,7 @@ public class SBool implements ILogical {
         boolean truthvalue = this.getTipoInfo();
         String s = "";
         if (truthvalue == false) {
-            return new SBinary(binario);
+            return STypeFactory.getSBinary(binario);
         }
         int i = 0;
         while (i < largo) {
@@ -136,7 +136,7 @@ public class SBool implements ILogical {
                 i++;
             }
         }
-        return new SBinary(s);
+        return STypeFactory.getSBinary(s);
     }
 
     /**
@@ -144,7 +144,7 @@ public class SBool implements ILogical {
      */
     @Override
     public SBool negacion() {
-        return new SBool(!this.getTipoInfo());
+        return STypeFactory.getSBool(!this.getTipoInfo());
     }
 
 
@@ -155,7 +155,7 @@ public class SBool implements ILogical {
 
     @Override
     public SString SumaSString(SString number) {
-        return new SString(number.getTipoInfo() + getTipoInfo());
+        return STypeFactory.getSString(number.getTipoInfo() + getTipoInfo());
     }
 
 

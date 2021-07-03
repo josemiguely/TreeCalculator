@@ -38,7 +38,7 @@ public class SString implements INumberandStrings {
      */
 
     public SString intoSString() {
-        return new SString(getTipoInfo());
+        return STypeFactory.getSString(getTipoInfo());
     }
 
     @Override
@@ -60,7 +60,7 @@ public class SString implements INumberandStrings {
 
     @Override
     public SString SumaSString(SString number) {
-        return new SString(number.getTipoInfo() + this.getTipoInfo());
+        return STypeFactory.getSString(number.getTipoInfo() + this.getTipoInfo());
     }
 
 

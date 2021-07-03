@@ -5,8 +5,6 @@ import cl.uchile.dcc.scrabble.gui.Tipos.Composite.InterfazOperadores.Operador;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.ILogical;
 import cl.uchile.dcc.scrabble.gui.Tipos.InterfacesOperaciones.IUnion;
 
-import java.util.Objects;
-
 public class And implements Operador {
 
 

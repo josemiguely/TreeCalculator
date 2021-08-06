@@ -53,7 +53,7 @@ public class App extends Application {
         Button calculate=new Button("Calcular");
         BuilderFunctions(textField, insert, delete,calculate, tree, view);
         HBox hBox = new HBox(5);
-        hBox.getChildren().addAll(new Label("Operacion o elemento"), textField, insert, calculate,delete);
+        hBox.getChildren().addAll(new Label("Operación o elemento"), textField, insert, calculate,delete);
         hBox.setAlignment(Pos.BASELINE_CENTER);
         pane.setBottom(hBox);
     }

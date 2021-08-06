@@ -124,7 +124,7 @@ public class Nodo {
      */
 
     public boolean SaltaElemento(){
-        String[] Operadores ={"And","Or","Sub","Div","Mult","Add","ToInt","ToFloat","ToBinary","ToString"};
+        String[] Operadores ={"And","Or","Sub","Div","Mult","Add","ToInt","ToFloat","ToBinary","ToString","ToBool"};
         if(!(Arrays.asList(Operadores).contains(this.info))){
             System.out.println("Es elemento la raiz y tira false");
             return false;
@@ -170,8 +170,11 @@ public class Nodo {
                     return arbolfact.ToFloat(this.root.izq.TreeSType());
                 case "ToBinary":
                     return arbolfact.ToBinary(this.root.izq.TreeSType());
+                case "ToBool":
+                    return arbolfact.ToBool(this.root.izq.TreeSType());
                 case "Negacion":
                     return arbolfact.Negacion(this.root.izq.TreeSType());
+
 
 
                 // Es un Elemento (Int,Float,String,Binario o Bool) y veo si cumple algun patron

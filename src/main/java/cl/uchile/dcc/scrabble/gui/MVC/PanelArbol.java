@@ -28,7 +28,7 @@ public class PanelArbol extends Pane {
     }
 
     /**
-     * Recursivamente Dibuja el arbol si corresponde
+     * Recursivamente Dibuja el arbol si corresponde(Por ejemplo, no dibuja a los hijos de un nodo que no puede tener hijos, o si no puede tener uno de los dos)
      * @param root Nodo en donde se dibuja
      * @param x posicion x para dibujar
      * @param y posicion y para dibujar

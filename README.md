@@ -56,7 +56,8 @@ Strings: Cualquier secuencia de caracteres que empiece con " y termine con ". Ej
 
 Booleanos: Dos opciones. booltrue o boolfalse
 
-Si alguna operacion es incorrecta, usted deberá borrar todo y intentarlo nuevamente"+'\n'+
+Si alguna operacion es incorrecta, usted deberá borrar todo y intentarlo nuevamente
+
 Para las operaciones Unarias o Elementos que no tengan hijos, debe ingresar cualquier cosa en los espacios vacios el número de veces correspondiente hasta llegar al nodo deseado
 
 

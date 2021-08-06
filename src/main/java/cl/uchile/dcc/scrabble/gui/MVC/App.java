@@ -93,7 +93,7 @@ public class App extends Application {
                     textField.clear();
                 });
         C.setOnAction(e->{
-            System.out.println("Borrar");
+
             controller.Borrar(tree);
             view.displayTree();
 
@@ -102,11 +102,11 @@ public class App extends Application {
         Calcular.setOnAction(e->{
 
             try {
-            System.out.println("Calcular");
+
 
             String resultado=controller.Calcular(tree);
 
-            System.out.println("Resultado es = "+resultado);
+
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION, resultado, ButtonType.OK);
             alert.setTitle("Resultado");

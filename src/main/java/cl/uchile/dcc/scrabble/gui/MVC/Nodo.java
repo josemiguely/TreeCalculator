@@ -105,11 +105,11 @@ public class Nodo {
         String[] Unarios ={"ToInt","ToFloat","ToString","ToBinary","ToBool","Negacion",""};
 
 
-        System.out.println("Informacion en cuestion"+this.info);
+
 
 
         if (Arrays.asList(Unarios).contains(this.info) ){
-            System.out.println("Es unario y tira false");
+
             return false;}
 
         else{
@@ -124,9 +124,8 @@ public class Nodo {
      */
 
     public boolean SaltaElemento(){
-        String[] Operadores ={"And","Or","Sub","Div","Mult","Add","ToInt","ToFloat","ToBinary","ToString","ToBool"};
+        String[] Operadores ={"And","Or","Sub","Div","Mult","Add","ToInt","ToFloat","ToBinary","ToString","ToBool","Negacion"};
         if(!(Arrays.asList(Operadores).contains(this.info))){
-            System.out.println("Es elemento la raiz y tira false");
             return false;
         }
 

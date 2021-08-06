@@ -45,10 +45,15 @@ Operaciones Binarias disponibles: Add,Sub,Div,Mult,Add,Or
 Operaciones Unarias disponibles: Negacion,ToInt,ToString,ToBool,ToFloat,ToBinary
 
 Elementos que se pueden ingresar:
+
 Numeros enteros: Cualquier digito valido sin puntos
+
 Numeros decimales: Cualquier digito valido con punto
+
 Numeros binarios: Cualquier digito de 0 y 1 que empiece con bx. Ejemplo: bx1011
+
 Strings: Cualquier secuencia de caracteres que empieze con " y termine con ". Ejemplo: "Nancy es lo mejor que existe 1234"
+
 Booleanos: Dos opciones. booltrue o boolfalse
 
 Si alguna operacion es incorrecta, usted debera borrar todo y intentarlo nuevamente"+'\n'+

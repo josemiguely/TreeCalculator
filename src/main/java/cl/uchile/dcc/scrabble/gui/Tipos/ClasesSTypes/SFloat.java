@@ -30,6 +30,11 @@ public class SFloat implements IRealNumbers {
         return STypeFactory.getSString(String.valueOf(this.getTipoInfo()));
     }
 
+    @Override
+    public String getInfoAsString() {
+        return String.valueOf(getTipoInfo());
+    }
+
 
     /**
      * Metodo que transforma SFloat a SFloat

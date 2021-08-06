@@ -28,6 +28,11 @@ public class SBool implements ILogical {
         return STypeFactory.getSString(String.valueOf(getTipoInfo()));
     }
 
+    @Override
+    public String getInfoAsString() {
+        return String.valueOf(getTipoInfo());
+    }
+
     /**
      * Metodo que transforma SBool a SBool
      *

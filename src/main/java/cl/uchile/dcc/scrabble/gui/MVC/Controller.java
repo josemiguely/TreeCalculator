@@ -45,7 +45,8 @@ public class Controller {
                 "Booleanos: Dos opciones. booltrue o boolfalse"+'\n'+'\n'+
 
                 "Si alguna operacion es incorrecta, usted debera borrar todo y intentarlo nuevamente"+'\n'+
-                "Para las operaciones Unarias o Elementos que no tengan hijos, debe ingresar cualquier cosa en los espacios vacios el numero de veces correspondiente hasta llegar al nodo deseado";
+                "Para las operaciones Unarias o Elementos que no tengan hijos, debe ingresar cualquier cosa en los espacios vacios el numero de veces correspondiente hasta llegar al nodo deseado"+'\n'+'\n'+
+                "Para desplegar esta informacion nuevamente puede apretar la letra i";
 
         if (keyEvent.getCode() == KeyCode.I) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);

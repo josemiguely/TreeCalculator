@@ -11,7 +11,6 @@ import javafx.scene.text.Text;
  */
 public class PanelArbol extends Pane {
     private Nodo tree;
-    private final double radius=25;
     private final double vertical=50;
 
 
@@ -45,7 +44,8 @@ public class PanelArbol extends Pane {
             MostrarArbol(root.getDer(),x+h,y+vertical,h/2);
         }
 
-        Circle circle=new Circle(x,y,radius);
+        double radius = 25;
+        Circle circle=new Circle(x,y, radius);
         circle.setFill(Color.GOLD);
         circle.setStroke(Color.BLACK);
         getChildren().addAll(circle,new Text(x-4,y+4,root.getInfo()+""));

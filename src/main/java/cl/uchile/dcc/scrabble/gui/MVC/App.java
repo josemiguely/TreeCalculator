@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 
 /**
- * JavaFX App
+ * JavaFX App. Desde aqui se puede  correr la aplicacion
  */
 public class App extends Application {
     Controller controller=new Controller();

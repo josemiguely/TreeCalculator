@@ -13,7 +13,7 @@ _University of Chile_.
 
 ---
 
-**The rest of the documentation is left for the users of this template to complete**
+
 
 ## Introduccion:
 

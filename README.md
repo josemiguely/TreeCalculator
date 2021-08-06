@@ -30,7 +30,7 @@ Para ejecutar los tests basta con correr la carpeta de Test.
 
 # **GUI:**
 
-Para hacer correr la gui basta con correr la clase en el paquete MVC (Modelo-Vista-Controlador)
+Para hacer correr la gui basta con correr la clase App en el paquete MVC (Modelo-Vista-Controlador)
 
 _Instrucciones:_
 
@@ -46,18 +46,18 @@ Operaciones Unarias disponibles: Negacion,ToInt,ToString,ToBool,ToFloat,ToBinary
 
 ### _**`Elementos que se pueden ingresar:`**_
 
-Numeros enteros: Cualquier digito valido sin puntos
+Números enteros: Cualquier dígito válido sin puntos
 
-Numeros decimales: Cualquier digito valido con punto
+Números decimales: Cualquier dígito válido con punto
 
-Numeros binarios: Cualquier digito de 0 y 1 que empiece con bx. Ejemplo: bx1011
+Números binarios: Cualquier dígito de 0 y 1 que empiece con bx. Ejemplo: bx1011
 
-Strings: Cualquier secuencia de caracteres que empieze con " y termine con ". Ejemplo: "Nancy es lo mejor que existe 1234"
+Strings: Cualquier secuencia de caracteres que empiece con " y termine con ". Ejemplo: "Nancy es lo mejor que existe 1234"
 
 Booleanos: Dos opciones. booltrue o boolfalse
 
-Si alguna operacion es incorrecta, usted debera borrar todo y intentarlo nuevamente"+'\n'+
-Para las operaciones Unarias o Elementos que no tengan hijos, debe ingresar cualquier cosa en los espacios vacios el numero de veces correspondiente hasta llegar al nodo deseado
+Si alguna operacion es incorrecta, usted deberá borrar todo y intentarlo nuevamente"+'\n'+
+Para las operaciones Unarias o Elementos que no tengan hijos, debe ingresar cualquier cosa en los espacios vacios el número de veces correspondiente hasta llegar al nodo deseado
 
 
-**_Para desplegar esta informacion en la aplicacion puede apretar la letra i._**
+**_Para desplegar esta información en la aplicación puede apretar la letra i._**

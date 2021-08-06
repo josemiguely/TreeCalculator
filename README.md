@@ -39,7 +39,9 @@ Esta aplicación añade nodos en orden de nivel de izquierda a derecha
 Todas las operaciones y elementos que se pueden ingresar deben escribirse tal cual como escritas a continuación
 
 Operaciones que se pueden ingresar
+
 Operaciones Binarias disponibles: Add,Sub,Div,Mult,Add,Or
+
 Operaciones Unarias disponibles: Negacion,ToInt,ToString,ToBool,ToFloat,ToBinary
 
 Elementos que se pueden ingresar:

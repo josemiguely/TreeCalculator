@@ -22,4 +22,9 @@ public interface IUnion {
      */
 
     SString intoSString();
+
+     String getInfoAsString();
+
+
+
 }

@@ -28,6 +28,11 @@ public class SBinary implements INumber, ILogical {
         return STypeFactory.getSString(getTipoInfo());
     }
 
+    @Override
+    public String getInfoAsString() {
+        return getTipoInfo();
+    }
+
     /**
      * Metodo que transforma  SBinary a  Float
      *

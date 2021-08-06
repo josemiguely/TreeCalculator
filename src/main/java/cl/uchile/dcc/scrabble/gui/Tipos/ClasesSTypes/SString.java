@@ -42,6 +42,11 @@ public class SString implements INumberandStrings {
     }
 
     @Override
+    public String getInfoAsString() {
+        return getTipoInfo();
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(getTipoInfo());
     }

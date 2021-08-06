@@ -22,12 +22,18 @@ public class PanelArbol extends Pane {
 
     public void displayTree(){
         this.getChildren().clear();
-        System.out.println("displayTree");
         if(tree.getRoot() != null){
             MostrarArbol(tree.getRoot(), getWidth() / 2, vertical, getWidth() / 4);
         }
     }
 
+    /**
+     * Recursivamente Dibuja el arbol si corresponde
+     * @param root Nodo en donde se dibuja
+     * @param x posicion x para dibujar
+     * @param y posicion y para dibujar
+     * @param h altura para dibujar
+     */
     protected void MostrarArbol(Nodo root,double x,double y,double h){
 
 

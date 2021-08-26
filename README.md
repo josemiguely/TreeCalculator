@@ -1,7 +1,10 @@
-This  Java program evaluates an operation between : Integers,Floats,Strings,Booleans,Binaries through a tree, displaying its result on a tree structure on the screen using the library JavaFX. The operations this program can evaluate are the following: Addition,Multiplication,Substraction,Divition,And,Or,Transformation (example: From Binary to Integer),Logical Negation.
+<h1>Tree Calculator</h1>
+
+This Java program evaluates an operation between Integers, Floats, Strings, Booleans, Binaries through a tree, displaying its result on a tree structure on the screen using the library JavaFX.
+
+The operations this program can evaluate are the following: Addition, Multiplication, Subtraction, Division, And, Or, Transformation (example: From Binary to Integer), Logical Negation.
 
 This program was an assignment for the course "Metodologías de Diseño y Programación" in Universidad de Chile for educational purpouses.
-
 
 An example of the program is the following:
 
@@ -17,7 +20,7 @@ An example of the program is the following:
 
 
 
-An explanation of the program,its considerations and the design patterns used are given in spanish. A translation wil be soon avaible: 
+An explanation of the program, its considerations, and the design patterns used are given in Spanish. A translation will be soon available
 
 
 ## Introduccion:

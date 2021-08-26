@@ -1,7 +1,23 @@
+This  Java program evaluates an operation between : Integers,Floats,Strings,Booleans,Binaries through a tree, displaying its result on a tree structure on the screen using the library JavaFX. The operations this program can evaluate are the following: Addition,Multiplication,Substraction,Divition,And,Or,Transformation (example: From Binary to Integer),Logical Negation.
+
+This program was an assignment for the course "Metodologías de Diseño y Programación" in Universidad de Chile for educational purpouses.
+
+
+An example of the program is the following:
+
+
+
 ![image](https://user-images.githubusercontent.com/81194170/131036413-a1ff18ae-21a0-4b20-b0f5-5e0ec27df674.png)
 
 
 
+
+
+
+
+
+
+An explanation of the program,its considerations and the design patterns used are given in spanish. A translation wil be soon avaible: 
 
 
 ## Introduccion:
@@ -11,7 +27,7 @@ que pueden interactuar entre ellos a partir de operaciones comunes en sus contra
 
 Se asumieron las siguientes cosas 
 
--Dos Sbinaries son iguales si su transformacion a entero es la misma.
+-Dos SBinaries son iguales si su transformacion a entero es la misma.
 
 -El arbolAst (Clase ArbolFactory), asume que el usuario va a crear correctamente el arbol. En la gui, atrapa las excepciones y la despliega como errores de sintaxis
 

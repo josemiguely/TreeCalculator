@@ -23,7 +23,7 @@ An example of the program is the following:
 An explanation of the program, its considerations, and the design patterns used are given in Spanish. A translation will be soon available
 
 
-## Introduccion:
+## Introducción:
 
 -La lógica del programa es que hay 5 tipos. SBinary (binarios),SBool(booleanos),SFloat(double),SInt(enteros),SString(strings)
 que pueden interactuar entre ellos a partir de operaciones comunes en sus contrapartes primitivas

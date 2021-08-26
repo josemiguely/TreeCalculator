@@ -25,14 +25,14 @@ An explanation of the program, its considerations, and the design patterns used 
 
 ## Introduccion:
 
--La logica del programa es que hay 5 tipos. SBinary (binarios),SBool(booleanos),SFloat(double),SInt(enteros),SString(strings)
+-La lógica del programa es que hay 5 tipos. SBinary (binarios),SBool(booleanos),SFloat(double),SInt(enteros),SString(strings)
 que pueden interactuar entre ellos a partir de operaciones comunes en sus contrapartes primitivas
 
 Se asumieron las siguientes cosas 
 
--Dos SBinaries son iguales si su transformacion a entero es la misma.
+-Dos SBinaries son iguales si su transformación a entero es la misma.
 
--El arbolAst (Clase ArbolFactory), asume que el usuario va a crear correctamente el arbol. En la gui, atrapa las excepciones y la despliega como errores de sintaxis
+-El arbolAst (Clase ArbolFactory), asume que el usuario va a crear correctamente el árbol. En la gui, atrapa las excepciones y la despliega como errores de sintaxis
 
 Para ejecutar los tests basta con correr la carpeta de Test.
 
@@ -64,9 +64,9 @@ Strings: Cualquier secuencia de caracteres que empiece con " y termine con ". Ej
 
 Booleanos: Dos opciones. booltrue o boolfalse
 
-Si alguna operacion es incorrecta, usted deberá borrar todo y intentarlo nuevamente
+Si alguna operación es incorrecta, usted deberá borrar todo y intentarlo nuevamente
 
-Para las operaciones Unarias o Elementos que no tengan hijos, debe ingresar cualquier cosa en los espacios vacios el número de veces correspondiente hasta llegar al nodo deseado
+Para las operaciones Unarias o Elementos que no tengan hijos, debe ingresar cualquier cosa en los espacios vacíos el número de veces correspondiente hasta llegar al nodo deseado
 
 
 **_Para desplegar esta información en la aplicación puede apretar la letra i._**

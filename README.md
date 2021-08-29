@@ -22,7 +22,7 @@ An example of the program is the following:
 
 
 
-An explanation of the program, its considerations, and the design patterns used are given in Spanish. A translation will be soon available
+An explanation of the program, its considerations, and the design patterns used are given in Spanish. A translation will be soon available.
 
 
 ## Introducción:

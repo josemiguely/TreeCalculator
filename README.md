@@ -28,13 +28,13 @@ An explanation of the program, its considerations, and the design patterns used 
 ## Introducción:
 
 -La lógica del programa es que hay 5 tipos. SBinary (binarios),SBool(booleanos),SFloat(double),SInt(enteros),SString(strings)
-que pueden interactuar entre ellos a partir de operaciones comunes en sus contrapartes primitivas
+que pueden interactuar entre ellos a partir de operaciones comunes en sus contrapartes primitivas.
 
-Se asumieron las siguientes cosas 
+Se asumieron las siguientes cosas:
 
--Dos SBinaries son iguales si su transformación a entero es la misma.
+-Dos SBinaries son iguales si su transformación a entero es la misma
 
--El arbolAst (Clase ArbolFactory), asume que el usuario va a crear correctamente el árbol. En la gui, atrapa las excepciones y la despliega como errores de sintaxis
+-El arbolAst (Clase ArbolFactory), asume que el usuario va a crear correctamente el árbol. En la gui, se atrapan las excepciones y se despliegan como errores de sintaxis
 
 Para ejecutar los tests basta con correr la carpeta de Test.
 
@@ -56,7 +56,7 @@ Operaciones Unarias disponibles: Negacion,ToInt,ToString,ToBool,ToFloat,ToBinary
 
 ### _**`Elementos que se pueden ingresar:`**_
 
-Números enteros: Cualquier dígito válido sin puntos
+Números enteros: Cualquier dígito válido sin punto
 
 Números decimales: Cualquier dígito válido con punto
 

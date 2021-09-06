@@ -4,7 +4,8 @@ This Java program evaluates an operation between Integers, Floats, Strings, Bool
 
 The operations this program can evaluate are the following: Addition, Multiplication, Subtraction, Division, And, Or, Transformation (example: From Binary to Integer), Logical Negation.
 
-Maven is used to manage the program dependencies. 
+
+Maven is used to manage the program dependencies and JUnit 5 for unit testing. 
 
 This program was an assignment for the course "Metodologías de Diseño y Programación" in Universidad de Chile for educational purpouses.
 

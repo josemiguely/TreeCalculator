@@ -7,7 +7,7 @@ The operations this program can evaluate are the following: Addition, Multiplica
 
 Maven is used to manage the program dependencies and JUnit 5 for unit testing. 
 
-This program was an assignment for the course "Metodologías de Diseño y Programación" in Universidad de Chile for educational purpouses.
+
 
 An example of the program is the following:
 
